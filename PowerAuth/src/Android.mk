@@ -17,7 +17,7 @@
 LOCAL_PATH:= $(call my-dir)
 
 # -------------------------------------------------------------------------
-# PowerAuth2 static library
+# PowerAuthCore static library
 # Contains all multiplatform code
 # -------------------------------------------------------------------------
 include $(CLEAR_VARS)
@@ -25,7 +25,7 @@ include $(CLEAR_VARS)
 NDK_TOOLCHAIN_VERSION := clang
 
 # Library name
-LOCAL_MODULE			:= libPowerAuth2
+LOCAL_MODULE			:= libPowerAuthCore
 LOCAL_CFLAGS			:= $(EXTERN_CFLAGS)
 LOCAL_CPPFLAGS			:= $(EXTERN_CFLAGS) -std=c++11
 LOCAL_CPP_FEATURES		+= exceptions
@@ -63,7 +63,7 @@ include $(BUILD_STATIC_LIBRARY)
 
 
 # -------------------------------------------------------------------------
-# PowerAuth2 static unit testing library. 
+# PowerAuthCore static unit testing library. 
 # Contains all multiplatform unit tests
 # -------------------------------------------------------------------------
 include $(CLEAR_VARS)
@@ -71,7 +71,7 @@ include $(CLEAR_VARS)
 NDK_TOOLCHAIN_VERSION := clang
 
 # Library name
-LOCAL_MODULE			:= libPowerAuth2Tests
+LOCAL_MODULE			:= libPowerAuthCoreTests
 LOCAL_CFLAGS			:= $(EXTERN_CFLAGS)
 LOCAL_CPPFLAGS			:= $(EXTERN_CFLAGS) -std=c++11
 LOCAL_CPP_FEATURES		+= exceptions
@@ -111,7 +111,7 @@ LOCAL_SRC_FILES := \
 include $(BUILD_STATIC_LIBRARY)
 
 # -------------------------------------------------------------------------
-# PowerAuth2 dynamic library 
+# PowerAuthCore dynamic library 
 # Contains final dynamic library (.so) with JNI wrapped methods.
 # -------------------------------------------------------------------------
 include $(CLEAR_VARS)
@@ -119,12 +119,12 @@ include $(CLEAR_VARS)
 NDK_TOOLCHAIN_VERSION := clang
 
 # Library name
-LOCAL_MODULE			:= PowerAuth2Module
+LOCAL_MODULE			:= PowerAuthCoreModule
 LOCAL_CFLAGS			:= $(EXTERN_CFLAGS) -fvisibility=hidden -fpic
 LOCAL_CPPFLAGS			:= $(EXTERN_CFLAGS) -fvisibility=hidden -fpic -std=c++11
 LOCAL_CPP_FEATURES		+= exceptions
 
-LOCAL_STATIC_LIBRARIES 	:= PowerAuth2
+LOCAL_STATIC_LIBRARIES 	:= PowerAuthCore
 LOCAL_LDLIBS            := -llog
 ifeq ($(NDK_DEBUG),1)
 	LOCAL_LDFLAGS       := -Wl,--hash-style=both,--exclude-libs,ALL
@@ -143,7 +143,6 @@ LOCAL_SRC_FILES := \
 	PowerAuth/jni/PasswordJNI.cpp \
 	PowerAuth/jni/ActivationCodeUtilJNI.cpp \
 	PowerAuth/jni/ECIESEncryptorJNI.cpp \
-	PowerAuth/jni/TokenCalculatorJNI.cpp \
 	PowerAuth/jni/CryptoUtilsJNI.cpp \
 	PowerAuth/jni/ProtocolVersionJNI.cpp
 

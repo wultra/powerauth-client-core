@@ -41,7 +41,7 @@ namespace powerAuth
 	}
 	
 	/**
-	 The Session class provides all cryptographic operations defined in PowerAuth2
+	 The Session class provides all cryptographic operations defined in PowerAuth
 	 protocol. The object also represents a long term session estabilished
 	 between the client and the server.
 	 
