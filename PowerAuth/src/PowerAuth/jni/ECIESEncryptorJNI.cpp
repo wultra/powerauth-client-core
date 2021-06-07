@@ -17,7 +17,7 @@
 #include "ECIESEncryptorJNI.h"
 #include <cc7/Base64.h>
 
-// Package: io.getlime.security.powerauth.core
+// Package: com.wultra.android.powerauth.core
 #define CC7_JNI_CLASS_PATH	    	"com/wultra/android/powerauth/core"
 #define CC7_JNI_CLASS_PACKAGE	    com_wultra_android_powerauth_core
 #define CC7_JNI_JAVA_CLASS  		EciesEncryptor

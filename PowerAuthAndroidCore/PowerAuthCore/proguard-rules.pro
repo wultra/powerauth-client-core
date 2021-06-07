@@ -15,7 +15,7 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 
--keep class io.getlime.security.powerauth.core.* {
+-keep class com.wultra.android.powerauth.core.* {
     <init>(...);
     <fields>;
 }
