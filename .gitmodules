@@ -1,0 +1,3 @@
+[submodule "PowerAuth/cc7"]
+	path = PowerAuth/cc7
+	url = https://github.com/wultra/cc7.git
