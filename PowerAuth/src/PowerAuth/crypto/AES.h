@@ -23,9 +23,9 @@
  be replaced with a similar cc7 implementation.
  */
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -41,7 +41,7 @@ namespace crypto
 	cc7::ByteArray AES_CBC_Encrypt_Padding(const cc7::ByteRange & key, const cc7::ByteRange & iv, const cc7::ByteRange & data);
 
 	
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

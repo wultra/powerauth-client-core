@@ -20,9 +20,9 @@
 #include <map>
 #include <mutex>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -689,6 +689,6 @@ namespace powerAuth
 		
 	};
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

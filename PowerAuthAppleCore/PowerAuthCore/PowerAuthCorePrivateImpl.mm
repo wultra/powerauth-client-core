@@ -18,7 +18,7 @@
 #import <PowerAuthCore/PowerAuthCoreLog.h>
 #import "PowerAuthCorePrivateImpl.h"
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 #if defined(DEBUG)
 void PowerAuthCoreObjc_DebugDumpErrorImpl(id instance, NSString * message, ErrorCode code)

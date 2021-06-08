@@ -23,7 +23,7 @@
 @implementation PowerAuthCorePassword
 {
 @protected
-	io::getlime::powerAuth::Password _password;
+	com::wultra::powerAuth::Password _password;
 }
 
 + (instancetype) passwordWithString:(NSString *)string
@@ -77,7 +77,7 @@
 
 @implementation PowerAuthCorePassword (Private)
 
-- (io::getlime::powerAuth::Password &) passObjRef
+- (com::wultra::powerAuth::Password &) passObjRef
 {
 	return _password;
 }

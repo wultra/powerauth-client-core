@@ -4,9 +4,9 @@
 #include <cc7tests/TestDirectory.h>
 #include <cc7tests/TestResource.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuthTests
 {
@@ -26,7 +26,7 @@ namespace powerAuthTests
 
     #include <cc7tests/TestDirectory.h>
 
-    namespace io::getlime::powerAuthTests {
+    namespace com::wultra::powerAuthTests {
        extern cc7::tests::TestDirectory g_pa2Files;
     }
 
@@ -12953,5 +12953,5 @@ cc7::tests::TestDirectory g_pa2Files({
 });
 
 } // powerAuthTests
-} // getlime
-} // io
+} // wultra
+} // com

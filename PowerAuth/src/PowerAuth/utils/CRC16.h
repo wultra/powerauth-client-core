@@ -18,9 +18,9 @@
 
 #include <cc7/ByteRange.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -38,7 +38,7 @@ namespace utils
 	 */
 	bool CRC16_Validate(const cc7::ByteRange & data);
 	
-} // io::getlime::powerAuth::utils
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::utils
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

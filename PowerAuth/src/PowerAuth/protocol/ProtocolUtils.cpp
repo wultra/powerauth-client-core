@@ -21,9 +21,9 @@
 #include <cc7/Base64.h>
 #include <cc7/Endian.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -709,7 +709,7 @@ namespace protocol
 		return d3;
 	}
 	
-} // io::getlime::powerAuth::protocol
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::protocol
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

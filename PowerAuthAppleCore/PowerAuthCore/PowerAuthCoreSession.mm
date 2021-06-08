@@ -21,7 +21,7 @@
 #import <PowerAuthCore/PowerAuthCoreMacros.h>
 #import "PowerAuthCorePrivateImpl.h"
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreSession
 {
@@ -65,7 +65,7 @@ using namespace io::getlime::powerAuth;
 
 + (BOOL) hasDebugFeatures
 {
-	BOOL debug_features = io::getlime::powerAuth::HasDebugFeaturesTurnedOn();
+	BOOL debug_features = com::wultra::powerAuth::HasDebugFeaturesTurnedOn();
 #if defined(ENABLE_POWERAUTH_CORE_LOG) || defined(DEBUG)
 	debug_features |= YES;
 #endif

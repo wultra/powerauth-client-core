@@ -20,9 +20,9 @@
 #include <openssl/ecdh.h>
 #include <cc7/Endian.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -101,8 +101,8 @@ namespace crypto
 	}
 */
 	
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com
 

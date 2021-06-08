@@ -21,7 +21,7 @@
 #import <PowerAuthCore/PowerAuthCoreSession.h>
 #import "PowerAuthCorePrivateImpl.h"
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 
 #pragma mark - ECIES Encryptor implementation -

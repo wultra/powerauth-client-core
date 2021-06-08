@@ -27,7 +27,7 @@
 
 @implementation PowerAuthCoreProtocolUpgradeDataV3 (Private)
 
-- (void) setupStructure:(io::getlime::powerAuth::ProtocolUpgradeData &)ref
+- (void) setupStructure:(com::wultra::powerAuth::ProtocolUpgradeData &)ref
 {
 	ref.toV3.ctrData = cc7::objc::CopyFromNSString(_ctrData);
 }

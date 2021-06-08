@@ -21,11 +21,11 @@
 
 using namespace cc7;
 using namespace cc7::tests;
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuthTests
 {
@@ -200,6 +200,6 @@ namespace powerAuthTests
 	
 	CC7_CREATE_UNIT_TEST(pa2CryptoHMACTests, "pa2")
 	
-} // io::getlime::powerAuthTests
-} // io::getlime
-} // io
+} // com::wultra::powerAuthTests
+} // com::wultra
+} // com

@@ -23,9 +23,9 @@
  be replaced with a similar cc7 implementation.
  */
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -34,8 +34,8 @@ namespace crypto
 	// HMAC with SHA256
 	cc7::ByteArray HMAC_SHA256(const cc7::ByteRange & data, const cc7::ByteRange & key, size_t outputBytes = 0);
 	
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com
 
