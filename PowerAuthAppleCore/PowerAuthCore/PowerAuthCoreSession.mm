@@ -25,41 +25,25 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreSession
 {
-	Session *	_session;
+	Session _session;
 }
 
 #pragma mark - Initialization / Reset
 
-- (nullable instancetype) initWithSessionSetup:(nonnull PowerAuthCoreSessionSetup *)setup
+- (nonnull instancetype) initWithSessionSetup:(nonnull PowerAuthCoreSessionSetup *)setup
 {
 	self = [super init];
 	if (self) {
 		SessionSetup cpp_setup;
 		PowerAuthCoreSessionSetupToStruct(setup, cpp_setup);
-		_session = new Session(cpp_setup);
-		if (!_session) {
-			// This is a low memory issue. Returning nil we guarantee that swift/objc
-			// will not use this unitialized instance at all.
-			return nil;
-		}
+		_session.setSessionSetup(cpp_setup);
 	}
 	return self;
 }
 
-- (nullable instancetype) init
-{
-	// Simple object init should always return nil
-	return nil;
-}
-
-- (void) dealloc
-{
-	delete _session;
-}
-
 - (void) resetSession
 {
-	_session->resetSession();
+	_session.resetSession();
 }
 
 
@@ -77,7 +61,7 @@ using namespace com::wultra::powerAuth;
 
 - (PowerAuthCoreSessionSetup*) sessionSetup
 {
-	const SessionSetup * cpp_setup = _session->sessionSetup();
+	const SessionSetup * cpp_setup = _session.sessionSetup();
 	if (cpp_setup) {
 		return PowerAuthCoreSessionSetupToObject(*cpp_setup);
 	}
@@ -86,55 +70,55 @@ using namespace com::wultra::powerAuth;
 
 - (UInt32) sessionIdentifier
 {
-	return _session->sessionIdentifier();
+	return _session.sessionIdentifier();
 }
 
 - (BOOL) hasValidSetup
 {
-	return  _session->hasValidSetup();
+	return  _session.hasValidSetup();
 }
 
 - (BOOL) canStartActivation
 {
-	return _session->canStartActivation();
+	return _session.canStartActivation();
 }
 
 - (BOOL) hasPendingActivation
 {
-	return _session->hasPendingActivation();
+	return _session.hasPendingActivation();
 }
 
 - (BOOL) hasValidActivation
 {
-	return _session->hasValidActivation();
+	return _session.hasValidActivation();
 }
 
 - (BOOL) hasProtocolUpgradeAvailable
 {
-	return _session->hasProtocolUpgradeAvailable();
+	return _session.hasProtocolUpgradeAvailable();
 }
 
 - (BOOL) hasPendingProtocolUpgrade
 {
-	return _session->hasPendingProtocolUpgrade();
+	return _session.hasPendingProtocolUpgrade();
 }
 
 - (PowerAuthCoreProtocolVersion) protocolVersion
 {
-	return (PowerAuthCoreProtocolVersion) _session->protocolVersion();
+	return (PowerAuthCoreProtocolVersion) _session.protocolVersion();
 }
 
 #pragma mark - Serialization
 
 - (nonnull NSData*) serializedState
 {
-	return cc7::objc::CopyToNSData(_session->saveSessionState());
+	return cc7::objc::CopyToNSData(_session.saveSessionState());
 }
 
 
 - (BOOL) deserializeState:(nonnull NSData *)state
 {
-	auto error = _session->loadSessionState(cc7::ByteRange(state.bytes, state.length));
+	auto error = _session.loadSessionState(cc7::ByteRange(state.bytes, state.length));
 	PowerAuthCoreObjc_DebugDumpError(self, @"DeserializeState", error);
 	return error == EC_Ok;
 }
@@ -145,12 +129,12 @@ using namespace com::wultra::powerAuth;
 
 - (nullable NSString*) activationIdentifier
 {
-	return cc7::objc::CopyToNullableNSString(_session->activationIdentifier());
+	return cc7::objc::CopyToNullableNSString(_session.activationIdentifier());
 }
 
 - (nullable NSString*) activationFingerprint
 {
-	return cc7::objc::CopyToNullableNSString(_session->activationFingerprint());
+	return cc7::objc::CopyToNullableNSString(_session.activationFingerprint());
 }
 
 - (nullable PowerAuthCoreActivationStep1Result*) startActivation:(nonnull PowerAuthCoreActivationStep1Param*)param
@@ -158,7 +142,7 @@ using namespace com::wultra::powerAuth;
 	ActivationStep1Param cpp_p1;
 	ActivationStep1Result cpp_r1;
 	PowerAuthCoreActivationStep1ParamToStruct(param, cpp_p1);
-	auto error = _session->startActivation(cpp_p1, cpp_r1);
+	auto error = _session.startActivation(cpp_p1, cpp_r1);
 	if (error == EC_Ok) {
 		return PowerAuthCoreActivationStep1ResultToObject(cpp_r1);
 	}
@@ -172,7 +156,7 @@ using namespace com::wultra::powerAuth;
 	ActivationStep2Param cpp_p2;
 	ActivationStep2Result cpp_r2;
 	PowerAuthCoreActivationStep2ParamToStruct(param, cpp_p2);
-	auto error = _session->validateActivationResponse(cpp_p2, cpp_r2);
+	auto error = _session.validateActivationResponse(cpp_p2, cpp_r2);
 	if (error == EC_Ok) {
 		return PowerAuthCoreActivationStep2ResultToObject(cpp_r2);
 	}
@@ -185,7 +169,7 @@ using namespace com::wultra::powerAuth;
 {
 	SignatureUnlockKeys cpp_keys;
 	PowerAuthCoreSignatureUnlockKeysToStruct(keys, cpp_keys);
-	auto error = _session->completeActivation(cpp_keys);
+	auto error = _session.completeActivation(cpp_keys);
 	PowerAuthCoreObjc_DebugDumpError(self, @"CompleteActivation", error);
 	return error == EC_Ok;
 }
@@ -202,7 +186,7 @@ using namespace com::wultra::powerAuth;
 	ActivationStatus cpp_status;
 	PowerAuthCoreEncryptedActivationStatusToStruct(encryptedStatus, cpp_encrypted_status);
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
-	auto error = _session->decodeActivationStatus(cpp_encrypted_status, cpp_keys, cpp_status);
+	auto error = _session.decodeActivationStatus(cpp_encrypted_status, cpp_keys, cpp_status);
 	if (error == EC_Ok) {
 		return PowerAuthCoreActivationStatusToObject(cpp_status);
 	}
@@ -245,7 +229,7 @@ using namespace com::wultra::powerAuth;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
 	
 	PowerAuthCoreHTTPRequestDataSignature * signature = [[PowerAuthCoreHTTPRequestDataSignature alloc] init];
-	auto error = _session->signHTTPRequestData(request, cpp_keys, cpp_factor, [signature signatureStructRef]);
+	auto error = _session.signHTTPRequestData(request, cpp_keys, cpp_factor, [signature signatureStructRef]);
 	if (error == EC_Ok) {
 		return signature;
 	}
@@ -256,7 +240,7 @@ using namespace com::wultra::powerAuth;
 
 - (NSString*) httpAuthHeaderName
 {
-	return cc7::objc::CopyToNSString(_session->httpAuthHeaderName());
+	return cc7::objc::CopyToNSString(_session.httpAuthHeaderName());
 }
 
 
@@ -264,7 +248,7 @@ using namespace com::wultra::powerAuth;
 {
 	ErrorCode error;
 	if (signedData != nil) {
-		error = _session->verifyServerSignedData(signedData.signedDataRef);
+		error = _session.verifyServerSignedData(signedData.signedDataRef);
 	} else {
 		error = EC_WrongParam;
 	}
@@ -279,7 +263,7 @@ using namespace com::wultra::powerAuth;
 {
 	ErrorCode error;
 	if (old_password != nil && new_password != nil) {
-		error = _session->changeUserPassword([old_password passObjRef].passwordData(), [new_password passObjRef].passwordData());
+		error = _session.changeUserPassword([old_password passObjRef].passwordData(), [new_password passObjRef].passwordData());
 	} else {
 		error = EC_WrongParam;
 	}
@@ -293,7 +277,7 @@ using namespace com::wultra::powerAuth;
 	std::string cpp_c_vault_key = cc7::objc::CopyFromNSString(cVaultKey);
 	SignatureUnlockKeys cpp_keys;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
-	auto error = _session->addBiometryFactor(cpp_c_vault_key, cpp_keys);
+	auto error = _session.addBiometryFactor(cpp_c_vault_key, cpp_keys);
 	PowerAuthCoreObjc_DebugDumpError(self, @"AddBiometryFactor", error);
 	return error == EC_Ok;
 }
@@ -301,14 +285,14 @@ using namespace com::wultra::powerAuth;
 - (BOOL) hasBiometryFactor
 {
 	bool result;
-	CC7_UNUSED_VAR auto error = _session->hasBiometryFactor(result);
+	CC7_UNUSED_VAR auto error = _session.hasBiometryFactor(result);
 	PowerAuthCoreObjc_DebugDumpError(self, @"HasBiometryFactor", error);
 	return result;
 }
 
 - (BOOL) removeBiometryFactor
 {
-	auto error = _session->removeBiometryFactor();
+	auto error = _session.removeBiometryFactor();
 	PowerAuthCoreObjc_DebugDumpError(self, @"RemoveBiometryFactor", error);
 	return error == EC_Ok;
 }
@@ -325,7 +309,7 @@ using namespace com::wultra::powerAuth;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
 		
 	cc7::ByteArray cpp_derived_key;
-	auto error = _session->deriveCryptographicKeyFromVaultKey(cpp_c_vault_key, cpp_keys, keyIndex, cpp_derived_key);
+	auto error = _session.deriveCryptographicKeyFromVaultKey(cpp_c_vault_key, cpp_keys, keyIndex, cpp_derived_key);
 	if (error == EC_Ok) {
 		return cc7::objc::CopyToNSData(cpp_derived_key);
 	}
@@ -343,7 +327,7 @@ using namespace com::wultra::powerAuth;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
 		
 	cc7::ByteArray cpp_signature;
-	auto error = _session->signDataWithDevicePrivateKey(cpp_c_vault_key, cpp_keys, cpp_data, cpp_signature);
+	auto error = _session.signDataWithDevicePrivateKey(cpp_c_vault_key, cpp_keys, cpp_data, cpp_signature);
 	if (error == EC_Ok) {
 		return cc7::objc::CopyToNSData(cpp_signature);
 	}
@@ -356,26 +340,26 @@ using namespace com::wultra::powerAuth;
 
 - (BOOL) hasExternalEncryptionKey
 {
-	return _session->hasExternalEncryptionKey();
+	return _session.hasExternalEncryptionKey();
 }
 
 - (BOOL) setExternalEncryptionKey:(nonnull NSData *)externalEncryptionKey
 {
-	auto error = _session->setExternalEncryptionKey(cc7::objc::CopyFromNSData(externalEncryptionKey));
+	auto error = _session.setExternalEncryptionKey(cc7::objc::CopyFromNSData(externalEncryptionKey));
 	PowerAuthCoreObjc_DebugDumpError(self, @"SetExternalEncryptionKey", error);
 	return error == EC_Ok;
 }
 
 - (BOOL) addExternalEncryptionKey:(nonnull NSData *)externalEncryptionKey
 {
-	auto error = _session->addExternalEncryptionKey(cc7::objc::CopyFromNSData(externalEncryptionKey));
+	auto error = _session.addExternalEncryptionKey(cc7::objc::CopyFromNSData(externalEncryptionKey));
 	PowerAuthCoreObjc_DebugDumpError(self, @"AddExternalEncryptionKey", error);
 	return error == EC_Ok;
 }
 
 - (BOOL) removeExternalEncryptionKey
 {
-	auto error = _session->removeExternalEncryptionKey();
+	auto error = _session.removeExternalEncryptionKey();
 	PowerAuthCoreObjc_DebugDumpError(self, @"RemoveExternalEncryptionKey", error);
 	return error == EC_Ok;
 }
@@ -393,7 +377,7 @@ using namespace com::wultra::powerAuth;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
 	
 	PowerAuthCoreEciesEncryptor * encryptor = [[PowerAuthCoreEciesEncryptor alloc] init];
-	auto error = _session->getEciesEncryptor(cpp_scope, cpp_keys, cpp_shared_info1, encryptor.encryptorRef);
+	auto error = _session.getEciesEncryptor(cpp_scope, cpp_keys, cpp_shared_info1, encryptor.encryptorRef);
 	PowerAuthCoreObjc_DebugDumpError(self, @"GetEciesEncryptor", error);
 	return error == EC_Ok ? encryptor : nil;
 }
@@ -422,14 +406,14 @@ using namespace com::wultra::powerAuth;
 
 - (BOOL) startProtocolUpgrade
 {
-	ErrorCode error = _session->startProtocolUpgrade();
+	ErrorCode error = _session.startProtocolUpgrade();
 	PowerAuthCoreObjc_DebugDumpError(self, @"StartProtocolUpgrade", error);
 	return error == EC_Ok;
 }
 
 - (PowerAuthCoreProtocolVersion) pendingProtocolUpgradeVersion
 {
-	return (PowerAuthCoreProtocolVersion) _session->pendingProtocolUpgradeVersion();
+	return (PowerAuthCoreProtocolVersion) _session.pendingProtocolUpgradeVersion();
 }
 
 - (BOOL) applyProtocolUpgradeData:(nonnull id<PowerAuthCoreProtocolUpgradeData>)upgradeData
@@ -440,7 +424,7 @@ using namespace com::wultra::powerAuth;
 		// Convert data to C++ & commit to underlying session
 		ProtocolUpgradeData cpp_upgrade_data;
 		[upgradeDataObject setupStructure:cpp_upgrade_data];
-		error = _session->applyProtocolUpgradeData(cpp_upgrade_data);
+		error = _session.applyProtocolUpgradeData(cpp_upgrade_data);
 	} else {
 		error = EC_WrongParam;
 	}
@@ -450,7 +434,7 @@ using namespace com::wultra::powerAuth;
 
 - (BOOL) finishProtocolUpgrade
 {
-	ErrorCode error = _session->finishProtocolUpgrade();
+	ErrorCode error = _session.finishProtocolUpgrade();
 	PowerAuthCoreObjc_DebugDumpError(self, @"FinishProtocolUpgrade", error);
 	return error == EC_Ok;
 }
@@ -464,7 +448,7 @@ using namespace com::wultra::powerAuth;
 
 - (BOOL) hasActivationRecoveryData
 {
-	return _session->hasActivationRecoveryData();
+	return _session.hasActivationRecoveryData();
 }
 
 - (PowerAuthCoreRecoveryData*) activationRecoveryData:(NSString *)cVaultKey keys:(PowerAuthCoreSignatureUnlockKeys *)unlockKeys
@@ -474,7 +458,7 @@ using namespace com::wultra::powerAuth;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
 	
 	RecoveryData cpp_recovery_data;
-	ErrorCode error = _session->getActivationRecoveryData(cpp_c_vault_key, cpp_keys, cpp_recovery_data);
+	ErrorCode error = _session.getActivationRecoveryData(cpp_c_vault_key, cpp_keys, cpp_recovery_data);
 	if (error != EC_Ok) {
 		PowerAuthCoreObjc_DebugDumpError(self, @"ActivationRecoveryData", error);
 		return nil;

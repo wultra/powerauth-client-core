@@ -22,9 +22,14 @@
 #pragma mark -  Initialization / Reset
 
 /**
+ Use class factory methods to init object.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+/**
  The designated initializer. You have to provide a valid PowerAuthCoreSessionSetup object.
  */
-- (nullable instancetype) initWithSessionSetup:(nonnull PowerAuthCoreSessionSetup *)setup;
+- (nonnull instancetype) initWithSessionSetup:(nonnull PowerAuthCoreSessionSetup *)setup;
 
 /**
  Resets session into its initial state. The existing session's setup and EEK is preserved

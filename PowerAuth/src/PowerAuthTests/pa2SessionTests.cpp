@@ -119,18 +119,6 @@ namespace powerAuthTests
 			}
 		}
 		
-		void compareSetup(const SessionSetup * ss, const char * message)
-		{
-			if (!ss) {
-				return;
-			}
-			ccstMessage("Testing SessionSetup : %s", message);
-			ccstAssertEqual(ss->applicationKey,			_setup.applicationKey);
-			ccstAssertEqual(ss->applicationSecret,		_setup.applicationSecret);
-			ccstAssertEqual(ss->masterServerPublicKey,	_setup.masterServerPublicKey);
-			ccstAssertEqual(ss->sessionIdentifier,		_setup.sessionIdentifier);
-		}
-		
 		void testBeforeActivation()
 		{
 			// valid setup
@@ -180,6 +168,24 @@ namespace powerAuthTests
 				bool bf = true;
 				ccstAssertEqual(EC_WrongState, s3.hasBiometryFactor(bf));
 				ccstAssertFalse(bf);
+			}
+			{
+				// Empty, but then initialized
+				Session s4;
+				ccstAssertFalse(s4.hasValidSetup());
+				auto result = s4.setSessionSetup(_setup);
+				ccstAssertTrue(result);
+				ccstAssertTrue(s4.hasValidSetup());
+				
+				// Set back to invalid
+				result = s4.setSessionSetup(SessionSetup());
+				ccstAssertFalse(result);
+				ccstAssertFalse(s4.hasValidSetup());
+				ccstAssertFalse(s4.canStartActivation());
+				ccstAssertFalse(s4.hasPendingActivation());
+				ccstAssertFalse(s4.hasValidActivation());
+				ccstAssertTrue(s4.activationIdentifier().empty());
+				ccstAssertTrue(s4.activationFingerprint().empty());
 			}
 		}
 		
@@ -439,7 +445,11 @@ namespace powerAuthTests
 				ccstAssertFalse(state_active1.empty());
 				{
 					// Reset & Restore
-					s1.resetSession();
+					// The following sequence has the same effect as resetSession()
+					s1.setSessionSetup(_setup);
+					if (eek && eek_setter) {
+						s1.setExternalEncryptionKey(eek->byteRange());
+					}
 					ec = s1.loadSessionState(state_active1);
 					ccstAssertEqual(ec, EC_Ok);
 					ccstAssertEqual(s1.activationIdentifier(), _activation_id);
