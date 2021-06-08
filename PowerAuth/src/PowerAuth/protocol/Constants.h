@@ -56,9 +56,6 @@ namespace protocol
 	// How many iterations are used for password key derivation.
 	const size_t PBKDF2_PASS_ITERATIONS = 10000;
 	
-	// How many iterations are used for OTP key expanding.
-	const size_t PBKDF2_OTP_EXPAND_ITERATIONS = 10000;
-	
 	// Length of generated salt
 	const size_t PBKDF2_SALT_SIZE = 16;
 	

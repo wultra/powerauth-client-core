@@ -15,7 +15,7 @@
  */
 
 #include <cc7tests/CC7Tests.h>
-#include <PowerAuth/OtpUtil.h>
+#include <PowerAuth/ActivationCode.h>
 
 // Required by "nice code generator"
 #include <cc7/Base32.h>
@@ -32,11 +32,11 @@ namespace wultra
 {
 namespace powerAuthTests
 {
-	class pa2OtpUtilTests : public UnitTest
+	class pa2ActivationCodeTests : public UnitTest
 	{
 	public:
 		
-		pa2OtpUtilTests()
+		pa2ActivationCodeTests()
 		{
 			CC7_REGISTER_TEST_METHOD(testActivationCodeValidation)
 			CC7_REGISTER_TEST_METHOD(testCharValidation)
@@ -75,7 +75,7 @@ namespace powerAuthTests
 			};
 			const char ** p = valid_codes;
 			while (const char * code = *p++) {
-				bool result = OtpUtil::validateActivationCode(std::string(code));
+				bool result = ActivationCodeUtil::validateActivationCode(std::string(code));
 				ccstAssertTrue(result, "Code '%s' should pass the test", code);
 			}
 			
@@ -100,7 +100,7 @@ namespace powerAuthTests
 			};
 			p = invalid_codes;
 			while (const char * code = *p++) {
-				bool result = OtpUtil::validateActivationCode(std::string(code));
+				bool result = ActivationCodeUtil::validateActivationCode(std::string(code));
 				ccstAssertFalse(result, "Code '%s' should not pass the test", code);
 			}
 
@@ -124,7 +124,7 @@ namespace powerAuthTests
 				for (size_t i = 0; i < inp.length(); i++) {
 					cc7::U32 inp_char = (cc7::U32)inp[i];
 					cc7::U32 out_char = (cc7::U32)out[i];
-					cc7::U32 cor_char = OtpUtil::validateAndCorrectTypedCharacter(inp_char);
+					cc7::U32 cor_char = ActivationCodeUtil::validateAndCorrectTypedCharacter(inp_char);
 					ccstAssertEqual(out_char, cor_char, "Corrected characted doesn't match '%c'->'%c' != '%c'", inp_char, out_char, cor_char)
 				}
 			}
@@ -132,7 +132,7 @@ namespace powerAuthTests
 			std::string invalid_characters("89-=#$%^&!@#-=';()");
 			for (size_t i = 0; i < invalid_characters.length(); i++) {
 				cc7::U32 inp_char = (cc7::U32)invalid_characters[i];
-				cc7::U32 cor_char = OtpUtil::validateAndCorrectTypedCharacter(inp_char);
+				cc7::U32 cor_char = ActivationCodeUtil::validateAndCorrectTypedCharacter(inp_char);
 				ccstAssertEqual(0, cor_char, "Character '%c' should not pass validation", inp_char);
 			}
 		}
@@ -143,14 +143,14 @@ namespace powerAuthTests
 			std::string valid_characters("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567");
 			for (size_t i = 0; i < valid_characters.length(); i++) {
 				cc7::U32 inp_char = (cc7::U32)valid_characters[i];
-				bool result = OtpUtil::validateTypedCharacter(inp_char);
+				bool result = ActivationCodeUtil::validateTypedCharacter(inp_char);
 				ccstAssertTrue(result, "Character '%c' should pass validation", inp_char);
 			}
 			
 			std::string invalid_characters("abcdefghijklmnopqrstuvwxyz0189-=#$%^&!@#-=';()");
 			for (size_t i = 0; i < invalid_characters.length(); i++) {
 				cc7::U32 inp_char = (cc7::U32)invalid_characters[i];
-				bool result = OtpUtil::validateTypedCharacter(inp_char);
+				bool result = ActivationCodeUtil::validateTypedCharacter(inp_char);
 				ccstAssertFalse(result, "Character '%c' should not pass validation", inp_char);
 			}
 		}
@@ -158,29 +158,29 @@ namespace powerAuthTests
 		
 		void testActivationCodeParser()
 		{
-			OtpComponents components;
+			ActivationCode components;
 			bool result;
 			
 			// valid sequences
-			result = OtpUtil::parseActivationCode("BBBBB-BBBBB-BBBBB-BTA6Q", components);
+			result = ActivationCodeUtil::parseActivationCode("BBBBB-BBBBB-BBBBB-BTA6Q", components);
 			ccstAssertTrue(result);
 			ccstAssertEqual(components.activationCode, "BBBBB-BBBBB-BBBBB-BTA6Q");
 			ccstAssertEqual(components.activationSignature, "");
 			ccstAssertFalse(components.hasSignature());
 			
-			result = OtpUtil::parseActivationCode("CCCCC-CCCCC-CCCCC-CNUUQ#ABCD", components);
+			result = ActivationCodeUtil::parseActivationCode("CCCCC-CCCCC-CCCCC-CNUUQ#ABCD", components);
 			ccstAssertTrue(result);
 			ccstAssertEqual(components.activationCode, "CCCCC-CCCCC-CCCCC-CNUUQ");
 			ccstAssertEqual(components.activationSignature, "ABCD");
 			ccstAssertTrue(components.hasSignature());
 			
-			result = OtpUtil::parseActivationCode("DDDDD-DDDDD-DDDDD-D6UKA#ABC=", components);
+			result = ActivationCodeUtil::parseActivationCode("DDDDD-DDDDD-DDDDD-D6UKA#ABC=", components);
 			ccstAssertTrue(result);
 			ccstAssertEqual(components.activationCode, "DDDDD-DDDDD-DDDDD-D6UKA");
 			ccstAssertEqual(components.activationSignature, "ABC=");
 			ccstAssertTrue(components.hasSignature());
 
-			result = OtpUtil::parseActivationCode("EEEEE-EEEEE-EEEEE-E2OXA#AB==", components);
+			result = ActivationCodeUtil::parseActivationCode("EEEEE-EEEEE-EEEEE-E2OXA#AB==", components);
 			ccstAssertTrue(result);
 			ccstAssertEqual(components.activationCode, "EEEEE-EEEEE-EEEEE-E2OXA");
 			ccstAssertEqual(components.activationSignature, "AB==");
@@ -188,25 +188,25 @@ namespace powerAuthTests
 
 			
 			// invalid sequences
-			result = OtpUtil::parseActivationCode("", components);
+			result = ActivationCodeUtil::parseActivationCode("", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("#", components);
+			result = ActivationCodeUtil::parseActivationCode("#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("#AB==", components);
+			result = ActivationCodeUtil::parseActivationCode("#AB==", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("KLMNO-PQRST", components);
+			result = ActivationCodeUtil::parseActivationCode("KLMNO-PQRST", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("EEEEE-EEEEE-EEEEE-E2OXA#", components);
+			result = ActivationCodeUtil::parseActivationCode("EEEEE-EEEEE-EEEEE-E2OXA#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("OOOOO-OOOOO-OOOOO-OZH2Q#", components);
+			result = ActivationCodeUtil::parseActivationCode("OOOOO-OOOOO-OOOOO-OZH2Q#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("SSSSS-SSSSS-SSSSS-SX7IA#AB", components);
+			result = ActivationCodeUtil::parseActivationCode("SSSSS-SSSSS-SSSSS-SX7IA#AB", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("UUUUU-UUUUU-UUUUU-UAFLQ#AB#", components);
+			result = ActivationCodeUtil::parseActivationCode("UUUUU-UUUUU-UUUUU-UAFLQ#AB#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("WWWWW-WWWWW-WWWWW-WNR7A#ABA=#", components);
+			result = ActivationCodeUtil::parseActivationCode("WWWWW-WWWWW-WWWWW-WNR7A#ABA=#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseActivationCode("XXXXX-XXXXX-XXXXX-X6RBQ#ABA-=", components);
+			result = ActivationCodeUtil::parseActivationCode("XXXXX-XXXXX-XXXXX-X6RBQ#ABA-=", components);
 			ccstAssertFalse(result);
 		}
 
@@ -241,7 +241,7 @@ namespace powerAuthTests
 			};
 			const char ** p = valid_codes;
 			while (const char * code = *p++) {
-				bool result = OtpUtil::validateRecoveryCode(std::string(code));
+				bool result = ActivationCodeUtil::validateRecoveryCode(std::string(code));
 				ccstAssertTrue(result, "Code '%s' should pass the test", code);
 			}
 			
@@ -273,12 +273,12 @@ namespace powerAuthTests
 			};
 			p = invalid_codes;
 			while (const char * code = *p++) {
-				bool result = OtpUtil::validateRecoveryCode(std::string(code));
+				bool result = ActivationCodeUtil::validateRecoveryCode(std::string(code));
 				ccstAssertFalse(result, "Code '%s' should not pass the test", code);
 			}
 			
-			ccstAssertTrue(OtpUtil::validateRecoveryCode("NQHGX-LNM2S-EQ4NT-G3NAA", false));
-			ccstAssertFalse(OtpUtil::validateRecoveryCode("R:NQHGX-LNM2S-EQ4NT-G3NAA", false));
+			ccstAssertTrue(ActivationCodeUtil::validateRecoveryCode("NQHGX-LNM2S-EQ4NT-G3NAA", false));
+			ccstAssertFalse(ActivationCodeUtil::validateRecoveryCode("R:NQHGX-LNM2S-EQ4NT-G3NAA", false));
 		}
 		
 		void testRecoveryPukValidation()
@@ -294,7 +294,7 @@ namespace powerAuthTests
 			};
 			const char ** p = valid_puks;
 			while (const char * puk = *p++) {
-				bool result = OtpUtil::validateRecoveryPuk(std::string(puk));
+				bool result = ActivationCodeUtil::validateRecoveryPuk(std::string(puk));
 				ccstAssertTrue(result, "PUK '%s' should pass the test", puk);
 			}
 			
@@ -328,53 +328,53 @@ namespace powerAuthTests
 			};
 			p = invalid_puks;
 			while (const char * puk = *p++) {
-				bool result = OtpUtil::validateRecoveryPuk(std::string(puk));
+				bool result = ActivationCodeUtil::validateRecoveryPuk(std::string(puk));
 				ccstAssertFalse(result, "PUK '%s' should not pass the test", puk);
 			}
 		}
 		
 		void testRecoveryCodeParser()
 		{
-			OtpComponents components;
+			ActivationCode components;
 			bool result;
 			
 			// valid sequences
-			result = OtpUtil::parseRecoveryCode("BBBBB-BBBBB-BBBBB-BTA6Q", components);
+			result = ActivationCodeUtil::parseRecoveryCode("BBBBB-BBBBB-BBBBB-BTA6Q", components);
 			ccstAssertTrue(result);
 			ccstAssertEqual(components.activationCode, "BBBBB-BBBBB-BBBBB-BTA6Q");
 			
-			result = OtpUtil::parseRecoveryCode("R:BBBBB-BBBBB-BBBBB-BTA6Q", components);
+			result = ActivationCodeUtil::parseRecoveryCode("R:BBBBB-BBBBB-BBBBB-BTA6Q", components);
 			ccstAssertTrue(result);
 			ccstAssertEqual(components.activationCode, "BBBBB-BBBBB-BBBBB-BTA6Q");
 			
 			// invalid sequences
-			result = OtpUtil::parseRecoveryCode("", components);
+			result = ActivationCodeUtil::parseRecoveryCode("", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("#", components);
+			result = ActivationCodeUtil::parseRecoveryCode("#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("#AB==", components);
+			result = ActivationCodeUtil::parseRecoveryCode("#AB==", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("KLMNO-PQRST", components);
+			result = ActivationCodeUtil::parseRecoveryCode("KLMNO-PQRST", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("EEEEE-EEEEE-EEEEE-E2OXA#", components);
+			result = ActivationCodeUtil::parseRecoveryCode("EEEEE-EEEEE-EEEEE-E2OXA#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("OOOOO-OOOOO-OOOOO-OZH2Q#", components);
+			result = ActivationCodeUtil::parseRecoveryCode("OOOOO-OOOOO-OOOOO-OZH2Q#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("SSSSS-SSSSS-SSSSS-SX7IA#AB", components);
+			result = ActivationCodeUtil::parseRecoveryCode("SSSSS-SSSSS-SSSSS-SX7IA#AB", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("UUUUU-UUUUU-UUUUU-UAFLQ#AB#", components);
+			result = ActivationCodeUtil::parseRecoveryCode("UUUUU-UUUUU-UUUUU-UAFLQ#AB#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("WWWWW-WWWWW-WWWWW-WNR7A#ABA=#", components);
+			result = ActivationCodeUtil::parseRecoveryCode("WWWWW-WWWWW-WWWWW-WNR7A#ABA=#", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("XXXXX-XXXXX-XXXXX-X6RBQ#ABA-=", components);
+			result = ActivationCodeUtil::parseRecoveryCode("XXXXX-XXXXX-XXXXX-X6RBQ#ABA-=", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("DDDDD-DDDDD-DDDDD-D6UKA#ABC=", components);
+			result = ActivationCodeUtil::parseRecoveryCode("DDDDD-DDDDD-DDDDD-D6UKA#ABC=", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("EEEEE-EEEEE-EEEEE-E2OXA#AB==", components);
+			result = ActivationCodeUtil::parseRecoveryCode("EEEEE-EEEEE-EEEEE-E2OXA#AB==", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("R:DDDDD-DDDDD-DDDDD-D6UKA#ABC=", components);
+			result = ActivationCodeUtil::parseRecoveryCode("R:DDDDD-DDDDD-DDDDD-D6UKA#ABC=", components);
 			ccstAssertFalse(result);
-			result = OtpUtil::parseRecoveryCode("R:EEEEE-EEEEE-EEEEE-E2OXA#AB==", components);
+			result = ActivationCodeUtil::parseRecoveryCode("R:EEEEE-EEEEE-EEEEE-E2OXA#AB==", components);
 			ccstAssertFalse(result);
 		}
 		
@@ -396,7 +396,7 @@ namespace powerAuthTests
 		}
 	};
 	
-	CC7_CREATE_UNIT_TEST(pa2OtpUtilTests, "pa2")
+	CC7_CREATE_UNIT_TEST(pa2ActivationCodeTests, "pa2")
 	
 } // com::wultra::powerAuthTests
 } // com::wultra

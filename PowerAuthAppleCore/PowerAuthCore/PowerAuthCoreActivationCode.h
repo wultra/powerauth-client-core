@@ -17,10 +17,10 @@
 #import <PowerAuthCore/PowerAuthCoreMacros.h>
 
 /**
- The `PowerAuthCoreOtp` object contains parsed components from user-provided activation, or recovery
- code. You can use methods from `PowerAuthCoreOtpUtil` class to fill this object with valid data.
+ The `PowerAuthCoreActivationCode` object contains parsed components from user-provided activation, or recovery
+ code. You can use methods from `PowerAuthCoreActivationCodeUtil` class to fill this object with valid data.
  */
-@interface PowerAuthCoreOtp : NSObject
+@interface PowerAuthCoreActivationCode : NSObject
 
 /**
  If object is constructed from an activation code, then property contains just a code, without a signature part.
@@ -39,7 +39,7 @@
 
 
 /** 
- The `PowerAuthCoreOtpUtil` class provides various set of methods for parsing and validating
+ The `PowerAuthCoreActivationCodeUtil` class provides various set of methods for parsing and validating
  activation or recovery codes.
  
  Current format:
@@ -59,9 +59,9 @@
  - Where the 'D' is digit (0 - 9)
  
  As you can see, both activation and recovery codes, shares the same basic principle (like CRC16
- checksum). That's why parser returns the same `PowerAuthCoreOtp` object for both scenarios. 
+ checksum). That's why parser returns the same `PowerAuthCoreActivationCode` object for both scenarios.
  */
-@interface PowerAuthCoreOtpUtil : NSObject
+@interface PowerAuthCoreActivationCodeUtil : NSObject
 
 #pragma mark - Validations
 
@@ -106,19 +106,20 @@
 #pragma mark - Parser
 
 /**
- Parses an input |activationCode| (which may or may not contain an optional signature) and returns PowerAuthCoreOtp 
+ Parses an input |activationCode| (which may or may not contain an optional signature) and returns PowerAuthCoreActivationCode
  object filled with valid data. The method doesn't perform an auto-correction, so the provided code must be valid.
  
- Returns PowerAuthCoreOtp object if code is valid, or nil.
+ Returns PowerAuthCoreActivationCode object if code is valid, or nil.
  */
-+ (nullable PowerAuthCoreOtp*) parseFromActivationCode:(nonnull NSString*)activationCode;
++ (nullable PowerAuthCoreActivationCode*) parseFromActivationCode:(nonnull NSString*)activationCode;
 
 /**
- Parses an input |recoveryCode| (which may or may not contain an optional "R:" prefix) and returns PowerAuthCoreOtp
+ Parses an input |recoveryCode| (which may or may not contain an optional "R:" prefix) and returns PowerAuthCoreActivationCode
  object filled with valid data. The method doesn't perform an auto-correction, so the provided code must be valid.
  
- Returns PowerAuthCoreOtp object if code is valid, or nil.
+ Returns PowerAuthCoreActivationCode
+ bject if code is valid, or nil.
  */
-+ (nullable PowerAuthCoreOtp*) parseFromRecoveryCode:(nonnull NSString*)recoveryCode;
++ (nullable PowerAuthCoreActivationCode*) parseFromRecoveryCode:(nonnull NSString*)recoveryCode;
 
 @end

@@ -42,7 +42,7 @@ LOCAL_SRC_FILES := \
 	PowerAuth/PublicTypes.cpp \
 	PowerAuth/Password.cpp \
 	PowerAuth/Debug.cpp \
-	PowerAuth/OtpUtil.cpp \
+	PowerAuth/ActivationCode.cpp \
 	PowerAuth/ECIES.cpp \
 	PowerAuth/crypto/AES.cpp \
 	PowerAuth/crypto/Hash.cpp \
@@ -103,7 +103,7 @@ LOCAL_SRC_FILES := \
 	PowerAuthTests/pa2PublicKeyFingerprintTests.cpp \
 	PowerAuthTests/pa2ActivationStatusBlobTests.cpp \
 	PowerAuthTests/pa2URLEncodingTests.cpp \
-	PowerAuthTests/pa2OtpUtilTests.cpp \
+	PowerAuthTests/pa2ActivationCodeTests.cpp \
 	PowerAuthTests/pa2ECIESTests.cpp \
 	PowerAuthTests/pa2CRC16Tests.cpp \
 	PowerAuthTests/TestData/pa2.generated/g_pa2Files.cpp
@@ -141,7 +141,7 @@ LOCAL_C_INCLUDES := \
 LOCAL_SRC_FILES := \
 	PowerAuth/jni/SessionJNI.cpp \
 	PowerAuth/jni/PasswordJNI.cpp \
-	PowerAuth/jni/ActivationCodeUtilJNI.cpp \
+	PowerAuth/jni/ActivationCodeJNI.cpp \
 	PowerAuth/jni/ECIESEncryptorJNI.cpp \
 	PowerAuth/jni/CryptoUtilsJNI.cpp \
 	PowerAuth/jni/ProtocolVersionJNI.cpp

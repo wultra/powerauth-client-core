@@ -245,7 +245,7 @@ namespace powerAuthTests
 				s1.resetSession();
 				
 				// SERVER STEP 1,
-				//  ...prepare short-id, otp & activation signature
+				//  ...prepare activation code & signature
 				ActivationStep1Param param1;
 				{
 					param1.activationCode		= _activation_code;

@@ -16,7 +16,7 @@
 
 #include <PowerAuth/Session.h>
 #include <PowerAuth/ECIES.h>
-#include <PowerAuth/OtpUtil.h>
+#include <PowerAuth/ActivationCode.h>
 
 #include <cc7/Base64.h>
 #include "protocol/ProtocolUtils.h"
@@ -254,7 +254,7 @@ namespace powerAuth
 		}
 		if (!param.activationCode.empty()) {
 			// If activation code is present, then check whether CRC16 checksum is OK
-			if (!OtpUtil::validateActivationCode(param.activationCode)) {
+			if (!ActivationCodeUtil::validateActivationCode(param.activationCode)) {
 				CC7_LOG("Session %p, %d: Step 1: Wrong activation code.", this, sessionIdentifier());
 				return EC_WrongParam;
 			}
@@ -266,7 +266,7 @@ namespace powerAuth
 		do {
 			crypto::BNContext ctx;
 			
-			// Import master server public key & try to validate OTP+ShortID signature
+			// Import master server public key & try to validate ActivationCode signature
 			ad->masterServerPublicKey = crypto::ECC_ImportPublicKeyFromB64(nullptr, _setup.masterServerPublicKey, ctx);
 			if (nullptr == ad->masterServerPublicKey) {
 				CC7_LOG("Session %p, %d: Step 1: Master server public key is invalid.", this, sessionIdentifier());
