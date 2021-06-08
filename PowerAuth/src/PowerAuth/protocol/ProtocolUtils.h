@@ -29,11 +29,6 @@ namespace protocol
 	//
 	// MARK: - Helpers and utilities related to PA2 -
 	//
-
-	/**
-	 Validates "shortId-OTP" sequence with provided master key and signature
-	 */
-	bool ValidateShortIdAndOtpSignature(const std::string & sid, const std::string & otp, const std::string & sig, EC_KEY * mk);
 	
 	/**
 	 Validates "activationCode" sequence with provided master key and signature.

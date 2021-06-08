@@ -25,10 +25,10 @@ namespace wultra
 namespace powerAuth
 {
 	/**
-	 The `OtpComponents` structure contains parsed components from user-provided activation
-	 code. You can use methods from `OtpUtil` class to fill this structure with valid data.
+	 The `ActivationCode` structure contains parsed components from user-provided activation
+	 code. You can use methods from `ActivationCodeUtil` class to fill this structure with valid data.
 	 */
-	struct OtpComponents
+	struct ActivationCode
 	{		
 		/**
 		 Activation code.
@@ -49,7 +49,7 @@ namespace powerAuth
 	
 
 	/**
-	 The `OtpUtil` class provides various set of methods for parsing and validating activation codes.
+	 The `ActivationCodeUtil` class provides various set of methods for parsing and validating activation codes.
 	 
 	 Current format:
 	 ------------------
@@ -59,29 +59,29 @@ namespace powerAuth
 	 Where the 'C' is a character from range [A-Z2-7]
 	 
 	 */
-	class OtpUtil
+	class ActivationCodeUtil
 	{
 	public:
 
 		// Parser
 	
 		/**
-		 Parses an input |activation_code| (which may or may not contain an optional signature) and stores
-		 the result into the |out_components| structure. The method doesn't perform an autocorrection,
+		 Parses an input |activation_code_str| (which may or may not contain an optional signature) and stores
+		 the result into the |out_activation_code| structure. The method doesn't perform an autocorrection,
 		 so the provided code must be valid.
 		 
-		 Returns true if the code is valid and |out_components| contains a valid data.
+		 Returns true if the code is valid and |out_activation_code| contains a valid data.
 		 */
-		static bool parseActivationCode(const std::string & activation_code, OtpComponents & out_components);
+		static bool parseActivationCode(const std::string & activation_code_str, ActivationCode & out_activation_code);
 		
 		/**
-		 Parses an input |recovery_code| (which may or may not contain an optional "R:" prefix) and stores
-		 the result into the |out_components| structure. The method doesn't perform an autocorrection,
+		 Parses an input |recovery_code_str| (which may or may not contain an optional "R:" prefix) and stores
+		 the result into the |out_recovery_code| structure. The method doesn't perform an autocorrection,
 		 so the provided code must be valid.
 		 
-		 Returns true if the code is valid and |out_components| contains a valid data.
+		 Returns true if the code is valid and |out_recovery_code| contains a valid data.
 		 */
-		static bool parseRecoveryCode(const std::string & recovery_code, OtpComponents & out_components);
+		static bool parseRecoveryCode(const std::string & recovery_code_str, ActivationCode & out_recovery_code);
 		
 		
 		// Validations

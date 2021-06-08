@@ -16,7 +16,7 @@
 
 #import <PowerAuthCore/PowerAuthCoreMacros.h>
 #import <PowerAuthCore/PowerAuthCorePassword.h>
-#import <PowerAuthCore/PowerAuthCoreOtpUtil.h>
+#import <PowerAuthCore/PowerAuthCoreActivationCode.h>
 #import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
 
 #pragma mark - Session setup & Error -
@@ -354,7 +354,7 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
  Full, parsed activation code. The parameter is optional and may be nil
  in case of custom activation.
  */
-@property (nonatomic, strong, nullable) PowerAuthCoreOtp * activationCode;
+@property (nonatomic, strong, nullable) PowerAuthCoreActivationCode * activationCode;
 
 @end
 

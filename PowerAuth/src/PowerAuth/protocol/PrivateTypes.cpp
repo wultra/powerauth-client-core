@@ -21,7 +21,7 @@
 #include "../utils/DataReader.h"
 #include "../utils/DataWriter.h"
 
-#include <PowerAuth/OtpUtil.h>
+#include <PowerAuth/ActivationCode.h>
 #include <cc7/Base64.h>
 
 using namespace cc7;
@@ -274,8 +274,8 @@ namespace protocol
 			return true;
 		}
 		// Validate recovery code and PUK. Recovery code should not contain "R:" prefix.
-		return OtpUtil::validateRecoveryCode(data.recoveryCode, false) &&
-			   OtpUtil::validateRecoveryPuk(data.puk);
+		return ActivationCodeUtil::validateRecoveryCode(data.recoveryCode, false) &&
+			   ActivationCodeUtil::validateRecoveryPuk(data.puk);
 	}
 	
 	bool SerializeRecoveryData(const RecoveryData & data, const cc7::ByteRange vault_key, cc7::ByteArray & out_data)
