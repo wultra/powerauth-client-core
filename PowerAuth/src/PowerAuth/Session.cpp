@@ -40,6 +40,14 @@ namespace powerAuth
 	
 	// MARK: Construction / Destruction -
 	
+	Session::Session() :
+		_state(SS_Invalid),
+		_pd(nullptr),
+		_ad(nullptr)
+	{
+		CC7_LOG("Session %:: Object created with no SessionSetup", this);
+	}
+
 	Session::Session(const SessionSetup & setup) :
 		_state(SS_Empty),
 		_setup(setup),
@@ -61,11 +69,29 @@ namespace powerAuth
 		
 		CC7_LOG("Session %p, %d: Object destroyed.", this, sessionIdentifier());
 	}
+
+	bool Session::setSessionSetup(const SessionSetup & setup)
+	{
+		LOCK_GUARD();
+		resetSession();
+		_setup = setup;
+		if (protocol::ValidateSessionSetup(_setup, false)) {
+			_state = SS_Empty;
+			CC7_LOG("Session %p, %d: Assigned new SessionSetup.", this, sessionIdentifier());
+			return true;
+		} else {
+			_state = SS_Invalid;
+			CC7_LOG("Session %: Invalid SessionSetup provided!", this);
+			return false;
+		}
+	}
 	
 	void Session::resetSession()
 	{
 		LOCK_GUARD();
-		commitNewPersistentState(nullptr, SS_Empty);
+		if (_state >= SS_Empty) {
+			commitNewPersistentState(nullptr, SS_Empty);
+		}
 	}
 	
 	const SessionSetup * Session::sessionSetup() const
@@ -1268,7 +1294,7 @@ namespace powerAuth
 		} else {
 			// Delete everything
 			delete new_pd;
-			_pd = new_pd = nullptr;
+			_pd = nullptr;
 			// PD was not commited, so, we have to adjust new state.
 			new_state = SS_Empty;
 		}

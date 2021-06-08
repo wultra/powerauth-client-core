@@ -56,6 +56,12 @@ namespace powerAuth
 		// MARK: - Construction / Destruction -
 		
 		/**
+		 Object's constructor. It's recommended to call setSessionSetup() immediately
+		 after the object creation or use constructor with SessionSetup parameter.
+		 */
+		Session();
+		
+		/**
 		 Initializes a session object with a given SessionSetup object. The session
 		 is in not-activated state just after the object construction, but you
 		 can call 'loadSessionState' or 'startActivation' to change that.
@@ -72,6 +78,13 @@ namespace powerAuth
 		Session& operator=(const Session &) = delete;
 		
 		// MARK: - Initialization, State control -
+		
+		/**
+		 Initializes a session object with a given SessionSetup object. If the session
+		 has already a valid activation, then all activation data is lost.
+		 Returns true if SessionSetup is valid, otherwise false.
+		 */
+		bool setSessionSetup(const SessionSetup & setup);
 		
 		/**
 		 Returns pointer to an internal SessionSetup structure. Returns null if
@@ -618,7 +631,7 @@ namespace powerAuth
 		enum State
 		{
 			/**
-			 Provided SessionSetup structure is invalid
+			 Provided SessionSetup structure is invalid or no setup was provided yet.
 			 */
 			SS_Invalid,
 			/**
