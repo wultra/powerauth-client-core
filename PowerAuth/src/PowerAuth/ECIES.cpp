@@ -19,9 +19,9 @@
 #include "protocol/ProtocolUtils.h"
 #include "protocol/Constants.h"
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -373,6 +373,6 @@ namespace powerAuth
 		return EC_WrongState;
 	}
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

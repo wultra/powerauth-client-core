@@ -20,9 +20,9 @@
 #include <cc7/Base32.h>
 #include "utils/CRC16.h"
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -170,6 +170,6 @@ namespace powerAuth
 		return true;
 	}
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

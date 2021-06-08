@@ -18,9 +18,9 @@
 
 #include <cc7/DebugFeatures.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -31,6 +31,6 @@ namespace powerAuth
 	 */
 	bool HasDebugFeaturesTurnedOn();
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

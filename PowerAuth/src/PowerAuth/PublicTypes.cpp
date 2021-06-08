@@ -17,9 +17,9 @@
 #include <PowerAuth/PublicTypes.h>
 #include "protocol/Constants.h"
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -140,6 +140,6 @@ namespace powerAuth
 		return counterState == Counter_Updated;
 	}
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

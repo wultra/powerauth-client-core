@@ -16,9 +16,9 @@
 
 #include "CRC16.h"
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -80,7 +80,7 @@ namespace utils
 		return calculated_value == expected_value;
 	}
 	
-} // io::getlime::powerAuth::utils
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::utils
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

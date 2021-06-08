@@ -18,9 +18,9 @@
 
 #include "PrivateTypes.h"
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -173,7 +173,7 @@ namespace protocol
 	 */
 	int CalculateDistanceBetweenByteCounters(cc7::byte local_ctr, cc7::byte server_ctr);
 	
-} // io::getlime::powerAuth::protocol
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::protocol
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

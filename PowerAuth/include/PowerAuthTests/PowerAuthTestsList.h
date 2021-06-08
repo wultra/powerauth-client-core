@@ -18,9 +18,9 @@
 
 #include <cc7tests/CC7Tests.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuthTests
 {
@@ -30,6 +30,6 @@ namespace powerAuthTests
 	 */
 	extern cc7::tests::UnitTestCreationInfoList GetPowerAuthTestCreationInfoList();
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

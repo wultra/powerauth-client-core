@@ -20,12 +20,12 @@
 
 using namespace cc7;
 using namespace cc7::tests;
-using namespace io::getlime::powerAuth;
-using namespace io::getlime::powerAuth::utils;
+using namespace com::wultra::powerAuth;
+using namespace com::wultra::powerAuth::utils;
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuthTests
 {
@@ -346,6 +346,6 @@ namespace powerAuthTests
 	
 	CC7_CREATE_UNIT_TEST(pa2DataWriterReaderTests, "pa2")
 	
-} // io::getlime::powerAuthTests
-} // io::getlime
-} // io
+} // com::wultra::powerAuthTests
+} // com::wultra
+} // com

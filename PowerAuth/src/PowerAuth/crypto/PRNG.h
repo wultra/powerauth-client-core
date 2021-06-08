@@ -23,9 +23,9 @@
  be replaced with a similar cc7 implementation.
  */
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -56,7 +56,7 @@ namespace crypto
 	 */
 	void ReseedPRNG();
 	
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

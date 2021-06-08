@@ -18,9 +18,9 @@
 
 #include <cc7/ByteArray.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -32,7 +32,7 @@ namespace utils
 	 */
 	cc7::ByteArray ConvertStringToUrlEncodedData(const std::string & str);
 	
-} // io::getlime::powerAuth::utils
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::utils
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

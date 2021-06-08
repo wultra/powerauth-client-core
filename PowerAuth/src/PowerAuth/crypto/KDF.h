@@ -23,9 +23,9 @@
  be replaced with a similar cc7 implementation.
  */
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -40,7 +40,7 @@ namespace crypto
 	// ANSI X9.63 KDF function for ECDH
 	cc7::ByteArray ECDH_KDF_X9_63_SHA256(const cc7::ByteRange & secret, const cc7::ByteRange & info1, size_t output_bytes);
 
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

@@ -24,7 +24,7 @@
 #define CC7_JNI_CPP_CLASS		    NA
 #include <cc7/jni/JniModule.inl>
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 extern "C" {
 

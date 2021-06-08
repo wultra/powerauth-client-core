@@ -22,9 +22,9 @@
 #include <unistd.h>
 #endif
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -134,7 +134,7 @@ namespace crypto
 #error Unsupported platform
 #endif
 	
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

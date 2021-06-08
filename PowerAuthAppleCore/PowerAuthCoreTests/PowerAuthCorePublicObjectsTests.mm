@@ -26,7 +26,7 @@
  to the right C++ structure member.
  */
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 @interface PowerAuthCorePublicObjectsTests : XCTestCase
 @end

@@ -23,7 +23,7 @@
 #define CC7_JNI_CPP_CLASS		    NA
 #include <cc7/jni/JniModule.inl>
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 extern "C" {
 	
@@ -36,10 +36,10 @@ jobject CreateJavaProtocolVersion(JNIEnv * env, int v)
 	// Convert version to name of static field in ProtocolVersion java enum
 	const char * field_name;
 	switch (v) {
-		case io::getlime::powerAuth::Version_V2:
+		case com::wultra::powerAuth::Version_V2:
 			field_name = "V2"; 
 			break;
-		case io::getlime::powerAuth::Version_V3:
+		case com::wultra::powerAuth::Version_V3:
 			field_name = "V3";
 			 break;
 		default: 

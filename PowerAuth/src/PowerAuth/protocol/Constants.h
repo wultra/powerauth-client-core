@@ -18,9 +18,9 @@
 
 #include <cc7/ByteArray.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -95,7 +95,7 @@ namespace protocol
 	// Maximum supported look ahead.
 	const size_t LOOK_AHEAD_MAX = 64;
 	
-} // io::getlime::powerAuth::protocol
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::protocol
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

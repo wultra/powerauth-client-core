@@ -17,7 +17,7 @@
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
 #import "PowerAuthCorePrivateImpl.h"
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 #pragma mark - Public types implementation
 
@@ -29,10 +29,10 @@ using namespace io::getlime::powerAuth;
 
 @implementation PowerAuthCoreHTTPRequestDataSignature
 {
-	io::getlime::powerAuth::HTTPRequestDataSignature _signature;
+	com::wultra::powerAuth::HTTPRequestDataSignature _signature;
 }
 
-- (io::getlime::powerAuth::HTTPRequestDataSignature&) signatureStructRef
+- (com::wultra::powerAuth::HTTPRequestDataSignature&) signatureStructRef
 {
 	return _signature;
 }
@@ -76,10 +76,10 @@ using namespace io::getlime::powerAuth;
 
 @implementation PowerAuthCoreSignedData
 {
-	io::getlime::powerAuth::SignedData _signedData;
+	com::wultra::powerAuth::SignedData _signedData;
 }
 
-- (io::getlime::powerAuth::SignedData&) signedDataRef
+- (com::wultra::powerAuth::SignedData&) signedDataRef
 {
 	return _signedData;
 }
@@ -173,10 +173,10 @@ using namespace io::getlime::powerAuth;
 
 @implementation PowerAuthCoreActivationStatus
 {
-	io::getlime::powerAuth::ActivationStatus _status;
+	com::wultra::powerAuth::ActivationStatus _status;
 }
 
-- (id) initWithStatusStruct:(const io::getlime::powerAuth::ActivationStatus&)statusStruct
+- (id) initWithStatusStruct:(const com::wultra::powerAuth::ActivationStatus&)statusStruct
 {
 	self = [super init];
 	if (self) {
@@ -262,7 +262,7 @@ using namespace io::getlime::powerAuth;
 
 #pragma mark - Conversion routines
 
-void PowerAuthCoreSessionSetupToStruct(PowerAuthCoreSessionSetup * setup, io::getlime::powerAuth::SessionSetup & cpp_setup)
+void PowerAuthCoreSessionSetupToStruct(PowerAuthCoreSessionSetup * setup, com::wultra::powerAuth::SessionSetup & cpp_setup)
 {
 	cpp_setup.applicationKey		= cc7::objc::CopyFromNSString(setup.applicationKey);
 	cpp_setup.applicationSecret		= cc7::objc::CopyFromNSString(setup.applicationSecret);
@@ -271,7 +271,7 @@ void PowerAuthCoreSessionSetupToStruct(PowerAuthCoreSessionSetup * setup, io::ge
 	cpp_setup.sessionIdentifier		= setup.sessionIdentifier;
 }
 
-PowerAuthCoreSessionSetup * PowerAuthCoreSessionSetupToObject(const io::getlime::powerAuth::SessionSetup & cpp_setup)
+PowerAuthCoreSessionSetup * PowerAuthCoreSessionSetupToObject(const com::wultra::powerAuth::SessionSetup & cpp_setup)
 {
 	PowerAuthCoreSessionSetup * result = [[PowerAuthCoreSessionSetup alloc] init];
 	result.applicationKey			= cc7::objc::CopyToNSString(cpp_setup.applicationKey);
@@ -282,7 +282,7 @@ PowerAuthCoreSessionSetup * PowerAuthCoreSessionSetupToObject(const io::getlime:
 	return result;
 }
 
-void PowerAuthCoreSignatureUnlockKeysToStruct(PowerAuthCoreSignatureUnlockKeys * keys, io::getlime::powerAuth::SignatureUnlockKeys & cpp_keys)
+void PowerAuthCoreSignatureUnlockKeysToStruct(PowerAuthCoreSignatureUnlockKeys * keys, com::wultra::powerAuth::SignatureUnlockKeys & cpp_keys)
 {
 	cpp_keys.possessionUnlockKey	= cc7::objc::CopyFromNSData(keys.possessionUnlockKey);
 	cpp_keys.biometryUnlockKey		= cc7::objc::CopyFromNSData(keys.biometryUnlockKey);
@@ -293,7 +293,7 @@ void PowerAuthCoreSignatureUnlockKeysToStruct(PowerAuthCoreSignatureUnlockKeys *
 	}
 }
 
-void PowerAuthCoreHTTPRequestDataToStruct(PowerAuthCoreHTTPRequestData * req, io::getlime::powerAuth::HTTPRequestData & cpp_req)
+void PowerAuthCoreHTTPRequestDataToStruct(PowerAuthCoreHTTPRequestData * req, com::wultra::powerAuth::HTTPRequestData & cpp_req)
 {
 	cpp_req.body					= cc7::objc::CopyFromNSData(req.body);
 	cpp_req.method					= cc7::objc::CopyFromNSString(req.method);
@@ -301,32 +301,32 @@ void PowerAuthCoreHTTPRequestDataToStruct(PowerAuthCoreHTTPRequestData * req, io
 	cpp_req.offlineNonce			= cc7::objc::CopyFromNSString(req.offlineNonce);
 }
 
-void PowerAuthCoreEncryptedActivationStatusToStruct(PowerAuthCoreEncryptedActivationStatus * status, io::getlime::powerAuth::EncryptedActivationStatus& cpp_status)
+void PowerAuthCoreEncryptedActivationStatusToStruct(PowerAuthCoreEncryptedActivationStatus * status, com::wultra::powerAuth::EncryptedActivationStatus& cpp_status)
 {
 	cpp_status.challenge 			= cc7::objc::CopyFromNSString(status.challenge);
 	cpp_status.encryptedStatusBlob	= cc7::objc::CopyFromNSString(status.encryptedStatusBlob);
 	cpp_status.nonce				= cc7::objc::CopyFromNSString(status.nonce);
 }
 
-PowerAuthCoreActivationStatus * PowerAuthCoreActivationStatusToObject(const io::getlime::powerAuth::ActivationStatus& cpp_status)
+PowerAuthCoreActivationStatus * PowerAuthCoreActivationStatusToObject(const com::wultra::powerAuth::ActivationStatus& cpp_status)
 {
 	return [[PowerAuthCoreActivationStatus alloc] initWithStatusStruct:cpp_status];
 }
 
-void PowerAuthCoreActivationStep1ParamToStruct(PowerAuthCoreActivationStep1Param * p1, io::getlime::powerAuth::ActivationStep1Param & cpp_p1)
+void PowerAuthCoreActivationStep1ParamToStruct(PowerAuthCoreActivationStep1Param * p1, com::wultra::powerAuth::ActivationStep1Param & cpp_p1)
 {
 	cpp_p1.activationCode			= cc7::objc::CopyFromNSString(p1.activationCode.activationCode);
 	cpp_p1.activationSignature		= cc7::objc::CopyFromNSString(p1.activationCode.activationSignature);
 }
 
-PowerAuthCoreActivationStep1Result * PowerAuthCoreActivationStep1ResultToObject(const io::getlime::powerAuth::ActivationStep1Result& cpp_r1)
+PowerAuthCoreActivationStep1Result * PowerAuthCoreActivationStep1ResultToObject(const com::wultra::powerAuth::ActivationStep1Result& cpp_r1)
 {
 	PowerAuthCoreActivationStep1Result * res = [[PowerAuthCoreActivationStep1Result alloc] init];
 	res.devicePublicKey				= cc7::objc::CopyToNSString(cpp_r1.devicePublicKey);
 	return res;
 }
 
-void PowerAuthCoreActivationStep2ParamToStruct(PowerAuthCoreActivationStep2Param * p2, io::getlime::powerAuth::ActivationStep2Param & cpp_p2)
+void PowerAuthCoreActivationStep2ParamToStruct(PowerAuthCoreActivationStep2Param * p2, com::wultra::powerAuth::ActivationStep2Param & cpp_p2)
 {
 	cpp_p2.activationId				= cc7::objc::CopyFromNSString(p2.activationId);
 	cpp_p2.serverPublicKey			= cc7::objc::CopyFromNSString(p2.serverPublicKey);
@@ -334,20 +334,20 @@ void PowerAuthCoreActivationStep2ParamToStruct(PowerAuthCoreActivationStep2Param
 	PowerAuthCoreRecoveryDataToStruct(p2.activationRecovery, cpp_p2.activationRecovery);
 }
 
-PowerAuthCoreActivationStep2Result * PowerAuthCoreActivationStep2ResultToObject(const io::getlime::powerAuth::ActivationStep2Result& cpp_r2)
+PowerAuthCoreActivationStep2Result * PowerAuthCoreActivationStep2ResultToObject(const com::wultra::powerAuth::ActivationStep2Result& cpp_r2)
 {
 	PowerAuthCoreActivationStep2Result * res = [[PowerAuthCoreActivationStep2Result alloc] init];
 	res.activationFingerprint		= cc7::objc::CopyToNSString(cpp_r2.activationFingerprint);
 	return res;
 }
 
-void PowerAuthCoreRecoveryDataToStruct(PowerAuthCoreRecoveryData * rd, io::getlime::powerAuth::RecoveryData& cpp_rd)
+void PowerAuthCoreRecoveryDataToStruct(PowerAuthCoreRecoveryData * rd, com::wultra::powerAuth::RecoveryData& cpp_rd)
 {
 	cpp_rd.recoveryCode	= cc7::objc::CopyFromNSString(rd.recoveryCode);
 	cpp_rd.puk			= cc7::objc::CopyFromNSString(rd.puk);
 }
 
-PowerAuthCoreRecoveryData * PowerAuthCoreRecoveryDataToObject(const io::getlime::powerAuth::RecoveryData& cpp_rd)
+PowerAuthCoreRecoveryData * PowerAuthCoreRecoveryDataToObject(const com::wultra::powerAuth::RecoveryData& cpp_rd)
 {
 	if (cpp_rd.isEmpty()) {
 		CC7_ASSERT(false, "Empty structure should be handled before the conversion.");

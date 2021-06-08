@@ -23,9 +23,9 @@
 
 #include <cc7/Base64.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -268,7 +268,7 @@ namespace crypto
 		return secret;
 	}
 	
-} // io::getlime::powerAuth::crypto
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::crypto
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

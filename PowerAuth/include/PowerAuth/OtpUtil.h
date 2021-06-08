@@ -18,9 +18,9 @@
 
 #include <cc7/Platform.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -130,6 +130,6 @@ namespace powerAuth
 		static bool validateRecoveryPuk(const std::string & recovery_puk);
 	};
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

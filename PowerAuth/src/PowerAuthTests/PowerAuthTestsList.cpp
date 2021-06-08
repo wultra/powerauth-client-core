@@ -18,9 +18,9 @@
 
 using namespace cc7;
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuthTests
 {
@@ -59,6 +59,6 @@ namespace powerAuthTests
 		return list;
 	}
 	
-} // io::getlime::powerAuthTests
-} // io::getlime
-} // io
+} // com::wultra::powerAuthTests
+} // com::wultra
+} // com

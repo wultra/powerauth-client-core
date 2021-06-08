@@ -18,9 +18,9 @@
 
 #include <cc7/ByteArray.h>
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -685,6 +685,6 @@ namespace powerAuth
 		V3 toV3;
 	};
 	
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

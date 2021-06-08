@@ -21,9 +21,9 @@
 
 // Forward declarations
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -38,9 +38,9 @@ namespace utils
 }
 
 
-namespace io
+namespace com
 {
-namespace getlime
+namespace wultra
 {
 namespace powerAuth
 {
@@ -351,7 +351,7 @@ namespace protocol
 	bool DeserializeRecoveryData(const cc7::ByteRange & serialized, const cc7::ByteRange vault_key, RecoveryData & out_data);
 	
 		
-} // io::getlime::powerAuth::detail
-} // io::getlime::powerAuth
-} // io::getlime
-} // io
+} // com::wultra::powerAuth::detail
+} // com::wultra::powerAuth
+} // com::wultra
+} // com

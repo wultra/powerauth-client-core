@@ -19,7 +19,7 @@
 #include "CryptoUtils.h"			// Accessing private header; will be fixed by moving crypto to cc7
 
 
-using namespace io::getlime::powerAuth;
+using namespace com::wultra::powerAuth;
 
 #pragma mark - Private interfaces -
 
