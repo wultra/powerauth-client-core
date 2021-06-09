@@ -24,6 +24,11 @@ NS_SWIFT_NAME(ActivationCode)
 @interface PowerAuthCoreActivationCode : NSObject
 
 /**
+ Not available.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+/**
  If object is constructed from an activation code, then property contains just a code, without a signature part.
  If object is constructed from a recovery code, then property contains just a code, without an optional "R:" prefix.
  */
@@ -64,6 +69,11 @@ NS_SWIFT_NAME(ActivationCode)
  */
 NS_SWIFT_NAME(ActivationCodeUtil)
 @interface PowerAuthCoreActivationCodeUtil : NSObject
+
+/**
+ Not available.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Validations
 

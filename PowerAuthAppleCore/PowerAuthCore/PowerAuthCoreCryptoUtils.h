@@ -26,6 +26,11 @@ NS_SWIFT_NAME(CryptoUtils)
 @interface PowerAuthCoreCryptoUtils : NSObject
 
 /**
+ Use designated initializer.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+/**
  Validates ECDSA signature for given data and EC public key.
  */
 + (BOOL) ecdsaValidateSignature:(nonnull NSData*)signature

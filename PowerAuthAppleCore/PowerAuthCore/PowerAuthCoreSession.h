@@ -30,7 +30,7 @@ NS_SWIFT_NAME(Session)
 #pragma mark -  Initialization / Reset
 
 /**
- Use designated initialized.
+ Use designated initializer.
  */
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
