@@ -20,6 +20,7 @@
  The `PowerAuthCoreProtocolUpgradeData` protocol defines abstract interface for providing
  data for protocol upgrade.
  */
+NS_SWIFT_NAME(ProtocolUpgradeData)
 @protocol PowerAuthCoreProtocolUpgradeData <NSObject>
 @end
 
@@ -27,6 +28,7 @@
  The `PowerAuthCoreProtocolUpgradeDataV3` object contains data required for protocol upgrade
  from version 2 to version 3.
  */
+NS_SWIFT_NAME(ProtocolUpgradeDataV3)
 @interface PowerAuthCoreProtocolUpgradeDataV3 : NSObject<PowerAuthCoreProtocolUpgradeData>
 
 /**

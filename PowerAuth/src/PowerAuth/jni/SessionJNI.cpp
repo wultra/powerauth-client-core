@@ -538,12 +538,8 @@ CC7_JNI_METHOD(jboolean, hasBiometryFactor)
 		CC7_ASSERT(false, "Missing internal handle.");
 		return false;
 	}
-	// Get the status. We don't care about error returned from the method,
-	// because the problem is already dumped to the debug log and
-	// the result is always false in case of error.
-	bool result;
-	session->hasBiometryFactor(result);
-	return result;
+	// Get the status.
+	return session->hasBiometryFactor();
 }
 
 //

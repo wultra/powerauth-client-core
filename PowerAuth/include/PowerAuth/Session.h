@@ -367,12 +367,9 @@ namespace powerAuth
 		ErrorCode addBiometryFactor(const std::string & c_vault_key, const SignatureUnlockKeys & keys);
 		
 		/**
-		 Checks if the key for the biometry related factor exists for the session, returns the value as a reference.
-		 
-		 Returns EC_Ok,         if operation succeeded
-				 EC_WrongState,	if the session has no valid activation
+		 Checks if the key for the biometry related factor exists for this session.
 		 */
-		ErrorCode hasBiometryFactor(bool & hasBiometryFactor) const;
+		bool hasBiometryFactor() const;
 		
 		/**
 		 Removes existing key for biometric signatures from the session. You have to save state of the session

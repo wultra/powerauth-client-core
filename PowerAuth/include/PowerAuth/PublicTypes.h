@@ -87,9 +87,9 @@ namespace powerAuth
 	
 	/**
 	 The ErrorCode enumeration defines all possible error codes
-	 produced by Session class. You normally need to check only
-	 if operation ended with EC_Ok or not. All other codes are
-	 only hints and should be used only for debugging purposes.
+	 produced by low level PowerAuth classes. You normally need
+	 to check only if operation ended with EC_Ok or not. All other
+	 codes are only hints and should be used only for debugging purposes.
 	 
 	 For example, if the operation fails at EC_WrongState or EC_WrongParam,
 	 then it's usualy your fault and you're using session in wrong way.
@@ -102,17 +102,9 @@ namespace powerAuth
 		 */
 		EC_Ok = 0,
 		/**
-		 The method failed on an encryption. Whatever that means it's
-		 usually very wrong and the UI response depends on what
-		 method did you call. Typically, you have to perform retry
-		 or restart for the whole process.
-		 
-		 This error code is also returned when decoding of important
-		 parameter failed. For example, if BASE64 encoded value
-		 is in wrong format, then this is considered as an attack
-		 attempt.
+		 You have called Session method while session has invalid setup.
 		 */
-		EC_Encryption,
+		EC_WrongSetup,
 		/**
 		 You have called method in wrong session's state. Usually that
 		 means that you're using session in a  wrong way. This kind
@@ -122,14 +114,37 @@ namespace powerAuth
 		EC_WrongState,
 		/**
 		 You have called method with wrong or missing parameters.
-		 Usually this error code means that you're using session
+		 Usually this error code means that you're using method
 		 in wrong way and you did not provide all required data.
 		 This kind of error should not be propagated to UI. It's
 		 your responsibility to handle all user's inputs
 		 and validate all responses from server before you
-		 ask session for processing.
+		 ask core for processing.
 		 */
 		EC_WrongParam,
+		/**
+		 You have provided a wrong activation or recovery code.
+		 You should use ActivationCodeUtil class to vlaidate user
+		 inputs, before you call other PowerAuth functions.
+		 */
+		EC_WrongCode,
+		/**
+		 The provided digital signature is not valid. This error is also
+		 returned when the digital signature is missing, but it's required.
+		 */
+		EC_WrongSignature,
+		/**
+		 The provided data is in wrong format. This error code is typically
+		 returned when decoding of important parameter failed. For example,
+		 if BASE64 encoded value is in wrong format.
+		 */
+		EC_WrongData,
+		/**
+		 The encryption or decryption failed. Whatever that means it's usually
+		 very wrong and the UI response depends on what method did you call.
+		 Typically, you have to perform retry or restart for the whole process.
+		 */
+		EC_Encryption,
 	};
 	
 	/**

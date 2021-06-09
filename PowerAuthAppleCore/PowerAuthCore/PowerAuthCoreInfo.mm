@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2021 Wultra s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
-#import "PrivateFunctions.h"
+#import "PowerAuthCoreInfo.h"
+#include <PowerAuth/PowerAuth.h>
 
-#pragma mark - V3 data -
-
-@implementation PowerAuthCoreProtocolUpgradeDataV3
-@end
-
-@interface PowerAuthCoreProtocolUpgradeDataV3 (Private) <PowerAuthCoreProtocolUpgradeDataPrivate>
-@end
-
-@implementation PowerAuthCoreProtocolUpgradeDataV3 (Private)
-
-- (void) setupStructure:(com::wultra::powerAuth::ProtocolUpgradeData &)ref
+BOOL PowerAuthCoreHasDebugFeatures()
 {
-	ref.toV3.ctrData = cc7::objc::CopyFromNSString(_ctrData);
+	BOOL debug_features = com::wultra::powerAuth::HasDebugFeaturesTurnedOn();
+#if defined(ENABLE_POWERAUTH_CORE_LOG) || defined(DEBUG)
+	debug_features |= YES;
+#endif
+	return debug_features;
 }
-
-@end

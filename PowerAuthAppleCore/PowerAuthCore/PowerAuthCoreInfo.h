@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2021 Wultra s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
-#import "PrivateFunctions.h"
+#import <PowerAuthCore/PowerAuthCoreMacros.h>
 
-#pragma mark - V3 data -
-
-@implementation PowerAuthCoreProtocolUpgradeDataV3
-@end
-
-@interface PowerAuthCoreProtocolUpgradeDataV3 (Private) <PowerAuthCoreProtocolUpgradeDataPrivate>
-@end
-
-@implementation PowerAuthCoreProtocolUpgradeDataV3 (Private)
-
-- (void) setupStructure:(com::wultra::powerAuth::ProtocolUpgradeData &)ref
-{
-	ref.toV3.ctrData = cc7::objc::CopyFromNSString(_ctrData);
-}
-
-@end
+/**
+ Returns YES if PowerAuthCore library was compiled with a debug features. It is highly recommended
+ to check this flag and force application to crash if the producion, final application
+ is running against the debug featured library.
+ */
+POWERAUTH_EXTERN_C BOOL PowerAuthCoreHasDebugFeatures();

@@ -18,16 +18,16 @@
 
 /**
  Macro for marking interface as deprecated. You have to provide a version in which was this
- deprecation introduced. For example: POWERAUTH_DEPRECATED(0.19.0)
+ deprecation introduced. For example: POWERAUTH_DEPRECATED(2.0.0)
  
- We're keeping deprecated API's up to the next major release of SDK. For example, if something
- is marked as deprecated in 0.18.x, then the interface will be removed in 0.19.0
+ We're keeping deprecated API's up to the next release of SDK. For example, if something
+ is marked as deprecated in 2.0.0, then the interface will be removed in 2.1.0
  */
 #define POWERAUTH_DEPRECATED(deprecated_in_version) __attribute__((deprecated))
 
 /**
  Macro for making a whole protocol as deprecated. You have to provide a version in which was this
- deprecation introduced. For example: POWERAUTH_DEPRECATED_PROTOCOL(1.6.0, OldProtocol, NewProtocol)
+ deprecation introduced. For example: POWERAUTH_DEPRECATED_PROTOCOL(2.0.0, OldProtocol, NewProtocol)
  */
 #define POWERAUTH_DEPRECATED_PROTOCOL(deprecated_in_version, old, replacement)	\
 	POWERAUTH_DEPRECATED(deprecated_in_version)									\
@@ -36,14 +36,14 @@
 
 /**
  Macro for making a structure or enumeration as deprecated. You have to provide a version in
- which was this deprecation introduced. For example: POWERAUTH_DEPRECATED_TYPE(1.6.0, OldType, NewType)
+ which was this deprecation introduced. For example: POWERAUTH_DEPRECATED_TYPE(2.0.0, OldType, NewType)
  */
 #define POWERAUTH_DEPRECATED_TYPE(deprecated_in_version, old, replacement)		\
 	typedef replacement old POWERAUTH_DEPRECATED(deprecated_in_version);
 
 /**
  Macro for making a whole class as deprecated. You have to provide a version in which was this
- deprecation introduced. For example: POWERAUTH_DEPRECATED_CLASS(1.6.0, OldClass, NewClass).
+ deprecation introduced. For example: POWERAUTH_DEPRECATED_CLASS(2.0.0, OldClass, NewClass).
  This macro must be used in pair with POWERAUTH_DEPRECATED_CLASS_IMPL() to provide an implementation.
  */
 #define POWERAUTH_DEPRECATED_CLASS(deprecated_in_version, old, replacement)		\
@@ -53,7 +53,7 @@
 
 /**
  Macro for making an implementation for previously declared deprecated class.
- For example: POWERAUTH_DEPRECATED_CLASS_IMPL(1.6.0, OldClass, NewClass).
+ For example: POWERAUTH_DEPRECATED_CLASS_IMPL(2.0.0, OldClass, NewClass).
  To ingore deprecated warnings, you can use the following pragma declaration:
  
  #pragma clang diagnostic push

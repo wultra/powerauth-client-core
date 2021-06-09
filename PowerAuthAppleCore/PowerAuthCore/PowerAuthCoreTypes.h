@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import <PowerAuthCore/PowerAuthCoreMacros.h>
+#import <PowerAuthCore/PowerAuthCoreErrors.h>
 #import <PowerAuthCore/PowerAuthCorePassword.h>
 #import <PowerAuthCore/PowerAuthCoreActivationCode.h>
 #import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
@@ -25,6 +25,7 @@
  The PowerAuthCoreSessionSetup object defines unique constants required during the lifetime
  of the Session class.
  */
+NS_SWIFT_NAME(SessionSetup)
 @interface PowerAuthCoreSessionSetup : NSObject
 /**
  Defines APPLICATION_KEY for the session.
@@ -65,53 +66,6 @@
 
 
 /**
- The PowerAuthCoreErrorCode enumeration defines all possible error codes
- produced by PowerAuthCoreSession and other objects. You normally need 
- to check only if operation ended with EC_Ok or not. All other codes are
- only hints and should be used only for debugging purposes.
- 
- For example, if the operation fails at PowerAuthCoreErrorCode_WrongState or PowerAuthCoreErrorCode_WrongParam,
- then it's usualy your fault and you're using the session in wrong way.
- */
-typedef NS_ENUM(int, PowerAuthCoreErrorCode) {
-	/**
-	 Everything is OK.
-	 You can go out with your friends and enjoy the rest of the day :)
-	 */
-	PowerAuthCoreErrorCode_Ok			= 0,
-	/**
-	 The method failed on an encryption. Whatever that means it's
-	 usually very wrong and the UI response depends on what
-	 method did you call. Typically, you have to perform retry
-	 or restart for the whole process.
-	 
-	 This error code is also returned when decoding of important
-	 parameter failed. For example, if BASE64 encoded value
-	 is in wrong format, then this is considered as an attack
-	 attempt.
-	 */
-	PowerAuthCoreErrorCode_Encryption	= 1,
-	/**
-	 You have called method in wrong session's state. Usually that
-	 means that you're using session in a  wrong way. This kind
-	 of error should not be propagated to the UI. It's your
-	 responsibility to handle session states correctly.
-	 */
-	PowerAuthCoreErrorCode_WrongState	= 2,
-	/**
-	 You have called method with wrong or missing parameters.
-	 Usually this error code means that you're using Session
-	 in wrong way and you did not provide all required data.
-	 This kind of error should not be propagated to UI. It's
-	 your responsibility to handle all user's inputs
-	 and validate all responses from the server before you
-	 ask session for processing.
-	 */
-	PowerAuthCoreErrorCode_WrongParam	= 3,
-};
-
-
-/**
  The PowerAuthCoreProtocolVersion enum defines PowerAuth protocol version. The main difference
  between V2 & V3 is that V3 is using hash-based counter instead of linear one,
  and all E2EE tasks are now implemented by ECIES.
@@ -120,7 +74,7 @@ typedef NS_ENUM(int, PowerAuthCoreErrorCode) {
  the V2 signature calculations are supported. Basically, you cannot connect
  to V2 servers with V3 SDK.
  */
-typedef NS_ENUM(int, PowerAuthCoreProtocolVersion) {
+typedef NS_ENUM(NSInteger, PowerAuthCoreProtocolVersion) {
 	/**
 	 Protocol version is not specified, or cannot be determined.
 	 */
@@ -133,7 +87,7 @@ typedef NS_ENUM(int, PowerAuthCoreProtocolVersion) {
 	 Protocol version 3
 	 */
 	PowerAuthCoreProtocolVersion_V3 = 3,
-};
+} NS_SWIFT_NAME(ProtocolVersion);
 
 
 #pragma mark - Signatures -
@@ -143,14 +97,11 @@ typedef NS_ENUM(int, PowerAuthCoreProtocolVersion) {
  computation. The factor types are tightly coupled with the PASignatureUnlockKeys
  object.
  */
-typedef NS_ENUM(int, PowerAuthCoreSignatureFactor) {
+typedef NS_ENUM(NSInteger, PowerAuthCoreSignatureFactor) {
 	PowerAuthCoreSignatureFactor_Possession						= 0x0001,
-	PowerAuthCoreSignatureFactor_Knowledge						= 0x0010,
-	PowerAuthCoreSignatureFactor_Biometry						= 0x0100,
 	PowerAuthCoreSignatureFactor_Possession_Knowledge			= 0x0011,
-	PowerAuthCoreSignatureFactor_Possession_Biometry			= 0x0101,
-	PowerAuthCoreSignatureFactor_Possession_Knowledge_Biometry	= 0x0111
-};
+	PowerAuthCoreSignatureFactor_Possession_Biometry			= 0x0101
+} NS_SWIFT_NAME(SignatureFactor);
 
 /**
  The PowerAuthCoreSignatureUnlockKeys object contains all keys, required for signature computation.
@@ -174,6 +125,7 @@ typedef NS_ENUM(int, PowerAuthCoreSignatureFactor) {
  As you can see, you still need to take care about how you're working with these unlock keys.
  Check the details below, each key type has its own rules how to construct the key or
  */
+NS_SWIFT_NAME(SignatureUnlockKeys)
 @interface PowerAuthCoreSignatureUnlockKeys : NSObject
 
 /**
@@ -220,6 +172,7 @@ typedef NS_ENUM(int, PowerAuthCoreSignatureFactor) {
  HTTP request. You have to provide values at least non-empty strings to `method` and `uri` 
  members, to pass a data validation.
  */
+NS_SWIFT_NAME(HTTPRequestData)
 @interface PowerAuthCoreHTTPRequestData : NSObject
 
 /**
@@ -249,6 +202,7 @@ typedef NS_ENUM(int, PowerAuthCoreSignatureFactor) {
  The PowerAuthCoreHTTPRequestDataSignature object contains result from HTTP request data signing
  operation.
  */
+NS_SWIFT_NAME(HTTPRequestDataSignature)
 @interface PowerAuthCoreHTTPRequestDataSignature : NSObject
 
 /**
@@ -285,7 +239,7 @@ typedef NS_ENUM(int, PowerAuthCoreSignatureFactor) {
 /**
  The PowerAuthCoreSigningDataKey enumeration defines key type used for signature calculation.
  */
-typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
+typedef NS_ENUM(NSInteger, PowerAuthCoreSigningDataKey) {
 	/**
 	 `KEY_SERVER_MASTER_PRIVATE` key was used for signature calculation
 	 */
@@ -293,12 +247,14 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
 	/**
 	 `KEY_SERVER_PRIVATE` key was used for signature calculation
 	 */
-	PowerAuthCoreSigningDataKey_ECDSA_PersonalizedKey = 1,
-};
+	PowerAuthCoreSigningDataKey_ECDSA_PersonalizedKey = 1
+	
+} NS_SWIFT_NAME(SigningDataKey);
 
 /**
  The PowerAuthCoreSignedData object contains data and signature calculated from data.
  */
+NS_SWIFT_NAME(SignedData)
 @interface PowerAuthCoreSignedData : NSObject
 
 @property (nonatomic, assign) PowerAuthCoreSigningDataKey signingDataKey;
@@ -330,6 +286,7 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
  RecoveryData object contains information about recovery code and PUK, created
  during the activation process.
  */
+NS_SWIFT_NAME(RecoveryData)
 @interface PowerAuthCoreRecoveryData : NSObject
 /**
  Contains recovery code.
@@ -346,9 +303,10 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
 #pragma mark - Activation steps -
 
 /**
- The PowerAuthCoreActivationStep1Param object contains parameters for first step of device activation.
+ The `StartActivationParam` object contains parameters for first step of device activation.
  */
-@interface PowerAuthCoreActivationStep1Param : NSObject
+NS_SWIFT_NAME(StartActivationParam)
+@interface PowerAuthCoreStartActivationParam : NSObject
 
 /**
  Full, parsed activation code. The parameter is optional and may be nil
@@ -360,10 +318,11 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
 
 
 /**
- The PowerAuthCoreActivationStep1Result object represents result from first
+ The `StartActivationResult` object represents result from first
  step of the device activation.
  */
-@interface PowerAuthCoreActivationStep1Result : NSObject
+NS_SWIFT_NAME(StartActivationResult)
+@interface PowerAuthCoreStartActivationResult : NSObject
 
 /**
  Device's public key, in Base64 format
@@ -374,10 +333,11 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
 
 
 /**
- The PowerAuthCoreActivationStep2Param contains parameters for second step of
+ The `ValidateActivationResponseParam` contains parameters for second step of
  device activation
  */
-@interface PowerAuthCoreActivationStep2Param : NSObject
+NS_SWIFT_NAME(ValidateActivationResponseParam)
+@interface PowerAuthCoreValidateActivationResponseParam : NSObject
 
 /**
  Real Activation ID received from server.
@@ -400,10 +360,11 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
 
 
 /**
- The PowerAuthCoreActivationStep2Result object represent result from 2nd
+ The `ValidateActivationResponseResult` object represent result from 2nd
  step of activation.
  */
-@interface PowerAuthCoreActivationStep2Result : NSObject
+NS_SWIFT_NAME(ValidateActivationResponseResult)
+@interface PowerAuthCoreValidateActivationResponseResult : NSObject
 
 /**
  Short, human readable string, calculated from device's public key.
@@ -422,7 +383,7 @@ typedef NS_ENUM(int, PowerAuthCoreSigningDataKey) {
  The state is a part of information received together with the rest
  of the PowerAuthCoreActivationStatus object.
  */
-typedef NS_ENUM(int, PowerAuthCoreActivationState) {
+typedef NS_ENUM(NSInteger, PowerAuthCoreActivationState) {
 	/**
 	 The activation is just created.
 	 */
@@ -448,12 +409,14 @@ typedef NS_ENUM(int, PowerAuthCoreActivationState) {
 	 for the signature calculations.
 	 */
 	PowerAuthCoreActivationState_Deadlock	= 128,
-};
+	
+} NS_SWIFT_NAME(ActivationState);
 
 /**
  The PowerAuthCoreEncryptedActivationStatus object contains encrypted status
  data and parameters required for the data decryption.
  */
+NS_SWIFT_NAME(EncryptedActivationStatus)
 @interface PowerAuthCoreEncryptedActivationStatus : NSObject
 
 /**
@@ -476,6 +439,7 @@ typedef NS_ENUM(int, PowerAuthCoreActivationState) {
  The status is typically received as an encrypted blob and you can use module
  to decode that blob into this object.
  */
+NS_SWIFT_NAME(ActivationStatus)
 @interface PowerAuthCoreActivationStatus : NSObject
 
 /**
@@ -532,7 +496,7 @@ typedef NS_ENUM(int, PowerAuthCoreActivationState) {
  The `PowerAuthCoreEciesEncryptorScope` enumeration defines how `PowerAuthCoreEciesEncryptor` encryptor is configured
  in `PowerAuthCoreSession.getEciesEncryptor()` method.
  */
-typedef NS_ENUM(int, PowerAuthCoreEciesEncryptorScope) {
+typedef NS_ENUM(NSInteger, PowerAuthCoreEciesEncryptorScope) {
 	/**
 	 An application scope means that encryptor can be constructed also when
 	 the session has no valid activation.
@@ -542,5 +506,6 @@ typedef NS_ENUM(int, PowerAuthCoreEciesEncryptorScope) {
 	 An activation scope means that the encryptor can be constructed only when
 	 the session has a valid activation.
 	 */
-	PowerAuthCoreEciesEncryptorScope_Activation  = 1,
-};
+	PowerAuthCoreEciesEncryptorScope_Activation  = 1
+	
+} NS_SWIFT_NAME(EciesEncryptorScope);

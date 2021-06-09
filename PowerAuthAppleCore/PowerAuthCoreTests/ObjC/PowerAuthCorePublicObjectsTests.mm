@@ -17,7 +17,7 @@
 #import <XCTest/XCTest.h>
 #import <PowerAuthCore/PowerAuthCore.h>
 
-#import "PowerAuthCorePrivateImpl.h"
+#import "PrivateFunctions.h"
 
 /*
  This file contains mostly simple unit tests for ObjC objects using
