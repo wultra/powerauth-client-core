@@ -844,16 +844,14 @@ namespace powerAuth
 		return code;
 	}
 	
-	ErrorCode Session::hasBiometryFactor(bool &hasBiometryFactor) const
+	bool Session::hasBiometryFactor() const
 	{
 		LOCK_GUARD();
 		if (!hasValidActivation()) {
 			CC7_LOG("Session %p, %d: hasBiometryFactor: There's no valid activation.", this, sessionIdentifier());
-			hasBiometryFactor = false;
-			return EC_WrongState;
+			return false;
 		}
-		hasBiometryFactor = !_pd->sk.biometryKey.empty();
-		return EC_Ok;
+		return !_pd->sk.biometryKey.empty();
 	}
 	
 	ErrorCode Session::removeBiometryFactor()

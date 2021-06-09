@@ -165,9 +165,7 @@ namespace powerAuthTests
 			// Other initial tests for empty session
 			{
 				Session s3(_setup);
-				bool bf = true;
-				ccstAssertEqual(EC_WrongState, s3.hasBiometryFactor(bf));
-				ccstAssertFalse(bf);
+				ccstAssertEqual(false, s3.hasBiometryFactor());
 			}
 			{
 				// Empty, but then initialized
@@ -698,15 +696,12 @@ namespace powerAuthTests
 				// remove biometry factor
 				{
 					// check if BF exists
-					bool bf;
-					ccstAssertEqual(EC_Ok, s1.hasBiometryFactor(bf));
-					ccstAssertTrue(bf);
+					ccstAssertTrue(s1.hasBiometryFactor());
 					// remove
 					ec = s1.removeBiometryFactor();
 					ccstAssertEqual(ec, EC_Ok);
 					// check the status again
-					ccstAssertEqual(EC_Ok, s1.hasBiometryFactor(bf));
-					ccstAssertFalse(bf);
+					ccstAssertFalse(s1.hasBiometryFactor());
 					
 					// 2nd. remove should pass. The implementation only prints a warning about removing empty key.
 					ec = s1.removeBiometryFactor();
@@ -759,9 +754,7 @@ namespace powerAuthTests
 				}
 				// Vault test #1-B, adding biometry factor back again
 				{
-					bool bf;
-					ccstAssertEqual(EC_Ok, s1.hasBiometryFactor(bf));
-					ccstAssertFalse(bf);
+					ccstAssertFalse(s1.hasBiometryFactor());
 					SignatureUnlockKeys keys;
 					// No keys filled, should fail on missing params
 					ec = s1.addBiometryFactor(cVaultKey, keys);
@@ -772,8 +765,7 @@ namespace powerAuthTests
 					ec = s1.addBiometryFactor(cVaultKey, keys);
 					ccstAssertEqual(ec, EC_Ok);
 					// check BF flag again
-					ccstAssertEqual(EC_Ok, s1.hasBiometryFactor(bf));
-					ccstAssertTrue(bf);
+					ccstAssertTrue(s1.hasBiometryFactor());
 				}
 				// Vault test #1-C, try to use newly estabilished factor
 				{

@@ -15,7 +15,7 @@
  */
 
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
-#import "PowerAuthCorePrivateImpl.h"
+#import "PrivateFunctions.h"
 
 using namespace com::wultra::powerAuth;
 
@@ -156,16 +156,16 @@ using namespace com::wultra::powerAuth;
 @implementation PowerAuthCoreRecoveryData
 @end
 
-@implementation PowerAuthCoreActivationStep1Param
+@implementation PowerAuthCoreStartActivationParam
 @end
 
-@implementation PowerAuthCoreActivationStep1Result
+@implementation PowerAuthCoreStartActivationResult
 @end
 
-@implementation PowerAuthCoreActivationStep2Param
+@implementation PowerAuthCoreValidateActivationResponseParam
 @end
 
-@implementation PowerAuthCoreActivationStep2Result
+@implementation PowerAuthCoreValidateActivationResponseResult
 @end
 
 @implementation PowerAuthCoreEncryptedActivationStatus
@@ -313,20 +313,20 @@ PowerAuthCoreActivationStatus * PowerAuthCoreActivationStatusToObject(const com:
 	return [[PowerAuthCoreActivationStatus alloc] initWithStatusStruct:cpp_status];
 }
 
-void PowerAuthCoreActivationStep1ParamToStruct(PowerAuthCoreActivationStep1Param * p1, com::wultra::powerAuth::ActivationStep1Param & cpp_p1)
+void PowerAuthCoreStartActivationParamToStruct(PowerAuthCoreStartActivationParam * p1, com::wultra::powerAuth::ActivationStep1Param & cpp_p1)
 {
 	cpp_p1.activationCode			= cc7::objc::CopyFromNSString(p1.activationCode.activationCode);
 	cpp_p1.activationSignature		= cc7::objc::CopyFromNSString(p1.activationCode.activationSignature);
 }
 
-PowerAuthCoreActivationStep1Result * PowerAuthCoreActivationStep1ResultToObject(const com::wultra::powerAuth::ActivationStep1Result& cpp_r1)
+PowerAuthCoreStartActivationResult * PowerAuthCoreActivationStartResultToObject(const com::wultra::powerAuth::ActivationStep1Result& cpp_r1)
 {
-	PowerAuthCoreActivationStep1Result * res = [[PowerAuthCoreActivationStep1Result alloc] init];
+	PowerAuthCoreStartActivationResult * res = [[PowerAuthCoreStartActivationResult alloc] init];
 	res.devicePublicKey				= cc7::objc::CopyToNSString(cpp_r1.devicePublicKey);
 	return res;
 }
 
-void PowerAuthCoreActivationStep2ParamToStruct(PowerAuthCoreActivationStep2Param * p2, com::wultra::powerAuth::ActivationStep2Param & cpp_p2)
+void PowerAuthCoreValidateActivationResponseParamToStruct(PowerAuthCoreValidateActivationResponseParam * p2, com::wultra::powerAuth::ActivationStep2Param & cpp_p2)
 {
 	cpp_p2.activationId				= cc7::objc::CopyFromNSString(p2.activationId);
 	cpp_p2.serverPublicKey			= cc7::objc::CopyFromNSString(p2.serverPublicKey);
@@ -334,9 +334,9 @@ void PowerAuthCoreActivationStep2ParamToStruct(PowerAuthCoreActivationStep2Param
 	PowerAuthCoreRecoveryDataToStruct(p2.activationRecovery, cpp_p2.activationRecovery);
 }
 
-PowerAuthCoreActivationStep2Result * PowerAuthCoreActivationStep2ResultToObject(const com::wultra::powerAuth::ActivationStep2Result& cpp_r2)
+PowerAuthCoreValidateActivationResponseResult * PowerAuthCoreValidateActivationResponseResultToObject(const com::wultra::powerAuth::ActivationStep2Result& cpp_r2)
 {
-	PowerAuthCoreActivationStep2Result * res = [[PowerAuthCoreActivationStep2Result alloc] init];
+	PowerAuthCoreValidateActivationResponseResult * res = [[PowerAuthCoreValidateActivationResponseResult alloc] init];
 	res.activationFingerprint		= cc7::objc::CopyToNSString(cpp_r2.activationFingerprint);
 	return res;
 }

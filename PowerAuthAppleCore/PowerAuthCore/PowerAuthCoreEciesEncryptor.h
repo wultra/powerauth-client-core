@@ -26,6 +26,7 @@
  For more details about our ECIES implementation, please check documentation available at the beginning of
  <PowerAuth/ECIES.h> C++ header.
  */
+NS_SWIFT_NAME(EciesEncryptor)
 @interface PowerAuthCoreEciesEncryptor : NSObject
 
 #pragma mark Initialization
@@ -90,14 +91,16 @@
  
  The DEBUG version of the SDK prints detailed error about the failure reason into the log.
  */
-- (nullable PowerAuthCoreEciesCryptogram *) encryptRequest:(nullable NSData *)data;
+- (nullable PowerAuthCoreEciesCryptogram *) encryptRequest:(nullable NSData *)data
+													 error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Decrypts a |cryptogram| received from the server and returns decrypted data or nil in case of failure.
  
  The DEBUG version of the SDK prints detailed error about the failure reason into the log.
  */
-- (nullable NSData *) decryptResponse:(nonnull PowerAuthCoreEciesCryptogram *)cryptogram;
+- (nullable NSData *) decryptResponse:(nonnull PowerAuthCoreEciesCryptogram *)cryptogram
+								error:(NSError * _Nullable * _Nullable)error;
 
 /**
  This is a special, thread-safe version of request encryption. The method encrypts provided data
@@ -111,7 +114,7 @@
  Returns YES if encryption succeeded or NO in case of error.
  */
 - (BOOL) encryptRequest:(nullable NSData *)data
-			 completion:(void (NS_NOESCAPE ^_Nonnull)(PowerAuthCoreEciesCryptogram * _Nullable cryptogram, PowerAuthCoreEciesEncryptor * _Nullable decryptor))completion;
+			 completion:(void (NS_NOESCAPE ^_Nonnull)(PowerAuthCoreEciesCryptogram * _Nullable cryptogram, PowerAuthCoreEciesEncryptor * _Nullable decryptor, NSError * _Nullable error))completion;
 
 
 #pragma mark Associated metadata
@@ -131,6 +134,7 @@
  The `PowerAuthCoreEciesCryptogram` object represents cryptogram transmitted
  over the network.
  */
+NS_SWIFT_NAME(EciesCryptogram)
 @interface PowerAuthCoreEciesCryptogram : NSObject
 
 /**
@@ -181,6 +185,7 @@
  required for the correct HTTP request & response processing, but is not
  involved in the actual data encryption.
  */
+NS_SWIFT_NAME(EciesMetaData)
 @interface PowerAuthCoreEciesMetaData : NSObject
 
 /**

@@ -20,6 +20,7 @@
  The `PowerAuthCoreActivationCode` object contains parsed components from user-provided activation, or recovery
  code. You can use methods from `PowerAuthCoreActivationCodeUtil` class to fill this object with valid data.
  */
+NS_SWIFT_NAME(ActivationCode)
 @interface PowerAuthCoreActivationCode : NSObject
 
 /**
@@ -61,6 +62,7 @@
  As you can see, both activation and recovery codes, shares the same basic principle (like CRC16
  checksum). That's why parser returns the same `PowerAuthCoreActivationCode` object for both scenarios.
  */
+NS_SWIFT_NAME(ActivationCodeUtil)
 @interface PowerAuthCoreActivationCodeUtil : NSObject
 
 #pragma mark - Validations

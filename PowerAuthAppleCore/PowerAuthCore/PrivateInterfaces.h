@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-#include <PowerAuth/PublicTypes.h>
-#include <PowerAuth/Password.h>
-#include <PowerAuth/ECIES.h>
-
-#include <cc7/objc/ObjcHelper.h>
-
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
 #import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
 #import <PowerAuthCore/PowerAuthCorePassword.h>
 #import <PowerAuthCore/PowerAuthCoreEciesEncryptor.h>
 #import <PowerAuthCore/PowerAuthCoreLog.h>
+
+#include <PowerAuth/PublicTypes.h>
+#include <PowerAuth/Password.h>
+#include <PowerAuth/ECIES.h>
+
+#include <cc7/objc/ObjcHelper.h>
 
 /*
  This header contains various private interfaces, internally used
@@ -87,20 +87,20 @@ CC7_EXTERN_C void PowerAuthCoreHTTPRequestDataToStruct(PowerAuthCoreHTTPRequestD
 /**
  Converts PowerAuthCoreActivationStep1Param object into ActivationStep1Param C++ structure.
  */
-CC7_EXTERN_C void PowerAuthCoreActivationStep1ParamToStruct(PowerAuthCoreActivationStep1Param * p1, com::wultra::powerAuth::ActivationStep1Param & cpp_p1);
+CC7_EXTERN_C void PowerAuthCoreStartActivationParamToStruct(PowerAuthCoreStartActivationParam * p1, com::wultra::powerAuth::ActivationStep1Param & cpp_p1);
 /**
  Returns new instance of PowerAuthCoreActivationStep1Result object, with content copied from ActivationStep1Result C++ structure.
  */
-CC7_EXTERN_C PowerAuthCoreActivationStep1Result * PowerAuthCoreActivationStep1ResultToObject(const com::wultra::powerAuth::ActivationStep1Result& cpp_r1);
+CC7_EXTERN_C PowerAuthCoreStartActivationResult * PowerAuthCoreActivationStartResultToObject(const com::wultra::powerAuth::ActivationStep1Result& cpp_r1);
 
 /**
  Converts PowerAuthCoreActivationStep2Param object into ActivationStep2Param C++ structure.
  */
-CC7_EXTERN_C void PowerAuthCoreActivationStep2ParamToStruct(PowerAuthCoreActivationStep2Param * p2, com::wultra::powerAuth::ActivationStep2Param & cpp_p2);
+CC7_EXTERN_C void PowerAuthCoreValidateActivationResponseParamToStruct(PowerAuthCoreValidateActivationResponseParam * p2, com::wultra::powerAuth::ActivationStep2Param & cpp_p2);
 /**
  Returns new instance of PowerAuthCoreActivationStep2Result object, with content copied from ActivationStep2Result C++ structure.
  */
-CC7_EXTERN_C PowerAuthCoreActivationStep2Result * PowerAuthCoreActivationStep2ResultToObject(const com::wultra::powerAuth::ActivationStep2Result& cpp_r2);
+CC7_EXTERN_C PowerAuthCoreValidateActivationResponseResult * PowerAuthCoreValidateActivationResponseResultToObject(const com::wultra::powerAuth::ActivationStep2Result& cpp_r2);
 
 /**
  Converts PowerAuthCoreRecoveryData object into RecoveryData C++ structure
@@ -110,15 +110,3 @@ CC7_EXTERN_C void PowerAuthCoreRecoveryDataToStruct(PowerAuthCoreRecoveryData * 
  Returns new instance of PowerAuthCoreRecoveryData object, with content copied from RecoveryData C++ structure
  */
 CC7_EXTERN_C PowerAuthCoreRecoveryData * PowerAuthCoreRecoveryDataToObject(const com::wultra::powerAuth::RecoveryData& cpp_rd);
-
-#pragma mark - Debug functions
-
-#if defined(DEBUG)
-	CC7_EXTERN_C void PowerAuthCoreObjc_DebugDumpErrorImpl(id instance, NSString * message, com::wultra::powerAuth::ErrorCode code);
-	#define PowerAuthCoreObjc_DebugDumpError(instance, message, error_code)	PowerAuthCoreObjc_DebugDumpErrorImpl(instance, message, error_code)
-#else
-	#define PowerAuthCoreObjc_DebugDumpError(instance, message, error_code)
-#endif
-
-
-

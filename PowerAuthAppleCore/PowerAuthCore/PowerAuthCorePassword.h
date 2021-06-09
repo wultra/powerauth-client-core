@@ -68,6 +68,7 @@
  At the end, you can get benefits from a supporting very strong passphrases and also 
  you'll minimize all traces of the passphrase in the memory.
  */
+NS_SWIFT_NAME(Password)
 @interface PowerAuthCorePassword : NSObject
 
 /**
@@ -113,6 +114,7 @@
  
  The final passphrase is an UTF8 representation of added characters.
  */
+NS_SWIFT_NAME(MutablePassword)
 @interface PowerAuthCoreMutablePassword : PowerAuthCorePassword
 
 /**

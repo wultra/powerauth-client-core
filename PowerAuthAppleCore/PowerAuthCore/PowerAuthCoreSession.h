@@ -17,43 +17,43 @@
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
 #import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
 
+/**
+ The `PowerAuthCoreSession` class provides all cryptographic operations defined
+ in PowerAuth protocol. The object also represents a long term session estabilished
+ between the client and the server.
+ 
+ TODO: Review all inline documentation in this header.
+ */
+NS_SWIFT_NAME(Session)
 @interface PowerAuthCoreSession : NSObject
 
 #pragma mark -  Initialization / Reset
 
 /**
- Use class factory methods to init object.
+ Use designated initialized.
  */
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
 /**
- The designated initializer. You have to provide a valid PowerAuthCoreSessionSetup object.
+ The designated initializer. You have to provide a valid `SessionSetup` object.
  */
-- (nonnull instancetype) initWithSessionSetup:(nonnull PowerAuthCoreSessionSetup *)setup;
+- (nonnull instancetype) initWithSessionSetup:(nonnull PowerAuthCoreSessionSetup *)setup NS_SWIFT_NAME(init(setup:));
 
 /**
  Resets session into its initial state. The existing session's setup and EEK is preserved
  after the call.
  */
-- (void) resetSession;
-
-/**
- Returns YES if PowerAuthCore library was compiled with a debug features. It is highly recommended
- to check this flag and force application to crash if the producion, final application
- is running against the debug featured library.
- */
-+ (BOOL) hasDebugFeatures;
-
+- (void) resetSession NS_SWIFT_NAME(reset());
 
 /**
  Returns pointer to an internal SessionSetup object. Returns nil if
  session has no valid setup.
  
- Note that internal implementation always creates a new instance of PowerAuthCoreSessionSetup object.
+ Note that internal implementation always creates a new instance of `SessionSetup` object.
  If you want to get just a sessionIdentifier, then you can use the dedicated read only
  property, which is much faster than accessing the whole setup object.
  */
-@property (nonatomic, strong, readonly, nullable) PowerAuthCoreSessionSetup * sessionSetup;
+@property (nonatomic, strong, readonly, nullable) PowerAuthCoreSessionSetup * sessionSetup NS_SWIFT_NAME(setup);
 
 /**
  Returns value of [self sessionSetup].sessionIdentifier if the setup object is present or 0 if not.
@@ -114,10 +114,11 @@
  Loads state of session from previously saved sequence of bytes. If the serialized state is
  invalid then the session ends in empty, unitialized state.
  
- Returns YES if operation succeeds. In case of faulure, you can determine the failure reason from
- DEBUG log.
+ In case of failure throws an error and you can determine the failure reason in
+ `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) deserializeState:(nonnull NSData *)state;
+- (BOOL) deserializeState:(NSData * _Nonnull)state
+					error:(NSError * _Nullable * _Nullable)error;
 
 
 #pragma mark - Activation
@@ -138,16 +139,12 @@
  Starts a new activation process. The session must have valid setup. Once the activation 
  is started you have to complete whole activation sequence or reset a whole session.
  
- You have to provide PowerAuthCoreActivationStep1Param object with all required properties available.
- The result of the operation returned in the PowerAuthCoreActivationStep1Result object. If the
- returned value is nil, then the error occured.
- 
- You can determine the failure reason from DEBUG log:
-	EC_Encryption, if you provided invalid Base64 strings or if signature is invalid
-	EC_WrongState, if called in wrong session's state
-	EC_WrongParam, if some required parameter is missing
+ You have to provide `StartActivationParam` object with all required properties available.
+ The result of the operation is returned in the `StartActivationResult` object. Throws an error
+ in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (nullable PowerAuthCoreActivationStep1Result*) startActivation:(nonnull PowerAuthCoreActivationStep1Param*)param;
+- (nullable PowerAuthCoreStartActivationResult*) startActivationWithParam:(nonnull PowerAuthCoreStartActivationParam*)param
+																	error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Validates activation respose received from the server. The session expects that the activation
@@ -167,14 +164,10 @@
  then the server will keep its part of shared secret but nobody will be able to use that
  estabilished context.
  
- If the returned value is nil, then the error occured. You can determine the failure reason from
- DEBUG log:
-	EC_Encryption, if provided data, signature or keys are invalid.
-				   If this error occurs then the session resets its state.
-	EC_WrongState, if called in wrong session's state
-	EC_WrongParam, if required parameter is missing
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (nullable PowerAuthCoreActivationStep2Result*) validateActivationResponse:(nonnull PowerAuthCoreActivationStep2Param*)param;
+- (nullable PowerAuthCoreValidateActivationResponseResult*) validateActivationResponseWithParam:(nonnull PowerAuthCoreValidateActivationResponseParam*)param
+																						  error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Completes previously started activation process and protects sensitive local information with
@@ -187,14 +180,11 @@
  
  WARNING: You have to save session's staate when the activation is completed!
  
- Returns YES if operation succeeds. In case of faulure, you can determine the failure reason from
- DEBUG log:
-	EC_Encryption,  if some internal encryption failed
-					if this error occurs, then the session resets its state
-	EC_WrongState,  if called in wrong session's state
-	EC_WrongParam,  if required parameter is missing
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) completeActivation:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys;
+- (BOOL) completeActivationWithKeys:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys
+							  error:(NSError * _Nullable * _Nullable)error
+					   NS_SWIFT_NAME(completeActivation(withKeys:));
 
 
 #pragma mark - Activation Status
@@ -204,11 +194,11 @@
  activation and obtain information about pairing between the client and server. You have to provide valid
  possessionUnlockKey in the unlockKeys object.
  
- If the returned object is nil then the error occured and you can determine the failure reason from
- DEBUG log.
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreActivationStatus*) decodeActivationStatus:(nonnull PowerAuthCoreEncryptedActivationStatus *)encryptedStatus
-															  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys;
+															  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+															 error:(NSError * _Nullable * _Nullable)error;
 
 #pragma mark - Data signing
 
@@ -218,15 +208,17 @@
  The result is normalized byte sequence, prepared for data signing. For POST requests it's recommended to sign
  a whole POST body.
  
- The method returns always NSData object, unless you provide the NSDictionary with wrong type of objects.
+ The method returns always NSData object, unless you provide the NSDictionary with wrong type of objects. In this case
+ method throws an error.
  
  Compatibility note
  
  This interface doesn't support multiple values for the same key. This is a known limitation, due to fact, that
- underlying std::map<> doesn't allow duplicit keys. The arrays in GET requests are so rare that I've decided to do not support
+ underlying std::map<> doesn't allow duplicit keys. The arrays in GET requests are so rare that we decided to do not support
  them. You can still implement your own data normalization, if this is your situation.
  */
-- (nullable NSData*) prepareKeyValueDictionaryForDataSigning:(nonnull NSDictionary<NSString*, NSString*>*)dictionary;
+- (nullable NSData*) prepareKeyValueDictionaryForDataSigning:(nonnull NSDictionary<NSString*, NSString*>*)dictionary
+													   error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Calculates signature from given data. You have to provide all involved unlock keys in |unlockKeys| object,
@@ -243,15 +235,13 @@
  If you don't save the state then you'll sooner or later loose synchronization with the server
  and your client will not be able to sign data anymore.
  
- Returns string with autorization header or nil if opeartion failed. You can determine the failure reason from
- DEBUG log:
-	EC_Encryption, if some cryptographic operation failed
-	EC_WrongState, if the session has no valid activation
-	EC_WrongParam, if some required parameter is missing
+ Returns string with autorization header or throws an error in case of failure and you can determine the failure
+ reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreHTTPRequestDataSignature*) signHttpRequestData:(nonnull PowerAuthCoreHTTPRequestData*)requestData
 																   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-																 factor:(PowerAuthCoreSignatureFactor)factor;
+																 factor:(PowerAuthCoreSignatureFactor)factor
+																  error:(NSError * _Nullable * _Nullable)error;
 /**
  Returns name of authorization header. The value is constant and is equal to "X-PowerAuth-Authorization".
  You can calculate appropriate value with using 'httpAuthHeaderValueForBody:...' method.
@@ -260,13 +250,11 @@
 
 /**
  Validates whether the data has been signed with master server private key.
- Returns YES if signature is valid. In case of error, you can determine the failure reason from
- DEBUG log:
-	 EC_Encryption	if signature is not valid or some cryptographic operation failed
-	 EC_WrongState	if session contains invalid setup
-	 EC_WrongParam	if signedData object doesn't contain signature
+ Returns YES if signature is valid. Throws an error in case that method is called in wrong state,
+ or you provide an invalid input data.
  */
-- (BOOL) verifyServerSignedData:(nonnull PowerAuthCoreSignedData*)signedData;
+- (BOOL) verifyServerSignedData:(nonnull PowerAuthCoreSignedData*)signedData
+						  error:(NSError * _Nullable * _Nullable)error;
 
 #pragma mark - Signature keys management
 
@@ -292,13 +280,11 @@
  All this, is just a preliminary proposal functionality and is not covered by PowerAuth specification.
  The behavior or a whole flow of password changing may be a subject of change in the future.
  
- Returns YES if operation succeeds or NO in case of failure. You can determine the failure reason from
- DEBUG log:
-	EC_Encryption,  if underlying cryptograhic operation did fail or
-					if you provided too short passwords.
-	EC_WrongState,  if the session has no valid activation
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) changeUserPassword:(nonnull PowerAuthCorePassword *)old_password newPassword:(nonnull PowerAuthCorePassword*)new_password;
+- (BOOL) changeUserPassword:(nonnull PowerAuthCorePassword *)old_password
+				newPassword:(nonnull PowerAuthCorePassword*)new_password
+					  error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Adds a key for biometry factor. You have to provide encrypted vault key |cVaultKey| in Base64 format
@@ -306,28 +292,24 @@
  new biometryUnlockKey, which will be used for a protection of the newly created biometry signature key. 
  You should always save session's state after this operation, whether it ends with error or not.
  
- Returns YES if operation succeeds or NO in case of failure. You can determine the failure reason from
- DEBUG log:
-	 EC_Encryption, if general encryption error occurs
-	 EC_WrongState, if the session has no valid activation
-	 EC_WrongParam, if some required parameter is missing
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (BOOL) addBiometryFactor:(nonnull NSString *)cVaultKey
-					  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys;
+					  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+					 error:(NSError * _Nullable * _Nullable)error;
 
-/** Checks if there is a biometry factor present in a current session.
- 
- @return YES if there is a biometry factor related key present, NO otherwise.
+/**
+ Checks if there is a biometry factor present in a current session. Return YES if there is a biometry factor
+ related key present, NO otherwise.
  */
 - (BOOL) hasBiometryFactor;
 
 /**
  Removes existing key for biometric signatures from the session. You have to save state of the session
- after the operation. Returns YES if operation succeeds or NO in case of failure. You can determine
- the failure reason from DEBUG log:
-	EC_WrongState, if the session has no valid activation
+ after the operation.Throws an error in case of failure and you can determine the failure reason in
+ `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) removeBiometryFactor;
+- (BOOL) removeBiometryFactor:(NSError * _Nullable * _Nullable)error;
 
 #pragma mark - Vault operations
 
@@ -346,15 +328,13 @@
  or even to the keychain, then the whole server based protection scheme will have no effect. You can, of
  course, keep the key in the volatile memory, if the application needs use the key for a longer period.
  
- Retuns NSData object with a derived cryptographic key or nil in case of failure. You can determine
- the failure reason from DEBUG log:
-	EC_Encryption,	if general encryption error occurs
-	EC_WrongState,	if the session has no valid activation
-	EC_WrongParam,	if some required parameter is missing
+ Retuns NSData object with a derived cryptographic key or throws an error in case of failure and you
+ can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable NSData*) deriveCryptographicKeyFromVaultKey:(nonnull NSString*)cVaultKey
 												   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-											   keyIndex:(UInt64)keyIndex;
+											   keyIndex:(UInt64)keyIndex
+												  error:(NSError * _Nullable * _Nullable)error;
 /**
  Computes a ECDSA-SHA256 signature of given |data| with using device's private key. You have to provide
  encrypted |cVaultKey| and |unlockKeys| structure with a valid possessionUnlockKey.
@@ -364,15 +344,13 @@
  The session's state contains device private key but it is encrypted with vault key, which is normally not
  available on the device.
  
- Retuns NSData object with calculated signature or nil in case of failure. You can determine the failure
- reason from DEBUG log:
-	EC_Encryption,	if general encryption error occurs
-	EC_WrongState,	if the session has no valid activation
-	EC_WrongParam,	if some required parameter is missing
+ Retuns Data object with calculated signature or throws an error in case of failure and you can determine
+ the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable NSData*) signDataWithDevicePrivateKey:(nonnull NSString*)cVaultKey
 											 keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-											 data:(nonnull NSData*)data;
+											 data:(nonnull NSData*)data
+											error:(NSError * _Nullable * _Nullable)error;
 
 #pragma mark - External Encryption Key
 
@@ -388,13 +366,10 @@
  decode. The data signing will also work correctly, but only for a knowledge factor, which
  is by design not protected with EEK.
  
- Returns YES if operation succeeded or NO in case of failure. You can determine the failure
- reason from DEBUG log:
-	 EC_WrongParam	if key is already set and new EEK is different, or
-					if provided key has invalid length.
-	 EC_WrongState	if you're setting key to activated session which doesn't use EEK
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) setExternalEncryptionKey:(nonnull NSData *)externalEncryptionKey;
+- (BOOL) setExternalEncryptionKey:(nonnull NSData *)externalEncryptionKey
+							error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Adds a new external encryption key permanently to the activated Session and to the internal 
@@ -403,14 +378,10 @@
  
  You have to save state of the session after the operation.
  
- Returns YES if operation succeeded or NO in case of failure. You can determine the failure
- reason from DEBUG log:
-	EC_WrongParam	if the EEK has wrong size
-	EC_WrongState	if session has no valid activation, or
-					if the EEK is already set.
-	EC_Encryption	if internal cryptographic operation failed
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) addExternalEncryptionKey:(nonnull NSData *)externalEncryptionKey;
+- (BOOL) addExternalEncryptionKey:(nonnull NSData *)externalEncryptionKey
+							error:(NSError * _Nullable * _Nullable)error;
 
 /**
  Removes existing external encryption key from the activated Session. The method removes EEK permanently
@@ -419,13 +390,9 @@
 	
  You have to save state of the session after the operation.
  
- Returns YES if operation succeeded or NO in case of failure. You can determine the failure
- reason from DEBUG log:
-	EC_WrongState	if session has no valid activation, or
-					if session has no EEK set
-	EC_Encryption	if internal cryptographic operation failed
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) removeExternalEncryptionKey;
+- (BOOL) removeExternalEncryptionKey:(NSError * _Nullable * _Nullable)error;
 
 #pragma mark - ECIES
 
@@ -433,10 +400,13 @@
  Constructs the `PowerAuthCoreEciesEncryptor` object for the required `scope` and for optional `sharedInfo1`.
  The `keys` parameter must contain valid `possessionUnlockKey` in case that the "activation" scope is requested.
  For "application" scope, the `keys` object may be nil.
+ 
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreEciesEncryptor*) eciesEncryptorForScope:(PowerAuthCoreEciesEncryptorScope)scope
 															keys:(nullable PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-													 sharedInfo1:(nullable NSData*)sharedInfo1;
+													 sharedInfo1:(nullable NSData*)sharedInfo1
+														   error:(NSError * _Nullable * _Nullable)error;
 
 #pragma mark - Utilities for generic keys
 
@@ -483,9 +453,9 @@
  indicating that upgrade is in progress. You should serialize an activation status
  after this call.
  
- Returns YES if upgrade has been started.
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) startProtocolUpgrade;
+- (BOOL) startProtocolUpgrade:(NSError * _Nullable * _Nullable)error;
 
 /**
  Determines which version of the protocol is the session being upgraded to.
@@ -499,9 +469,10 @@
  Applies upgrade data to the session. The version of data is determined by the
  object you provide. Currently, only `PowerAuthCoreProtocolUpgradeDataV3` is supported.
  
- Returns YES if session has been successfully upgraded.
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) applyProtocolUpgradeData:(nonnull id<PowerAuthCoreProtocolUpgradeData>)upgradeData;
+- (BOOL) applyProtocolUpgradeData:(nonnull id<PowerAuthCoreProtocolUpgradeData>)upgradeData
+							error:(NSError * _Nullable * _Nullable)error;
 
 
 /**
@@ -511,9 +482,9 @@
  
  You should serialize an activation status ater this call.
  
- Returns YES if upgrade has been finished successfully.
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) finishProtocolUpgrade;
+- (BOOL) finishProtocolUpgrade:(NSError * _Nullable * _Nullable)error;
 
 /**
  Returns textual representation for given protocol version. For example, for `PowerAuthCoreProtocolVersion_V3`
@@ -532,8 +503,11 @@
 /**
  Returns an activation recovery data. You have to provide encrypted vault key |c_vault_key| and
  |keys| structure where the valid possessionUnlockKey is set.
+ 
+ Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreRecoveryData*) activationRecoveryData:(nonnull NSString*)cVaultKey
-														  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys;
+														  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+														 error:(NSError * _Nullable * _Nullable)error;
 
 @end

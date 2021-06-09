@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+#import <PowerAuthCore/PowerAuthCoreMacros.h>
 
 @class PowerAuthCoreECPublicKey;
 
@@ -22,6 +22,7 @@
  The `PowerAuthCoreCryptoUtils` class provides a several general cryptographic primitives
  required in our other open source libraries.
  */
+NS_SWIFT_NAME(CryptoUtils)
 @interface PowerAuthCoreCryptoUtils : NSObject
 
 /**
@@ -64,6 +65,7 @@
  The `PowerAuthCoreECPublicKey` is an object representing public key in cryptography
  based on elliptic curves.
  */
+NS_SWIFT_NAME(ECPublicKey)
 @interface PowerAuthCoreECPublicKey: NSObject
 
 /**

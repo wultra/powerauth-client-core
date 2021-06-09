@@ -19,7 +19,7 @@
 
 #import <PowerAuthCore/PowerAuthCoreEciesEncryptor.h>
 #import <PowerAuthCore/PowerAuthCoreSession.h>
-#import "PowerAuthCorePrivateImpl.h"
+#import "PrivateFunctions.h"
 
 using namespace com::wultra::powerAuth;
 
@@ -98,32 +98,39 @@ using namespace com::wultra::powerAuth;
 #pragma mark - Encrypt & Decrypt
 
 - (nullable PowerAuthCoreEciesCryptogram *) encryptRequest:(nullable NSData *)data
+													 error:(NSError * _Nullable * _Nullable)error
 {
 	PowerAuthCoreEciesCryptogram * cryptogram = [[PowerAuthCoreEciesCryptogram alloc] init];
 	auto ec = _encryptor.encryptRequest(cc7::objc::CopyFromNSData(data), cryptogram.cryptogramRef);
-	PowerAuthCoreObjc_DebugDumpError(self, @"EncryptRequest", ec);
+	if (ec != EC_Ok && error != nil) {
+		*error = PowerAuthCoreMakeError(ec, nil);
+	}
 	return ec == EC_Ok ? cryptogram : nil;
 }
 
 - (nullable NSData *) decryptResponse:(nonnull PowerAuthCoreEciesCryptogram *)cryptogram
+								error:(NSError * _Nullable * _Nullable)error
 {
 	cc7::ByteArray data;
 	auto ec = _encryptor.decryptResponse(cryptogram.cryptogramRef, data);
-	PowerAuthCoreObjc_DebugDumpError(self, @"DecryptResponse", ec);
+	if (ec != EC_Ok && error != nil) {
+		*error = PowerAuthCoreMakeError(ec, nil);
+	}
 	return ec == EC_Ok ? cc7::objc::CopyToNSData(data) : nil;
 }
 
 - (BOOL) encryptRequest:(NSData *)data
-			 completion:(void (NS_NOESCAPE ^)(PowerAuthCoreEciesCryptogram * cryptogram, PowerAuthCoreEciesEncryptor * decryptor))completion
+			 completion:(void (NS_NOESCAPE ^)(PowerAuthCoreEciesCryptogram * cryptogram, PowerAuthCoreEciesEncryptor * decryptor, NSError * error))completion
 {
 	PowerAuthCoreEciesEncryptor * decryptor;
 	PowerAuthCoreEciesCryptogram * cryptogram;
+	NSError * error = nil;
 	@synchronized (self) {
-		cryptogram = [self encryptRequest:data];
+		cryptogram = [self encryptRequest:data error:&error];
 		decryptor = cryptogram ? [self copyForDecryption] : nil;
 	}
 	if (completion) {
-		completion(cryptogram, decryptor);
+		completion(cryptogram, decryptor, error);
 	}
 	return cryptogram != nil;
 }
