@@ -167,7 +167,8 @@ NS_SWIFT_NAME(Session)
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreValidateActivationResponseResult*) validateActivationResponseWithParam:(nonnull PowerAuthCoreValidateActivationResponseParam*)param
-																						  error:(NSError * _Nullable * _Nullable)error;
+																						  error:(NSError * _Nullable * _Nullable)error
+																				   NS_SWIFT_NAME(validateActivationResponse(response:));
 
 /**
  Completes previously started activation process and protects sensitive local information with
@@ -196,9 +197,10 @@ NS_SWIFT_NAME(Session)
  
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (nullable PowerAuthCoreActivationStatus*) decodeActivationStatus:(nonnull PowerAuthCoreEncryptedActivationStatus *)encryptedStatus
-															  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-															 error:(NSError * _Nullable * _Nullable)error;
+- (nullable PowerAuthCoreActivationStatus*) decodeActivationStatus:(nonnull PowerAuthCoreEncryptedActivationStatus *)status
+															  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys
+															 error:(NSError * _Nullable * _Nullable)error
+													  NS_SWIFT_NAME(decode(encryptedStatus:keys:));
 
 #pragma mark - Data signing
 
@@ -239,9 +241,10 @@ NS_SWIFT_NAME(Session)
  reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreHTTPRequestDataSignature*) signHttpRequestData:(nonnull PowerAuthCoreHTTPRequestData*)requestData
-																   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+																   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys
 																 factor:(PowerAuthCoreSignatureFactor)factor
-																  error:(NSError * _Nullable * _Nullable)error;
+																  error:(NSError * _Nullable * _Nullable)error
+														   NS_SWIFT_NAME(signHttpRequest(request:keys:factor:));
 /**
  Returns name of authorization header. The value is constant and is equal to "X-PowerAuth-Authorization".
  You can calculate appropriate value with using 'httpAuthHeaderValueForBody:...' method.
@@ -254,7 +257,8 @@ NS_SWIFT_NAME(Session)
  or you provide an invalid input data.
  */
 - (BOOL) verifyServerSignedData:(nonnull PowerAuthCoreSignedData*)signedData
-						  error:(NSError * _Nullable * _Nullable)error;
+						  error:(NSError * _Nullable * _Nullable)error
+				   NS_SWIFT_NAME(verifyServerSignedData(signedData:));
 
 #pragma mark - Signature keys management
 
@@ -284,7 +288,8 @@ NS_SWIFT_NAME(Session)
  */
 - (BOOL) changeUserPassword:(nonnull PowerAuthCorePassword *)old_password
 				newPassword:(nonnull PowerAuthCorePassword*)new_password
-					  error:(NSError * _Nullable * _Nullable)error;
+					  error:(NSError * _Nullable * _Nullable)error
+			   NS_SWIFT_NAME(changeUserPassword(old:new:));
 
 /**
  Adds a key for biometry factor. You have to provide encrypted vault key |cVaultKey| in Base64 format
@@ -296,7 +301,8 @@ NS_SWIFT_NAME(Session)
  */
 - (BOOL) addBiometryFactor:(nonnull NSString *)cVaultKey
 					  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-					 error:(NSError * _Nullable * _Nullable)error;
+					 error:(NSError * _Nullable * _Nullable)error
+			  NS_SWIFT_NAME(addBiometryFactor(encryptedVaultKey:keys:));
 
 /**
  Checks if there is a biometry factor present in a current session. Return YES if there is a biometry factor
@@ -334,7 +340,8 @@ NS_SWIFT_NAME(Session)
 - (nullable NSData*) deriveCryptographicKeyFromVaultKey:(nonnull NSString*)cVaultKey
 												   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
 											   keyIndex:(UInt64)keyIndex
-												  error:(NSError * _Nullable * _Nullable)error;
+												  error:(NSError * _Nullable * _Nullable)error
+										   NS_SWIFT_NAME(deriveCryptographicKey(encryptedVaultKey:keys:keyIndex:));
 /**
  Computes a ECDSA-SHA256 signature of given |data| with using device's private key. You have to provide
  encrypted |cVaultKey| and |unlockKeys| structure with a valid possessionUnlockKey.
@@ -350,7 +357,8 @@ NS_SWIFT_NAME(Session)
 - (nullable NSData*) signDataWithDevicePrivateKey:(nonnull NSString*)cVaultKey
 											 keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
 											 data:(nonnull NSData*)data
-											error:(NSError * _Nullable * _Nullable)error;
+											error:(NSError * _Nullable * _Nullable)error
+									 NS_SWIFT_NAME(signDataWithDevicePrivateKey(encryptedVaultKey:keys:data:));
 
 #pragma mark - External Encryption Key
 
@@ -406,7 +414,8 @@ NS_SWIFT_NAME(Session)
 - (nullable PowerAuthCoreEciesEncryptor*) eciesEncryptorForScope:(PowerAuthCoreEciesEncryptorScope)scope
 															keys:(nullable PowerAuthCoreSignatureUnlockKeys*)unlockKeys
 													 sharedInfo1:(nullable NSData*)sharedInfo1
-														   error:(NSError * _Nullable * _Nullable)error;
+														   error:(NSError * _Nullable * _Nullable)error
+													NS_SWIFT_NAME(eciesEncryptor(forScope:keys:sharedInfo1:));
 
 #pragma mark - Utilities for generic keys
 
@@ -472,7 +481,8 @@ NS_SWIFT_NAME(Session)
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (BOOL) applyProtocolUpgradeData:(nonnull id<PowerAuthCoreProtocolUpgradeData>)upgradeData
-							error:(NSError * _Nullable * _Nullable)error;
+							error:(NSError * _Nullable * _Nullable)error
+					 NS_SWIFT_NAME(applyProtocolUpgrade(upgradeData:));
 
 
 /**
@@ -508,6 +518,7 @@ NS_SWIFT_NAME(Session)
  */
 - (nullable PowerAuthCoreRecoveryData*) activationRecoveryData:(nonnull NSString*)cVaultKey
 														  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
-														 error:(NSError * _Nullable * _Nullable)error;
+														 error:(NSError * _Nullable * _Nullable)error
+												  NS_SWIFT_NAME(activationRecoveryData(encryptedVaultKey:keys:));
 
 @end
