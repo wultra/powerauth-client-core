@@ -395,12 +395,12 @@ using namespace com::wultra::powerAuth;
 	SignatureUnlockKeys cpp_keys;
 	PowerAuthCoreSignatureUnlockKeysToStruct(unlockKeys, cpp_keys);
 	
-	PowerAuthCoreEciesEncryptor * encryptor = [[PowerAuthCoreEciesEncryptor alloc] init];
-	auto ec = _session.getEciesEncryptor(cpp_scope, cpp_keys, cpp_shared_info1, encryptor.encryptorRef);
+	ECIESEncryptor cpp_encryptor;
+	auto ec = _session.getEciesEncryptor(cpp_scope, cpp_keys, cpp_shared_info1, cpp_encryptor);
 	if (error != nil) {
 		*error = PowerAuthCoreMakeError(ec, nil);
 	}
-	return ec == EC_Ok ? encryptor : nil;
+	return ec == EC_Ok ? [[PowerAuthCoreEciesEncryptor alloc] initWithObject:cpp_encryptor] : nil;
 }
 
 #pragma mark - Utilities for generic keys

@@ -32,6 +32,11 @@ NS_SWIFT_NAME(EciesEncryptor)
 #pragma mark Initialization
 
 /**
+ Use designated initializer.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+/**
  Initializes an ecnryptor with server's |publicKey| and optional |sharedInfo1| and |sharedInfo2|.
  The initialized instance can be used for both encryption and decryption tasks.
  */
@@ -187,6 +192,11 @@ NS_SWIFT_NAME(EciesCryptogram)
  */
 NS_SWIFT_NAME(EciesMetaData)
 @interface PowerAuthCoreEciesMetaData : NSObject
+
+/**
+ Use designated initializer.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
 
 /**
  Initializes object with required `applicationKey` and with optional `activationIdentifier`
