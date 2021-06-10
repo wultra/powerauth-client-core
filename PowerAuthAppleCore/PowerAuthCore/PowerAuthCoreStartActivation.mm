@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2021 Wultra s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,42 +14,42 @@
  * limitations under the License.
  */
 
-#import "PowerAuthCoreActivationCode.h"
+#import "PowerAuthCoreStartActivation.h"
 #import "PrivateInterfaces.h"
 
 using namespace com::wultra::powerAuth;
 
-@implementation PowerAuthCoreActivationCode
-{
-	ActivationCode _code;
-}
+@implementation PowerAuthCoreStartActivationParam
 
-- (NSString*) activationCode
-{
-	return cc7::objc::CopyToNSString(_code.activationCode);
-}
-
-- (NSString*) activationSignature
-{
-	return cc7::objc::CopyToNullableNSString(_code.activationSignature);
-}
-
-@end
-
-@implementation PowerAuthCoreActivationCode (Private)
-
-- (instancetype) initWithStruct:(const ActivationCode &)structRef
+- (instancetype) initWithActivationCode:(PowerAuthCoreActivationCode *)activationCode
 {
 	self = [super init];
 	if (self) {
-		_code = structRef;
+		_activationCode = activationCode;
 	}
 	return self;
 }
 
-- (const ActivationCode &) structRef
+- (ActivationStep1Param) activationData
 {
-	return _code;
+	ActivationStep1Param data;
+	data.activationCode 		= cc7::objc::CopyFromNSString(_activationCode.activationCode);
+	data.activationSignature	= cc7::objc::CopyFromNSString(_activationCode.activationSignature);
+	return data;
+}
+
+@end
+
+
+@implementation PowerAuthCoreStartActivationResult
+
+- (instancetype) initWithStruct:(const ActivationStep1Result &)structRef
+{
+	self = [super init];
+	if (self) {
+		_devicePublicKey = cc7::objc::CopyToNSString(structRef.devicePublicKey);
+	}
+	return self;
 }
 
 @end

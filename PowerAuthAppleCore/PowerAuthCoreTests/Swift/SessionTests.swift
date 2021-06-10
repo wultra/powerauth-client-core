@@ -26,12 +26,7 @@ class SessionTests: XCTestCase {
     }
 
     func testSwiftIntegration() throws {
-		let setup = SessionSetup()
-		setup.applicationKey = ""
-		setup.applicationSecret = ""
-		setup.masterServerPublicKey = ""
-		setup.sessionIdentifier = 99
-
+		let setup = SessionSetup(applicationKey: "", applicationSecret: "", masterServerPublicKey: "", sessionIdentifier: 0, externalEncryptionKey: nil)
 		let session = Session(setup: setup)
 		XCTAssertFalse(session.hasValidSetup)
 		do {

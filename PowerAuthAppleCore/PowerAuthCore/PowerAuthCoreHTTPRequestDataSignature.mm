@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2021 Wultra s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,42 +14,26 @@
  * limitations under the License.
  */
 
-#import "PowerAuthCoreActivationCode.h"
+#import "PowerAuthCoreHTTPRequestDataSignature.h"
 #import "PrivateInterfaces.h"
 
 using namespace com::wultra::powerAuth;
 
-@implementation PowerAuthCoreActivationCode
-{
-	ActivationCode _code;
-}
+@implementation PowerAuthCoreHTTPRequestDataSignature
 
-- (NSString*) activationCode
-{
-	return cc7::objc::CopyToNSString(_code.activationCode);
-}
-
-- (NSString*) activationSignature
-{
-	return cc7::objc::CopyToNullableNSString(_code.activationSignature);
-}
-
-@end
-
-@implementation PowerAuthCoreActivationCode (Private)
-
-- (instancetype) initWithStruct:(const ActivationCode &)structRef
+- (instancetype) initWithStruct:(const HTTPRequestDataSignature &)structRef
 {
 	self = [super init];
 	if (self) {
-		_code = structRef;
+		_version			= cc7::objc::CopyToNSString(structRef.version);
+		_activationId		= cc7::objc::CopyToNSString(structRef.activationId);
+		_applicationKey		= cc7::objc::CopyToNSString(structRef.applicationKey);
+		_nonce				= cc7::objc::CopyToNSString(structRef.nonce);
+		_factor				= cc7::objc::CopyToNSString(structRef.factor);
+		_signature			= cc7::objc::CopyToNSString(structRef.signature);
+		_authHeaderValue	= cc7::objc::CopyToNSString(structRef.buildAuthHeaderValue());
 	}
 	return self;
-}
-
-- (const ActivationCode &) structRef
-{
-	return _code;
 }
 
 @end

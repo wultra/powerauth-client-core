@@ -32,6 +32,6 @@ POWERAUTH_EXTERN_C NSError * _Nullable PowerAuthCoreMakeError(PowerAuthCoreError
 	 */
 	inline NSError * _Nullable PowerAuthCoreMakeError(com::wultra::powerAuth::ErrorCode errorCode, NSString * _Nullable message)
 	{
-		return PowerAuthCoreMakeError((PowerAuthCoreErrorCode)errorCode, message);
+		return PowerAuthCoreMakeError(static_cast<PowerAuthCoreErrorCode>(errorCode), message);
 	}
 #endif

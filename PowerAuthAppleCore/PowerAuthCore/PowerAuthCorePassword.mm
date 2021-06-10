@@ -17,13 +17,32 @@
 #import <PowerAuthCore/PowerAuthCorePassword.h>
 #import "PrivateFunctions.h"
 
-#pragma mark -
-#pragma mark Password -
+#pragma mark - Password -
+
+using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCorePassword
 {
 @protected
-	com::wultra::powerAuth::Password _password;
+	Password _password;
+}
+
+- (instancetype) init
+{
+	return [self initEmptyAsMutable:NO];
+}
+
+- (instancetype) initEmptyAsMutable:(BOOL)asMutable
+{
+	self = [super init];
+	if (self) {
+		if (asMutable) {
+			_password.initAsMutable();
+		} else {
+			_password.initAsImmutable(cc7::ByteRange());
+		}
+	}
+	return self;
 }
 
 + (instancetype) passwordWithString:(NSString *)string
@@ -72,12 +91,20 @@
 @end
 
 
-#pragma mark -
-#pragma mark Password (Private) -
+#pragma mark - Password (Private) -
 
 @implementation PowerAuthCorePassword (Private)
 
-- (com::wultra::powerAuth::Password &) passObjRef
+- (instancetype) initWithStruct:(const cc7::ByteRange &)structRef
+{
+	self = [super init];
+	if (self) {
+		_password.initAsImmutable(structRef);
+	}
+	return self;
+}
+
+- (const Password &) structRef
 {
 	return _password;
 }
@@ -85,24 +112,18 @@
 @end
 
 
-
-#pragma mark -
-#pragma mark Mutable password -
+#pragma mark - Mutable password -
 
 @implementation PowerAuthCoreMutablePassword
 
 - (id) init
 {
-	self = [super init];
-	if (self) {
-		_password.initAsMutable();
-	}
-	return self;
+	return [super initEmptyAsMutable:YES];
 }
 
 + (instancetype) mutablePassword
 {
-	return [[PowerAuthCoreMutablePassword alloc] init];
+	return [[self alloc] initEmptyAsMutable:YES];
 }
 
 - (void) clear

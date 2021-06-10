@@ -23,14 +23,24 @@ FOUNDATION_EXPORT double PowerAuthCoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char PowerAuthCoreVersionString[];
 
 #import <PowerAuthCore/PowerAuthCoreMacros.h>
-#import <PowerAuthCore/PowerAuthCoreLog.h>
-#import <PowerAuthCore/PowerAuthCoreErrors.h>
-#import <PowerAuthCore/PowerAuthCoreInfo.h>
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
-#import <PowerAuthCore/PowerAuthCoreSession.h>
 #import <PowerAuthCore/PowerAuthCoreActivationCode.h>
-#import <PowerAuthCore/PowerAuthCorePassword.h>
+#import <PowerAuthCore/PowerAuthCoreActivationCodeUtil.h>
+#import <PowerAuthCore/PowerAuthCoreActivationStatus.h>
 #import <PowerAuthCore/PowerAuthCoreCryptoUtils.h>
-#import <PowerAuthCore/PowerAuthCoreEciesEncryptor.h>
-#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
 #import <PowerAuthCore/PowerAuthCoreDeprecated.h>
+#import <PowerAuthCore/PowerAuthCoreEciesEncryptor.h>
+#import <PowerAuthCore/PowerAuthCoreErrors.h>
+#import <PowerAuthCore/PowerAuthCoreHTTPRequestData.h>
+#import <PowerAuthCore/PowerAuthCoreHTTPRequestDataSignature.h>
+#import <PowerAuthCore/PowerAuthCoreInfo.h>
+#import <PowerAuthCore/PowerAuthCoreLog.h>
+#import <PowerAuthCore/PowerAuthCorePassword.h>
+#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
+#import <PowerAuthCore/PowerAuthCoreRecoveryData.h>
+#import <PowerAuthCore/PowerAuthCoreSessionSetup.h>
+#import <PowerAuthCore/PowerAuthCoreSignatureFactorKeys.h>
+#import <PowerAuthCore/PowerAuthCoreSignedData.h>
+#import <PowerAuthCore/PowerAuthCoreStartActivation.h>
+#import <PowerAuthCore/PowerAuthCoreValidateActivationResponse.h>
+#import <PowerAuthCore/PowerAuthCoreSession.h>

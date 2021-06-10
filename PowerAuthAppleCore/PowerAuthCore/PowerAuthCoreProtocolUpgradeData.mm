@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
+#import "PowerAuthCoreProtocolUpgradeData.h"
 #import "PrivateFunctions.h"
 
 #pragma mark - V3 data -
