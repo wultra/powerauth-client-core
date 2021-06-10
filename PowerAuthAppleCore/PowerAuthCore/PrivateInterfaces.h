@@ -15,13 +15,24 @@
  */
 
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
-#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
+
+#import <PowerAuthCore/PowerAuthCoreSessionSetup.h>
+#import <PowerAuthCore/PowerAuthCoreSignatureFactorKeys.h>
 #import <PowerAuthCore/PowerAuthCorePassword.h>
+#import <PowerAuthCore/PowerAuthCoreStartActivation.h>
+#import <PowerAuthCore/PowerAuthCoreValidateActivationResponse.h>
+#import <PowerAuthCore/PowerAuthCoreActivationStatus.h>
+#import <PowerAuthCore/PowerAuthCoreActivationCode.h>
+#import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
+#import <PowerAuthCore/PowerAuthCoreHTTPRequestData.h>
+#import <PowerAuthCore/PowerAuthCoreHTTPRequestDataSignature.h>
+#import <PowerAuthCore/PowerAuthCoreSignedData.h>
+#import <PowerAuthCore/PowerAuthCoreRecoveryData.h>
 #import <PowerAuthCore/PowerAuthCoreEciesEncryptor.h>
-#import <PowerAuthCore/PowerAuthCoreLog.h>
 
 #include <PowerAuth/PublicTypes.h>
 #include <PowerAuth/Password.h>
+#include <PowerAuth/ActivationCode.h>
 #include <PowerAuth/ECIES.h>
 
 #include <cc7/objc/ObjcHelper.h>
@@ -32,17 +43,75 @@
  so it's not available for Objective-C or Swift codes.
  */
 
+@interface PowerAuthCoreSessionSetup (Private)
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::SessionSetup &)structRef;
+- (const com::wultra::powerAuth::SessionSetup &) structRef;
+@end
+
+// SIGNINNG
+
 @interface PowerAuthCorePassword (Private)
-- (com::wultra::powerAuth::Password &) passObjRef;
+- (instancetype) initWithStruct:(const cc7::ByteRange &)structRef;
+- (const com::wultra::powerAuth::Password &) structRef;
+@end
+
+@interface PowerAuthCoreSignatureFactorKeys (Private)
+- (const com::wultra::powerAuth::SignatureUnlockKeys &) structRef;
+- (com::wultra::powerAuth::SignatureFactor) signatureFactor;
+@end
+
+@interface PowerAuthCoreActivationCode (Private)
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::ActivationCode &)structRef;
+- (const com::wultra::powerAuth::ActivationCode &) structRef;
+@end
+
+@interface PowerAuthCoreHTTPRequestData (Private)
+- (com::wultra::powerAuth::HTTPRequestData) requestData;
 @end
 
 @interface PowerAuthCoreHTTPRequestDataSignature (Private)
-- (com::wultra::powerAuth::HTTPRequestDataSignature&) signatureStructRef;
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::HTTPRequestDataSignature &)structRef;
 @end
 
 @interface PowerAuthCoreSignedData (Private)
-- (com::wultra::powerAuth::SignedData&) signedDataRef;
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::SignedData &)structRef;
+- (const com::wultra::powerAuth::SignedData &) structRef;
 @end
+
+// RECOVERY
+
+@interface PowerAuthCoreRecoveryData (Private)
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::RecoveryData &)structRef;
+- (const com::wultra::powerAuth::RecoveryData &) structRef;
+@end
+
+// ACTIVATION
+
+@interface PowerAuthCoreActivationStatus (Private)
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::ActivationStatus &)structRef;
+@end
+
+@interface PowerAuthCoreEncryptedActivationStatus (Private)
+- (com::wultra::powerAuth::EncryptedActivationStatus) statusData;
+@end
+
+@interface PowerAuthCoreStartActivationParam (Private)
+- (com::wultra::powerAuth::ActivationStep1Param) activationData;
+@end
+
+@interface PowerAuthCoreStartActivationResult (Private)
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::ActivationStep1Result &)structRef;
+@end
+
+@interface PowerAuthCoreValidateActivationResponseParam (Private)
+- (com::wultra::powerAuth::ActivationStep2Param) activationData;
+@end
+
+@interface PowerAuthCoreValidateActivationResponseResult (Private)
+- (instancetype) initWithStruct:(const com::wultra::powerAuth::ActivationStep2Result &)structRef;
+@end
+
+// ECIES
 
 @interface PowerAuthCoreEciesCryptogram (Private)
 - (com::wultra::powerAuth::ECIESCryptogram &) cryptogramRef;
@@ -56,57 +125,3 @@
 @protocol PowerAuthCoreProtocolUpgradeDataPrivate <PowerAuthCoreProtocolUpgradeData>
 - (void) setupStructure:(com::wultra::powerAuth::ProtocolUpgradeData &)ref;
 @end
-
-/**
- Converts PowerAuthCoreSessionSetup object into SessionSetup C++ structure.
- */
-CC7_EXTERN_C void PowerAuthCoreSessionSetupToStruct(PowerAuthCoreSessionSetup * setup, com::wultra::powerAuth::SessionSetup & cpp_setup);
-/**
- Returns new instance of PowerAuthCoreSessionSetup object, with content copied from SessionSetup C++ structure.
- */
-CC7_EXTERN_C PowerAuthCoreSessionSetup * PowerAuthCoreSessionSetupToObject(const com::wultra::powerAuth::SessionSetup & cpp_setup);
-
-/**
- Converts PowerAuthCoreSignatureUnlockKeys object into SignatureUnlockKeys C++ structure.
- */
-CC7_EXTERN_C void PowerAuthCoreSignatureUnlockKeysToStruct(PowerAuthCoreSignatureUnlockKeys * keys, com::wultra::powerAuth::SignatureUnlockKeys & cpp_keys);
-/**
-Converts PowerAuthCoreEncryptedActivationStatus object into EncryptedActivationStatus C++ structure.
- */
-CC7_EXTERN_C void PowerAuthCoreEncryptedActivationStatusToStruct(PowerAuthCoreEncryptedActivationStatus * status, com::wultra::powerAuth::EncryptedActivationStatus& cpp_status);
-/**
- Returns new instance of PowerAuthCoreActivationStatus object, with content copied from ActivationStatus C++ structure.
- */
-CC7_EXTERN_C PowerAuthCoreActivationStatus * PowerAuthCoreActivationStatusToObject(const com::wultra::powerAuth::ActivationStatus& cpp_status);
-
-/**
- Converts PowerAuthCoreHTTPRequestData object into HTTPRequestData C++ structure.
- */
-CC7_EXTERN_C void PowerAuthCoreHTTPRequestDataToStruct(PowerAuthCoreHTTPRequestData * req, com::wultra::powerAuth::HTTPRequestData & cpp_req);
-
-/**
- Converts PowerAuthCoreActivationStep1Param object into ActivationStep1Param C++ structure.
- */
-CC7_EXTERN_C void PowerAuthCoreStartActivationParamToStruct(PowerAuthCoreStartActivationParam * p1, com::wultra::powerAuth::ActivationStep1Param & cpp_p1);
-/**
- Returns new instance of PowerAuthCoreActivationStep1Result object, with content copied from ActivationStep1Result C++ structure.
- */
-CC7_EXTERN_C PowerAuthCoreStartActivationResult * PowerAuthCoreActivationStartResultToObject(const com::wultra::powerAuth::ActivationStep1Result& cpp_r1);
-
-/**
- Converts PowerAuthCoreActivationStep2Param object into ActivationStep2Param C++ structure.
- */
-CC7_EXTERN_C void PowerAuthCoreValidateActivationResponseParamToStruct(PowerAuthCoreValidateActivationResponseParam * p2, com::wultra::powerAuth::ActivationStep2Param & cpp_p2);
-/**
- Returns new instance of PowerAuthCoreActivationStep2Result object, with content copied from ActivationStep2Result C++ structure.
- */
-CC7_EXTERN_C PowerAuthCoreValidateActivationResponseResult * PowerAuthCoreValidateActivationResponseResultToObject(const com::wultra::powerAuth::ActivationStep2Result& cpp_r2);
-
-/**
- Converts PowerAuthCoreRecoveryData object into RecoveryData C++ structure
- */
-CC7_EXTERN_C void PowerAuthCoreRecoveryDataToStruct(PowerAuthCoreRecoveryData * rd, com::wultra::powerAuth::RecoveryData& cpp_rd);
-/**
- Returns new instance of PowerAuthCoreRecoveryData object, with content copied from RecoveryData C++ structure
- */
-CC7_EXTERN_C PowerAuthCoreRecoveryData * PowerAuthCoreRecoveryDataToObject(const com::wultra::powerAuth::RecoveryData& cpp_rd);

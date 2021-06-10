@@ -17,6 +17,17 @@
 #import <PowerAuthCore/PowerAuthCoreTypes.h>
 #import <PowerAuthCore/PowerAuthCoreProtocolUpgradeData.h>
 
+@class PowerAuthCoreSessionSetup;
+@class PowerAuthCoreStartActivationParam, PowerAuthCoreStartActivationResult;
+@class PowerAuthCoreValidateActivationResponseParam, PowerAuthCoreValidateActivationResponseResult;
+@class PowerAuthCoreSignatureFactorKeys;
+@class PowerAuthCoreEncryptedActivationStatus, PowerAuthCoreActivationStatus;
+@class PowerAuthCoreHTTPRequestDataSignature, PowerAuthCoreHTTPRequestData;
+@class PowerAuthCoreSignedData;
+@class PowerAuthCoreRecoveryData;
+@class PowerAuthCorePassword;
+@class PowerAuthCoreEciesEncryptor;
+
 /**
  The `PowerAuthCoreSession` class provides all cryptographic operations defined
  in PowerAuth protocol. The object also represents a long term session estabilished
@@ -183,7 +194,7 @@ NS_SWIFT_NAME(Session)
  
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) completeActivationWithKeys:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys
+- (BOOL) completeActivationWithKeys:(nonnull PowerAuthCoreSignatureFactorKeys*)keys
 							  error:(NSError * _Nullable * _Nullable)error
 					   NS_SWIFT_NAME(completeActivation(withKeys:));
 
@@ -198,7 +209,7 @@ NS_SWIFT_NAME(Session)
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreActivationStatus*) decodeActivationStatus:(nonnull PowerAuthCoreEncryptedActivationStatus *)status
-															  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys
+															  keys:(nonnull PowerAuthCoreSignatureFactorKeys*)keys
 															 error:(NSError * _Nullable * _Nullable)error
 													  NS_SWIFT_NAME(decode(encryptedStatus:keys:));
 
@@ -241,8 +252,7 @@ NS_SWIFT_NAME(Session)
  reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreHTTPRequestDataSignature*) signHttpRequestData:(nonnull PowerAuthCoreHTTPRequestData*)requestData
-																   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)keys
-																 factor:(PowerAuthCoreSignatureFactor)factor
+																   keys:(nonnull PowerAuthCoreSignatureFactorKeys*)keys
 																  error:(NSError * _Nullable * _Nullable)error
 														   NS_SWIFT_NAME(signHttpRequest(request:keys:factor:));
 /**
@@ -286,7 +296,7 @@ NS_SWIFT_NAME(Session)
  
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
-- (BOOL) changeUserPassword:(nonnull PowerAuthCorePassword *)old_password
+- (BOOL) changeUserPassword:(nonnull PowerAuthCorePassword*)old_password
 				newPassword:(nonnull PowerAuthCorePassword*)new_password
 					  error:(NSError * _Nullable * _Nullable)error
 			   NS_SWIFT_NAME(changeUserPassword(old:new:));
@@ -300,7 +310,7 @@ NS_SWIFT_NAME(Session)
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (BOOL) addBiometryFactor:(nonnull NSString *)cVaultKey
-					  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+					  keys:(nonnull PowerAuthCoreSignatureFactorKeys*)unlockKeys
 					 error:(NSError * _Nullable * _Nullable)error
 			  NS_SWIFT_NAME(addBiometryFactor(encryptedVaultKey:keys:));
 
@@ -338,7 +348,7 @@ NS_SWIFT_NAME(Session)
  can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable NSData*) deriveCryptographicKeyFromVaultKey:(nonnull NSString*)cVaultKey
-												   keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+												   keys:(nonnull PowerAuthCoreSignatureFactorKeys*)unlockKeys
 											   keyIndex:(UInt64)keyIndex
 												  error:(NSError * _Nullable * _Nullable)error
 										   NS_SWIFT_NAME(deriveCryptographicKey(encryptedVaultKey:keys:keyIndex:));
@@ -355,7 +365,7 @@ NS_SWIFT_NAME(Session)
  the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable NSData*) signDataWithDevicePrivateKey:(nonnull NSString*)cVaultKey
-											 keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+											 keys:(nonnull PowerAuthCoreSignatureFactorKeys*)unlockKeys
 											 data:(nonnull NSData*)data
 											error:(NSError * _Nullable * _Nullable)error
 									 NS_SWIFT_NAME(signDataWithDevicePrivateKey(encryptedVaultKey:keys:data:));
@@ -412,7 +422,7 @@ NS_SWIFT_NAME(Session)
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreEciesEncryptor*) eciesEncryptorForScope:(PowerAuthCoreEciesEncryptorScope)scope
-															keys:(nullable PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+															keys:(nullable PowerAuthCoreSignatureFactorKeys*)unlockKeys
 													 sharedInfo1:(nullable NSData*)sharedInfo1
 														   error:(NSError * _Nullable * _Nullable)error
 													NS_SWIFT_NAME(eciesEncryptor(forScope:keys:sharedInfo1:));
@@ -517,7 +527,7 @@ NS_SWIFT_NAME(Session)
  Throws an error in case of failure and you can determine the failure reason in `NSError.powerAuthCoreErrorCode` property.
  */
 - (nullable PowerAuthCoreRecoveryData*) activationRecoveryData:(nonnull NSString*)cVaultKey
-														  keys:(nonnull PowerAuthCoreSignatureUnlockKeys*)unlockKeys
+														  keys:(nonnull PowerAuthCoreSignatureFactorKeys*)unlockKeys
 														 error:(NSError * _Nullable * _Nullable)error
 												  NS_SWIFT_NAME(activationRecoveryData(encryptedVaultKey:keys:));
 

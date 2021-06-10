@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2021 Wultra s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,24 +17,24 @@
 #import <PowerAuthCore/PowerAuthCoreMacros.h>
 
 /**
- The `PowerAuthCoreProtocolUpgradeData` protocol defines abstract interface for providing
- data for protocol upgrade.
+ The `RecoveryData` object contains information about recovery code and PUK, created
+ during the activation process.
  */
-NS_SWIFT_NAME(ProtocolUpgradeData)
-@protocol PowerAuthCoreProtocolUpgradeData <NSObject>
-@end
+NS_SWIFT_NAME(RecoveryData)
+@interface PowerAuthCoreRecoveryData : NSObject
 
 /**
- The `PowerAuthCoreProtocolUpgradeDataV3` object contains data required for protocol upgrade
- from version 2 to version 3.
+ Not available
  */
-NS_SWIFT_NAME(ProtocolUpgradeDataV3)
-@interface PowerAuthCoreProtocolUpgradeDataV3 : NSObject<PowerAuthCoreProtocolUpgradeData>
+- (nonnull instancetype)init NS_UNAVAILABLE;
 
 /**
- Contains initial value for hash-based counter. The Base64 string is expected
- with exact 16 bytes long encoded data.
+ Contains recovery code.
  */
-@property (nonatomic, strong) NSString * ctrData;
+@property (nonatomic, strong, readonly, nonnull) NSString * recoveryCode;
+/**
+ Contains PUK, valid with recovery code.
+ */
+@property (nonatomic, strong, readonly, nonnull) NSString * puk;
 
 @end

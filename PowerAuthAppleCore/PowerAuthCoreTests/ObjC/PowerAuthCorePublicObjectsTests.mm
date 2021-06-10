@@ -79,7 +79,7 @@ using namespace com::wultra::powerAuth;
 		cpp_status.currentVersion = ActivationStatus::V2;
 		cpp_status.upgradeVersion = ActivationStatus::V3;
 		
-		PowerAuthCoreActivationStatus * so = PowerAuthCoreActivationStatusToObject(cpp_status);
+		PowerAuthCoreActivationStatus * so = [[PowerAuthCoreActivationStatus alloc] initWithStruct:cpp_status];
 		XCTAssertEqual(so.state, (PowerAuthCoreActivationState)pa2st.integerValue);
 		XCTAssertEqual(so.maxFailCount, 100 - idx);
 		XCTAssertEqual(so.failCount, idx);
@@ -90,14 +90,15 @@ using namespace com::wultra::powerAuth;
 
 - (void) testPowerAuthCoreHTTPRequestDataSignature
 {
-	PowerAuthCoreHTTPRequestDataSignature * signature = [[PowerAuthCoreHTTPRequestDataSignature alloc] init];
-	HTTPRequestDataSignature& ref = signature.signatureStructRef;
+	HTTPRequestDataSignature ref;
 	ref.activationId = "activation-id";
 	ref.applicationKey = "hello world";
 	ref.version = "3.0";
 	ref.nonce = "nonce";
 	ref.factor = "possession";
 	ref.signature = "00000000";
+	
+	PowerAuthCoreHTTPRequestDataSignature * signature = [[PowerAuthCoreHTTPRequestDataSignature alloc] initWithStruct:ref];
 	
 	XCTAssertTrue([signature.activationId isEqualToString:@"activation-id"]);
 	XCTAssertTrue([signature.applicationKey isEqualToString:@"hello world"]);
