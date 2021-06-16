@@ -122,6 +122,9 @@
 - (com::wultra::powerAuth::ECIESEncryptor &) encryptorRef;
 @end
 
+
+// UPGRADE
+
 @protocol PowerAuthCoreProtocolUpgradeDataPrivate <PowerAuthCoreProtocolUpgradeData>
 - (void) setupStructure:(com::wultra::powerAuth::ProtocolUpgradeData &)ref;
 @end

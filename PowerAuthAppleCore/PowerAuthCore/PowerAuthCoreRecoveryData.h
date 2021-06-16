@@ -29,6 +29,12 @@ NS_SWIFT_NAME(RecoveryData)
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
 /**
+ Initialize object with given recovery code and PUK.
+ */
+- (nonnull instancetype)initWithRecoveryCode:(nonnull NSString*)recoveryCode
+										 puk:(nonnull NSString*)puk;
+
+/**
  Contains recovery code.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString * recoveryCode;

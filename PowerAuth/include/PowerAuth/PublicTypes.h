@@ -145,6 +145,12 @@ namespace powerAuth
 		 Typically, you have to perform retry or restart for the whole process.
 		 */
 		EC_Encryption,
+		/**
+		 The operation fails on general failure. This type of error is typically
+		 returned when underlying implementation fails. For example, if PRNG
+		 generator could not produce a sequence of bytes.
+		 */
+		EC_GeneralFailure
 	};
 	
 	/**

@@ -15,6 +15,7 @@
  */
 
 #import <PowerAuthCore/PowerAuthCoreSession.h>
+#import "PrivateInterfaces.h"
 #import "PrivateFunctions.h"
 
 #include <PowerAuth/Session.h>
@@ -227,17 +228,13 @@ using namespace com::wultra::powerAuth;
 	ErrorCode ec;
 	if (signedData != nil) {
 		ec = _session.verifyServerSignedData(signedData.structRef);
-		// Don't throw an error for EC_WrongSignature.
-		if (ec == EC_Ok || ec == EC_WrongSignature) {
-			return ec == EC_Ok;
-		}
 	} else {
 		ec = EC_WrongParam;
 	}
 	if (error != nil) {
 		*error = PowerAuthCoreMakeError(ec, nil);
 	}
-	return NO;
+	return ec == EC_Ok;
 }
 
 

@@ -18,6 +18,7 @@
 #import <PowerAuthCore/PowerAuthCore.h>
 
 #import "PrivateFunctions.h"
+#import "PrivateInterfaces.h"
 
 /*
  This file contains mostly simple unit tests for ObjC objects using

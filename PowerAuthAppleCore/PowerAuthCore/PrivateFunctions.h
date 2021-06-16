@@ -24,7 +24,7 @@
 POWERAUTH_EXTERN_C NSError * _Nullable PowerAuthCoreMakeError(PowerAuthCoreErrorCode errorCode, NSString * _Nullable message);
 
 #ifdef __cplusplus
-	#import "PrivateInterfaces.h"
+	#include <PowerAuth/PublicTypes.h>
 	/**
 	 Function creates a new `NSError` instance with `PowerAuthCoreErrorDomain` and provided error code. If message parameter
 	 is nil, then the default message is provided to error's localized description. If errorCode is EC_Ok then function

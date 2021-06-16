@@ -15,7 +15,7 @@
  */
 
 #import <PowerAuthCore/PowerAuthCorePassword.h>
-#import "PrivateFunctions.h"
+#import "PrivateInterfaces.h"
 
 #pragma mark - Password -
 

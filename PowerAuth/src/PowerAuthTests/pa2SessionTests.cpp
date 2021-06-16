@@ -876,7 +876,7 @@ namespace powerAuthTests
 					// modify data
 					signedData.data.pop_back();
 					ec = s1.verifyServerSignedData(signedData);
-					ccstAssertTrue(ec == EC_Encryption);
+					ccstAssertTrue(ec == EC_WrongSignature);
 					
 					// use clear signature
 					signedData.signature.clear();
@@ -978,7 +978,7 @@ namespace powerAuthTests
 			// modify data
 			signedData.data.pop_back();
 			ec = s1.verifyServerSignedData(signedData);
-			ccstAssertTrue(ec == EC_Encryption);
+			ccstAssertTrue(ec == EC_WrongSignature);
 			
 			// use clear signature
 			signedData.signature.clear();
