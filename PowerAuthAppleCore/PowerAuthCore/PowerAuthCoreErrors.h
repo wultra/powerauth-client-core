@@ -83,6 +83,15 @@ typedef NS_ENUM(NSInteger, PowerAuthCoreErrorCode) {
 	 */
 	PowerAuthCoreErrorCode_Encryption		= 7,
 	
+	// Not available for C++ errors
+	
+	/**
+	 The operation fails on general failure. This type of error is typically
+	 returned when underlying implementation fails. For example, if PRNG
+	 generator could not produce a sequence of bytes.
+	 */
+	PowerAuthCoreErrorCode_GeneralFailure	= 8
+	
 } NS_SWIFT_NAME(ErrorCode);
 
 @interface NSError (PowerAuthCore)

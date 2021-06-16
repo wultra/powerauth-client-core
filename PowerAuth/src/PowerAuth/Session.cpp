@@ -735,7 +735,7 @@ namespace powerAuth
 		// Free allocated OpenSSL resources
 		EC_KEY_free(ec_public_key);
 		
-		return success ? EC_Ok : EC_Encryption;
+		return success ? EC_Ok : EC_WrongSignature;
 	}
 	
 	// MARK: - Signature keys management -

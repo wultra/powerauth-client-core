@@ -23,6 +23,7 @@ using namespace com::wultra::powerAuth;
 {
 	RecoveryData _recoveryData;
 }
+
 - (instancetype) initWithStruct:(const RecoveryData &)structRef
 {
 	self = [super init];
@@ -35,6 +36,17 @@ using namespace com::wultra::powerAuth;
 - (const RecoveryData &) structRef
 {
 	return _recoveryData;
+}
+
+- (nonnull instancetype)initWithRecoveryCode:(nonnull NSString*)recoveryCode
+										 puk:(nonnull NSString*)puk
+{
+	self = [super init];
+	if (self) {
+		_recoveryData.recoveryCode = cc7::objc::CopyFromNSString(recoveryCode);
+		_recoveryData.puk = cc7::objc::CopyFromNSString(puk);
+	}
+	return self;
 }
 
 - (NSString*) recoveryCode

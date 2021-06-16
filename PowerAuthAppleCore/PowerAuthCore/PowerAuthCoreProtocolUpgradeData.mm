@@ -15,7 +15,7 @@
  */
 
 #import "PowerAuthCoreProtocolUpgradeData.h"
-#import "PrivateFunctions.h"
+#import "PrivateInterfaces.h"
 
 #pragma mark - V3 data -
 

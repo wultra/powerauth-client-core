@@ -20,6 +20,7 @@
 #import <PowerAuthCore/PowerAuthCoreEciesEncryptor.h>
 #import <PowerAuthCore/PowerAuthCoreSession.h>
 #import "PrivateFunctions.h"
+#import "PrivateInterfaces.h"
 
 using namespace com::wultra::powerAuth;
 

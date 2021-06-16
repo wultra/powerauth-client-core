@@ -254,7 +254,7 @@ NS_SWIFT_NAME(Session)
 - (nullable PowerAuthCoreHTTPRequestDataSignature*) signHttpRequestData:(nonnull PowerAuthCoreHTTPRequestData*)requestData
 																   keys:(nonnull PowerAuthCoreSignatureFactorKeys*)keys
 																  error:(NSError * _Nullable * _Nullable)error
-														   NS_SWIFT_NAME(signHttpRequest(request:keys:factor:));
+														   NS_SWIFT_NAME(signHttpRequest(request:keys:));
 /**
  Returns name of authorization header. The value is constant and is equal to "X-PowerAuth-Authorization".
  You can calculate appropriate value with using 'httpAuthHeaderValueForBody:...' method.

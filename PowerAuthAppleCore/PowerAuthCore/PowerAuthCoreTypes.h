@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import <PowerAuthCore/PowerAuthCoreErrors.h>
+#import <PowerAuthCore/PowerAuthCoreMacros.h>
 
 /**
  The `ProtocolVersion` enum defines PowerAuth protocol version. The main difference

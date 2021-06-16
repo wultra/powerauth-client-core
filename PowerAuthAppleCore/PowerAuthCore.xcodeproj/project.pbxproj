@@ -77,6 +77,21 @@
 		BF5F7BC926722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BC526722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm */; };
 		BF5F7BCA26722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BC526722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm */; };
 		BF5F7BCB26722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BC526722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm */; };
+		BF5F7BCE26738330002E7F45 /* MiniPAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BCD26738330002E7F45 /* MiniPAS.swift */; };
+		BF5F7BCF26738330002E7F45 /* MiniPAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BCD26738330002E7F45 /* MiniPAS.swift */; };
+		BF5F7BD026738330002E7F45 /* MiniPAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BCD26738330002E7F45 /* MiniPAS.swift */; };
+		BF5F7BDA26738675002E7F45 /* ECKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BD926738675002E7F45 /* ECKeyPair.swift */; };
+		BF5F7BDB26738675002E7F45 /* ECKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BD926738675002E7F45 /* ECKeyPair.swift */; };
+		BF5F7BDC26738675002E7F45 /* ECKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BD926738675002E7F45 /* ECKeyPair.swift */; };
+		BF5F7BDE267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BDD267396B6002E7F45 /* MiniPAS+Activation.swift */; };
+		BF5F7BDF267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BDD267396B6002E7F45 /* MiniPAS+Activation.swift */; };
+		BF5F7BE0267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BDD267396B6002E7F45 /* MiniPAS+Activation.swift */; };
+		BF5F7BE2267398C8002E7F45 /* MiniPASCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BE1267398C8002E7F45 /* MiniPASCrypto.swift */; };
+		BF5F7BE3267398C8002E7F45 /* MiniPASCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BE1267398C8002E7F45 /* MiniPASCrypto.swift */; };
+		BF5F7BE4267398C8002E7F45 /* MiniPASCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BE1267398C8002E7F45 /* MiniPASCrypto.swift */; };
+		BF5F7BE6267A04C8002E7F45 /* ActivationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BE5267A04C8002E7F45 /* ActivationHelper.swift */; };
+		BF5F7BE7267A04C8002E7F45 /* ActivationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BE5267A04C8002E7F45 /* ActivationHelper.swift */; };
+		BF5F7BE8267A04C8002E7F45 /* ActivationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F7BE5267A04C8002E7F45 /* ActivationHelper.swift */; };
 		BF6ADD6424C84BC5001B3E5E /* libPowerAuthCoreLib-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3ACC852073DBA500B8107E /* libPowerAuthCoreLib-ios.a */; };
 		BF6ADD6B24C84C0C001B3E5E /* PRNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8D82073E00D00735ED2 /* PRNG.cpp */; };
 		BF6ADD6C24C84C0C001B3E5E /* MAC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8DB2073E00D00735ED2 /* MAC.cpp */; };
@@ -282,6 +297,9 @@
 		BFC92DF02073E3860087851C /* pa2CryptoAESTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8C22073E00D00735ED2 /* pa2CryptoAESTests.cpp */; };
 		BFC92DF12073E3860087851C /* pa2CryptoHMACTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8BD2073E00D00735ED2 /* pa2CryptoHMACTests.cpp */; };
 		BFC92DF22073E3860087851C /* pa2CryptoECDHKDFTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8C82073E00D00735ED2 /* pa2CryptoECDHKDFTests.cpp */; };
+		BFCE7C76267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */; };
+		BFCE7C77267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */; };
+		BFCE7C78267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */; };
 		BFE92F702670C66500BFEE92 /* PowerAuthCoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFE92F6E2670C66500BFEE92 /* PowerAuthCoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFE92F712670C66500BFEE92 /* PowerAuthCoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFE92F6E2670C66500BFEE92 /* PowerAuthCoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFE92F722670C66500BFEE92 /* PowerAuthCoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFE92F6E2670C66500BFEE92 /* PowerAuthCoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -580,6 +598,11 @@
 		BF5F7BBD267228D9002E7F45 /* PowerAuthCoreStartActivation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PowerAuthCoreStartActivation.mm; sourceTree = "<group>"; };
 		BF5F7BC426722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PowerAuthCoreValidateActivationResponse.h; sourceTree = "<group>"; };
 		BF5F7BC526722AED002E7F45 /* PowerAuthCoreValidateActivationResponse.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PowerAuthCoreValidateActivationResponse.mm; sourceTree = "<group>"; };
+		BF5F7BCD26738330002E7F45 /* MiniPAS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPAS.swift; sourceTree = "<group>"; };
+		BF5F7BD926738675002E7F45 /* ECKeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECKeyPair.swift; sourceTree = "<group>"; };
+		BF5F7BDD267396B6002E7F45 /* MiniPAS+Activation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiniPAS+Activation.swift"; sourceTree = "<group>"; };
+		BF5F7BE1267398C8002E7F45 /* MiniPASCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPASCrypto.swift; sourceTree = "<group>"; };
+		BF5F7BE5267A04C8002E7F45 /* ActivationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationHelper.swift; sourceTree = "<group>"; };
 		BF6ADD1524C8486D001B3E5E /* PowerAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PowerAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6ADD6024C84A3D001B3E5E /* PowerAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PowerAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6ADD8624C84C0C001B3E5E /* libPowerAuthCoreLib-tvos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPowerAuthCoreLib-tvos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -684,6 +707,7 @@
 		BFABCD66214ABE2500A9221F /* CRC16.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CRC16.cpp; sourceTree = "<group>"; };
 		BFABCD68214AC31B00A9221F /* pa2CRC16Tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pa2CRC16Tests.cpp; sourceTree = "<group>"; };
 		BFB47D3E20753444008A6A52 /* cc7.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cc7.xcodeproj; path = "../PowerAuth/cc7/proj-xcode/cc7.xcodeproj"; sourceTree = "<group>"; };
+		BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MiniPAS+Signature.swift"; sourceTree = "<group>"; };
 		BFE92F6E2670C66500BFEE92 /* PowerAuthCoreInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PowerAuthCoreInfo.h; sourceTree = "<group>"; };
 		BFE92F6F2670C66500BFEE92 /* PowerAuthCoreInfo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PowerAuthCoreInfo.mm; sourceTree = "<group>"; };
 		BFFE1D51264D688F00D5B985 /* pa2CryptoECDSATests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pa2CryptoECDSATests.cpp; sourceTree = "<group>"; };
@@ -898,6 +922,18 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		BF5F7BCC26738306002E7F45 /* MiniPAS */ = {
+			isa = PBXGroup;
+			children = (
+				BF5F7BCD26738330002E7F45 /* MiniPAS.swift */,
+				BF5F7BDD267396B6002E7F45 /* MiniPAS+Activation.swift */,
+				BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */,
+				BF5F7BE1267398C8002E7F45 /* MiniPASCrypto.swift */,
+				BF5F7BD926738675002E7F45 /* ECKeyPair.swift */,
+			);
+			path = MiniPAS;
+			sourceTree = "<group>";
+		};
 		BF6AFD6D2073E4F600CE7DDE /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,7 +961,9 @@
 		BF7E53B82670F50C00F262B5 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				BF5F7BCC26738306002E7F45 /* MiniPAS */,
 				BF5F7B7526710221002E7F45 /* SessionTests.swift */,
+				BF5F7BE5267A04C8002E7F45 /* ActivationHelper.swift */,
 				BF5F7B7226710221002E7F45 /* PowerAuthCoreTests-Bridging-Header.h */,
 			);
 			path = Swift;
@@ -1816,7 +1854,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFCE7C76267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */,
 				BF5F7B7626710221002E7F45 /* SessionTests.swift in Sources */,
+				BF5F7BE2267398C8002E7F45 /* MiniPASCrypto.swift in Sources */,
+				BF5F7BCE26738330002E7F45 /* MiniPAS.swift in Sources */,
+				BF5F7BE6267A04C8002E7F45 /* ActivationHelper.swift in Sources */,
+				BF5F7BDA26738675002E7F45 /* ECKeyPair.swift in Sources */,
+				BF5F7BDE267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */,
 				BF86E6B626395D44004C8AE5 /* PowerAuthCoreTestsWrapper.mm in Sources */,
 				BF86E6B726395D44004C8AE5 /* PowerAuthCorePublicObjectsTests.mm in Sources */,
 			);
@@ -1826,7 +1870,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFCE7C77267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */,
 				BF5F7B7726710221002E7F45 /* SessionTests.swift in Sources */,
+				BF5F7BE3267398C8002E7F45 /* MiniPASCrypto.swift in Sources */,
+				BF5F7BCF26738330002E7F45 /* MiniPAS.swift in Sources */,
+				BF5F7BE7267A04C8002E7F45 /* ActivationHelper.swift in Sources */,
+				BF5F7BDB26738675002E7F45 /* ECKeyPair.swift in Sources */,
+				BF5F7BDF267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */,
 				BF86E6E226395F2C004C8AE5 /* PowerAuthCoreTestsWrapper.mm in Sources */,
 				BF86E6E326395F2C004C8AE5 /* PowerAuthCorePublicObjectsTests.mm in Sources */,
 			);
@@ -1918,7 +1968,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFCE7C78267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */,
 				BF5F7B7826710221002E7F45 /* SessionTests.swift in Sources */,
+				BF5F7BE4267398C8002E7F45 /* MiniPASCrypto.swift in Sources */,
+				BF5F7BD026738330002E7F45 /* MiniPAS.swift in Sources */,
+				BF5F7BE8267A04C8002E7F45 /* ActivationHelper.swift in Sources */,
+				BF5F7BDC26738675002E7F45 /* ECKeyPair.swift in Sources */,
+				BF5F7BE0267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */,
 				BF8EED2C266E24EA009AC5FD /* PowerAuthCoreTestsWrapper.mm in Sources */,
 				BF8EED2D266E24EA009AC5FD /* PowerAuthCorePublicObjectsTests.mm in Sources */,
 			);
@@ -2420,6 +2476,7 @@
 				DEVELOPMENT_TEAM = KTT9G859MR;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = PowerAuthCoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2448,6 +2505,7 @@
 				DEVELOPMENT_TEAM = KTT9G859MR;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = PowerAuthCoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2488,6 +2546,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "PowerAuthCoreTests/Swift/PowerAuthCoreTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Debug;
 		};
@@ -2515,6 +2574,7 @@
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "PowerAuthCoreTests/Swift/PowerAuthCoreTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Release;
 		};
@@ -2665,6 +2725,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wultra.lib.PowerAuthCoreTests-ios";
@@ -2693,6 +2754,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wultra.lib.PowerAuthCoreTests-ios";
