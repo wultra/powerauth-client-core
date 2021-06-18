@@ -51,6 +51,12 @@ static NSString * _GetDefaultErrorDescription(PowerAuthCoreErrorCode ec, NSStrin
 			return @"Data encryption or decryption failed";
 		case PowerAuthCoreErrorCode_WrongSignature:
 			return @"Invalid digital signature";
+		case PowerAuthCoreErrorCode_MissingRequestedFactor:
+			return @"Requested factor is missing in session's data";
+		case PowerAuthCoreErrorCode_MissingRequiredFactor:
+			return @"Mandatory signature factor key is missing.";
+		case PowerAuthCoreErrorCode_GeneralFailure:
+			return @"General failure";
 		default:
 			return nil;
 	}

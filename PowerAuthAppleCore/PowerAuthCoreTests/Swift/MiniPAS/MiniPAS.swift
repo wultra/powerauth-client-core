@@ -20,10 +20,18 @@ import Foundation
 /// CryptoKit framework.
 class MiniPAS {
 	
-	enum Errors: Error {
+	enum PASErrors: Error {
+		case invalidParameter
 		case invalidPublicKey
 		case invalidBase64Data
 		case invalidRandomGenerator
+		case invalidActivationState
+		case invalidApplicationKey
+		case invalidActivationId
+		
+		case eciesWrongMac
+		case eciesDecryption
+		case eciesWrongState
 	}
 	
 	struct Config {

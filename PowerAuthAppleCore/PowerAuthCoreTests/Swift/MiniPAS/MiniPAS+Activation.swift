@@ -55,6 +55,7 @@ extension MiniPAS {
 		
 		let serverKeyPair: ECKeyPair
 		
+		var devicePublicKey: Data!
 		var sharedSecret: SharedSecret!
 		var keys: ActivationKeys!
 		var activationFingerprint: String!
@@ -66,6 +67,9 @@ extension MiniPAS {
 		
 		var failCount: UInt8
 		var maxFailCount: UInt8
+		
+		var recoveryCode: String?
+		var recoveryPuk: String?
 	}
 	
 	/// Create a new activation.
@@ -80,6 +84,7 @@ extension MiniPAS {
 			activationCode: code,
 			activationCodeSignature: codeSignature,
 			serverKeyPair: kp,
+			devicePublicKey: nil,
 			sharedSecret: nil,
 			keys: nil,
 			activationFingerprint: nil,
@@ -88,7 +93,9 @@ extension MiniPAS {
 			state: .created,
 			version: .v3,
 			failCount: 0,
-			maxFailCount: maxFailCount
+			maxFailCount: maxFailCount,
+			recoveryCode: nil,
+			recoveryPuk: nil
 		)
 	}
 	
@@ -118,12 +125,13 @@ extension MiniPAS {
 	func activate(request: ActivationRequest, entry: inout ActivationEntry, nextState: ActivationEntry.State = .active) throws -> ActivationResponse {
 	
 		guard let devicePublicKey = Data(base64Encoded: request.devicePublicKey) else {
-			throw Errors.invalidPublicKey
+			throw PASErrors.invalidPublicKey
 		}
 		
 		let recoveryCode = config.enableRecovery ? generateActivationCode() : nil
 		let recoveryPuk = config.enableRecovery ? generateRecoveryPuk() : nil
 
+		entry.devicePublicKey = devicePublicKey
 		entry.sharedSecret = try entry.serverKeyPair.keyAgreement().sharedSecret(with: devicePublicKey)
 		entry.keys = try entry.sharedSecret.deriveActivationKeys()
 		entry.activationFingerprint = try MiniPASCrypto.CalculateActivationFingerprint(
@@ -131,6 +139,8 @@ extension MiniPAS {
 			clientPublicKey: try ECKeyPair.KeyAgreement.importKey(publicKeyData: devicePublicKey),
 			activationId: entry.activationId)
 		entry.state = nextState
+		entry.recoveryCode = recoveryCode
+		entry.recoveryPuk = recoveryPuk
 		
 		return ActivationResponse(
 			activationId: entry.activationId,
@@ -144,21 +154,28 @@ extension MiniPAS {
 	
 	/// BLock activation.
 	/// - Parameter entry: Activation entry
-	func blockActivation(entry: inout ActivationEntry) {
+	func blockActivation(entry: inout ActivationEntry) throws {
+		if entry.state == .removed {
+			throw PASErrors.invalidActivationState
+		}
 		entry.state = .blocked
 	}
 	
 	
 	/// Unblock activation
 	/// - Parameter entry: Activation entry
-	func unblockActivation(entry: inout ActivationEntry) {
+	func unblockActivation(entry: inout ActivationEntry) throws {
+		if entry.state != .blocked {
+			throw PASErrors.invalidActivationState
+		}
 		entry.state = .active
+		entry.failCount = 0
 	}
 	
 	
 	/// Remove activation
 	/// - Parameter entry: Activation entry
-	func removeActivation(entry: inout ActivationEntry) {
+	func removeActivation(entry: inout ActivationEntry) throws {
 		entry.state = .removed
 	}
 	
@@ -172,10 +189,10 @@ extension MiniPAS {
 	func getEncryptedStatus(challenge: String, entry: inout ActivationEntry) throws -> (statusData: String, nonce: String) {
 		
 		guard let challengeData = Data(base64Encoded: challenge) else {
-			throw Errors.invalidBase64Data
+			throw PASErrors.invalidBase64Data
 		}
 		guard let nonceData = try? CryptoUtils.randomBytes(count: 16) else {
-			throw Errors.invalidRandomGenerator
+			throw PASErrors.invalidRandomGenerator
 		}
 		let ivData = challengeData + nonceData
 		let iv = try MiniPASCrypto.KDF_Internal(key: entry.keys.transportIvKey, index: ivData)

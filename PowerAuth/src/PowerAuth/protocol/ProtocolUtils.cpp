@@ -151,6 +151,7 @@ namespace protocol
 		}
 	}
 	
+	// TODO: return ErrorCode
 	bool LockSignatureKeys(SignatureKeys & secret, const SignatureKeys & plain, const SignatureUnlockKeysReq & request)
 	{
 		if (request.keys == nullptr) {
@@ -228,7 +229,7 @@ namespace protocol
 		return ValidateSignatureKeys(secret, factor);
 	}
 	
-	
+	// TODO: return ErrorCode
 	bool UnlockSignatureKeys(SignatureKeys & plain, const SignatureKeys & secret, const SignatureUnlockKeysReq & request)
 	{
 		if (request.keys == nullptr) {

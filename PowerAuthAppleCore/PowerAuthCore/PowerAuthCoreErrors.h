@@ -82,15 +82,24 @@ typedef NS_ENUM(NSInteger, PowerAuthCoreErrorCode) {
 	 Typically, you have to perform retry or restart for the whole process.
 	 */
 	PowerAuthCoreErrorCode_Encryption		= 7,
-	
-	// Not available for C++ errors
-	
+	/**
+	 The operation requires a signature key that is not available in
+	 session's persistent data. For example, if you request a signature
+	 calculation with biometric factor but the biometry is not configured
+	 in the session.
+	 */
+	PowerAuthCoreErrorCode_MissingRequestedFactor	= 8,
+	/**
+	 The operation has a mandatory set of signature factor keys but you
+	 don't provide some.
+	 */
+	PowerAuthCoreErrorCode_MissingRequiredFactor	= 9,
 	/**
 	 The operation fails on general failure. This type of error is typically
 	 returned when underlying implementation fails. For example, if PRNG
 	 generator could not produce a sequence of bytes.
 	 */
-	PowerAuthCoreErrorCode_GeneralFailure	= 8
+	PowerAuthCoreErrorCode_GeneralFailure	= 10
 	
 } NS_SWIFT_NAME(ErrorCode);
 

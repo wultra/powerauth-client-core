@@ -97,7 +97,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  The DEBUG version of the SDK prints detailed error about the failure reason into the log.
  */
 - (nullable PowerAuthCoreEciesCryptogram *) encryptRequest:(nullable NSData *)data
-													 error:(NSError * _Nullable * _Nullable)error;
+													 error:(NSError * _Nullable * _Nullable)error
+									  NS_SWIFT_NAME(encrypt(requestData:));
 
 /**
  Decrypts a |cryptogram| received from the server and returns decrypted data or nil in case of failure.
@@ -105,7 +106,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  The DEBUG version of the SDK prints detailed error about the failure reason into the log.
  */
 - (nullable NSData *) decryptResponse:(nonnull PowerAuthCoreEciesCryptogram *)cryptogram
-								error:(NSError * _Nullable * _Nullable)error;
+								error:(NSError * _Nullable * _Nullable)error
+						 NS_SWIFT_NAME(decrypt(responseData:));
 
 /**
  This is a special, thread-safe version of request encryption. The method encrypts provided data
@@ -119,7 +121,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  Returns YES if encryption succeeded or NO in case of error.
  */
 - (BOOL) encryptRequest:(nullable NSData *)data
-			 completion:(void (NS_NOESCAPE ^_Nonnull)(PowerAuthCoreEciesCryptogram * _Nullable cryptogram, PowerAuthCoreEciesEncryptor * _Nullable decryptor, NSError * _Nullable error))completion;
+			 completion:(void (NS_NOESCAPE ^_Nonnull)(PowerAuthCoreEciesCryptogram * _Nullable cryptogram, PowerAuthCoreEciesEncryptor * _Nullable decryptor, NSError * _Nullable error))completion
+		   NS_SWIFT_NAME(encrypt(requestData:completion:));
 
 
 #pragma mark Associated metadata

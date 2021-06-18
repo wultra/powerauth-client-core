@@ -129,7 +129,8 @@ NS_SWIFT_NAME(Session)
  `NSError.powerAuthCoreErrorCode` property.
  */
 - (BOOL) deserializeState:(NSData * _Nonnull)state
-					error:(NSError * _Nullable * _Nullable)error;
+					error:(NSError * _Nullable * _Nullable)error
+			 NS_SWIFT_NAME(deserialize(state:));
 
 
 #pragma mark - Activation
@@ -415,7 +416,7 @@ NS_SWIFT_NAME(Session)
 #pragma mark - ECIES
 
 /**
- Constructs the `PowerAuthCoreEciesEncryptor` object for the required `scope` and for optional `sharedInfo1`.
+ Constructs the `EciesEncryptor` object for the required `scope` and for optional `sharedInfo1`.
  The `keys` parameter must contain valid `possessionUnlockKey` in case that the "activation" scope is requested.
  For "application" scope, the `keys` object may be nil.
  
