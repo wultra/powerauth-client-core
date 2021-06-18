@@ -293,6 +293,15 @@
 		BFB47D1720753324008A6A52 /* DataWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8E92073E00D00735ED2 /* DataWriter.cpp */; };
 		BFB47D1820753324008A6A52 /* URLEncoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8E42073E00D00735ED2 /* URLEncoding.cpp */; };
 		BFB47D5420753491008A6A52 /* libPowerAuthCoreLib-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3ACC852073DBA500B8107E /* libPowerAuthCoreLib-ios.a */; };
+		BFBEFC20267B4D1F0058DF91 /* MiniPAS+Vault.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC1F267B4D1F0058DF91 /* MiniPAS+Vault.swift */; };
+		BFBEFC21267B4D1F0058DF91 /* MiniPAS+Vault.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC1F267B4D1F0058DF91 /* MiniPAS+Vault.swift */; };
+		BFBEFC22267B4D1F0058DF91 /* MiniPAS+Vault.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC1F267B4D1F0058DF91 /* MiniPAS+Vault.swift */; };
+		BFBEFC28267B55910058DF91 /* MiniPAS+ECIES.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC27267B55910058DF91 /* MiniPAS+ECIES.swift */; };
+		BFBEFC29267B55910058DF91 /* MiniPAS+ECIES.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC27267B55910058DF91 /* MiniPAS+ECIES.swift */; };
+		BFBEFC2A267B55910058DF91 /* MiniPAS+ECIES.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC27267B55910058DF91 /* MiniPAS+ECIES.swift */; };
+		BFBEFC30267B597B0058DF91 /* EciesEncryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC2F267B597B0058DF91 /* EciesEncryptorTests.swift */; };
+		BFBEFC31267B597B0058DF91 /* EciesEncryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC2F267B597B0058DF91 /* EciesEncryptorTests.swift */; };
+		BFBEFC32267B597B0058DF91 /* EciesEncryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBEFC2F267B597B0058DF91 /* EciesEncryptorTests.swift */; };
 		BFC92DEF2073E3860087851C /* pa2CryptoPKCS7PaddingTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8C72073E00D00735ED2 /* pa2CryptoPKCS7PaddingTests.cpp */; };
 		BFC92DF02073E3860087851C /* pa2CryptoAESTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8C22073E00D00735ED2 /* pa2CryptoAESTests.cpp */; };
 		BFC92DF12073E3860087851C /* pa2CryptoHMACTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF99D8BD2073E00D00735ED2 /* pa2CryptoHMACTests.cpp */; };
@@ -707,6 +716,9 @@
 		BFABCD66214ABE2500A9221F /* CRC16.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CRC16.cpp; sourceTree = "<group>"; };
 		BFABCD68214AC31B00A9221F /* pa2CRC16Tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pa2CRC16Tests.cpp; sourceTree = "<group>"; };
 		BFB47D3E20753444008A6A52 /* cc7.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cc7.xcodeproj; path = "../PowerAuth/cc7/proj-xcode/cc7.xcodeproj"; sourceTree = "<group>"; };
+		BFBEFC1F267B4D1F0058DF91 /* MiniPAS+Vault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiniPAS+Vault.swift"; sourceTree = "<group>"; };
+		BFBEFC27267B55910058DF91 /* MiniPAS+ECIES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiniPAS+ECIES.swift"; sourceTree = "<group>"; };
+		BFBEFC2F267B597B0058DF91 /* EciesEncryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EciesEncryptorTests.swift; sourceTree = "<group>"; };
 		BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MiniPAS+Signature.swift"; sourceTree = "<group>"; };
 		BFE92F6E2670C66500BFEE92 /* PowerAuthCoreInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PowerAuthCoreInfo.h; sourceTree = "<group>"; };
 		BFE92F6F2670C66500BFEE92 /* PowerAuthCoreInfo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PowerAuthCoreInfo.mm; sourceTree = "<group>"; };
@@ -928,6 +940,8 @@
 				BF5F7BCD26738330002E7F45 /* MiniPAS.swift */,
 				BF5F7BDD267396B6002E7F45 /* MiniPAS+Activation.swift */,
 				BFCE7C71267A24DF0028B950 /* MiniPAS+Signature.swift */,
+				BFBEFC1F267B4D1F0058DF91 /* MiniPAS+Vault.swift */,
+				BFBEFC27267B55910058DF91 /* MiniPAS+ECIES.swift */,
 				BF5F7BE1267398C8002E7F45 /* MiniPASCrypto.swift */,
 				BF5F7BD926738675002E7F45 /* ECKeyPair.swift */,
 			);
@@ -963,6 +977,7 @@
 			children = (
 				BF5F7BCC26738306002E7F45 /* MiniPAS */,
 				BF5F7B7526710221002E7F45 /* SessionTests.swift */,
+				BFBEFC2F267B597B0058DF91 /* EciesEncryptorTests.swift */,
 				BF5F7BE5267A04C8002E7F45 /* ActivationHelper.swift */,
 				BF5F7B7226710221002E7F45 /* PowerAuthCoreTests-Bridging-Header.h */,
 			);
@@ -1856,11 +1871,14 @@
 			files = (
 				BFCE7C76267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */,
 				BF5F7B7626710221002E7F45 /* SessionTests.swift in Sources */,
+				BFBEFC30267B597B0058DF91 /* EciesEncryptorTests.swift in Sources */,
+				BFBEFC20267B4D1F0058DF91 /* MiniPAS+Vault.swift in Sources */,
 				BF5F7BE2267398C8002E7F45 /* MiniPASCrypto.swift in Sources */,
 				BF5F7BCE26738330002E7F45 /* MiniPAS.swift in Sources */,
 				BF5F7BE6267A04C8002E7F45 /* ActivationHelper.swift in Sources */,
 				BF5F7BDA26738675002E7F45 /* ECKeyPair.swift in Sources */,
 				BF5F7BDE267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */,
+				BFBEFC28267B55910058DF91 /* MiniPAS+ECIES.swift in Sources */,
 				BF86E6B626395D44004C8AE5 /* PowerAuthCoreTestsWrapper.mm in Sources */,
 				BF86E6B726395D44004C8AE5 /* PowerAuthCorePublicObjectsTests.mm in Sources */,
 			);
@@ -1872,11 +1890,14 @@
 			files = (
 				BFCE7C77267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */,
 				BF5F7B7726710221002E7F45 /* SessionTests.swift in Sources */,
+				BFBEFC31267B597B0058DF91 /* EciesEncryptorTests.swift in Sources */,
+				BFBEFC21267B4D1F0058DF91 /* MiniPAS+Vault.swift in Sources */,
 				BF5F7BE3267398C8002E7F45 /* MiniPASCrypto.swift in Sources */,
 				BF5F7BCF26738330002E7F45 /* MiniPAS.swift in Sources */,
 				BF5F7BE7267A04C8002E7F45 /* ActivationHelper.swift in Sources */,
 				BF5F7BDB26738675002E7F45 /* ECKeyPair.swift in Sources */,
 				BF5F7BDF267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */,
+				BFBEFC29267B55910058DF91 /* MiniPAS+ECIES.swift in Sources */,
 				BF86E6E226395F2C004C8AE5 /* PowerAuthCoreTestsWrapper.mm in Sources */,
 				BF86E6E326395F2C004C8AE5 /* PowerAuthCorePublicObjectsTests.mm in Sources */,
 			);
@@ -1970,11 +1991,14 @@
 			files = (
 				BFCE7C78267A24DF0028B950 /* MiniPAS+Signature.swift in Sources */,
 				BF5F7B7826710221002E7F45 /* SessionTests.swift in Sources */,
+				BFBEFC32267B597B0058DF91 /* EciesEncryptorTests.swift in Sources */,
+				BFBEFC22267B4D1F0058DF91 /* MiniPAS+Vault.swift in Sources */,
 				BF5F7BE4267398C8002E7F45 /* MiniPASCrypto.swift in Sources */,
 				BF5F7BD026738330002E7F45 /* MiniPAS.swift in Sources */,
 				BF5F7BE8267A04C8002E7F45 /* ActivationHelper.swift in Sources */,
 				BF5F7BDC26738675002E7F45 /* ECKeyPair.swift in Sources */,
 				BF5F7BE0267396B6002E7F45 /* MiniPAS+Activation.swift in Sources */,
+				BFBEFC2A267B55910058DF91 /* MiniPAS+ECIES.swift in Sources */,
 				BF8EED2C266E24EA009AC5FD /* PowerAuthCoreTestsWrapper.mm in Sources */,
 				BF8EED2D266E24EA009AC5FD /* PowerAuthCorePublicObjectsTests.mm in Sources */,
 			);

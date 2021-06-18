@@ -95,6 +95,14 @@ extension ECKeyPair.Signing {
 		let signature = try P256.Signing.ECDSASignature(derRepresentation: signature)
 		return publicKey.isValidSignature(signature, for: data)
 	}
+	
+	/// Import public key
+	/// - Parameter publicKeyData: Public key data.
+	/// - Throws: In case of failure
+	/// - Returns: Imported key
+	static func importKey(publicKeyData: Data) throws -> ECKeyPair.Signing.PublicKey {
+		return try P256.Signing.PublicKey(x963Representation: publicKeyData)
+	}
 }
 
 extension ECKeyPair.KeyAgreement {
@@ -127,12 +135,15 @@ extension ECKeyPair.KeyAgreement.PublicKey {
 		guard raw.count >= 32 else {
 			return nil
 		}
-		return raw.subdata(in: Range(raw.startIndex...raw.startIndex.advanced(by: 31)))
+		guard let start = raw.firstIndex(where: { $0 != 0x00 }) else {
+			return nil
+		}
+		let end = raw.startIndex.advanced(by: 31)
+		return raw.subdata(in: Range(start...end))
 	}
 }
 
 extension SharedSecret {
-	
 	/// Raw bytes of shared secret
 	var dataBytes: Data {
 		return withUnsafeBytes { buffer in
@@ -146,5 +157,14 @@ extension Data {
 	/// Hexadecimal representation
 	var hexDescription: String {
 		return reduce("") {$0 + String(format: "%02x", $1)}
+	}
+}
+
+extension SymmetricKey {
+	/// Raw bytes of symmetric key
+	var dataBytes: Data {
+		return withUnsafeBytes { buffer in
+			return Data(bytes: buffer.baseAddress!, count: buffer.count)
+		}
 	}
 }

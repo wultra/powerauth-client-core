@@ -151,6 +151,58 @@ class ActivationHelper {
 		try session.changeUserPassword(old: goodPassword, new: newPassword)
 		goodPassword = newPassword
 	}
+	
+	
+	/// Validate password by computing signature on the server.
+	/// - Parameter password: Password to validate
+	/// - Throws: In case of failure
+	/// - Returns: true if password is valid
+	func validatePassword(password: Password) throws -> Bool {
+		do {
+			let keys = SignatureFactorkKeys(possessionKey: possessionKey, biometryKey: nil, password: password)
+			let clientSignature = try session.signHttpRequest(request: HTTPRequestData(method: "POST", uri: "/password/validate"), keys: keys)
+			let serverSignature = MiniPAS.OnlineSignature(
+				method: "POST",
+				uriId: "/password/validate",
+				body: Data(),
+				signature: clientSignature.signature,
+				version: clientSignature.version,
+				factor: clientSignature.factor,
+				nonce: clientSignature.nonce,
+				activationId: clientSignature.activationId,
+				applicationKey: clientSignature.applicationKey)
+			let result = try server.verify(onlineSignature: serverSignature, activationEntry: &activation)
+			return result == .ok
+		} catch {
+			print("ActivationHelper.validatePassword: Failed: \(error.localizedDescription)")
+			return false
+		}
+	}
+	
+	/// Validate signature factor keys by computing signature on the server.
+	/// - Parameter keys: Signature factors to validate
+	/// - Throws: In case of failure
+	/// - Returns: true if password is valid
+	func validateFactors(keys: SignatureFactorkKeys, for data: Data = Data()) throws -> Bool {
+		do {
+			let clientSignature = try session.signHttpRequest(request: HTTPRequestData(method: "POST", uri: "/validate/keys"), keys: keys)
+			let serverSignature = MiniPAS.OnlineSignature(
+				method: "POST",
+				uriId: "/validate/keys",
+				body: data,
+				signature: clientSignature.signature,
+				version: clientSignature.version,
+				factor: clientSignature.factor,
+				nonce: clientSignature.nonce,
+				activationId: clientSignature.activationId,
+				applicationKey: clientSignature.applicationKey)
+			let result = try server.verify(onlineSignature: serverSignature, activationEntry: &activation)
+			return result == .ok
+		} catch {
+			print("ActivationHelper.validateFactors: Failed: \(error.localizedDescription)")
+			return false
+		}
+	}
 }
 
 extension SignatureFactorkKeys {
@@ -168,5 +220,17 @@ extension SignatureFactorkKeys {
 			components.append("biometry")
 		}
 		return components.joined(separator: "_")
+	}
+}
+
+extension CryptoUtils {
+	
+	/// Return random data with variable length.
+	/// - Parameter minimumLength: Minimum random data length.
+	/// - Throws: In case of failure
+	/// - Returns: Returns random data with variable length
+	static func variableLengthRandomData(from minimumLength: UInt = 13) throws -> Data {
+		let count = UInt(try randomBytes(count: 1)[0]) + minimumLength
+		return try randomBytes(count: count)
 	}
 }
