@@ -17,18 +17,18 @@
 import Foundation
 
 extension MiniPAS {
-	
-	/// Get encrypted vault key from activation entry
-	/// - Parameter activationEntry: Activation entry
-	/// - Throws: In case of failure
-	/// - Returns: Encrypted vault key in Base64 format
-	func getEncryptedVaultKey(activationEntry: ActivationEntry) throws -> String {
-		guard activationEntry.state == .active else {
-			throw PASErrors.invalidActivationState
-		}
-		let transportKey = activationEntry.keys.transportKey
-		let vaultKey = activationEntry.keys.vaultKey
-		let encryptedVaultKey = try MiniPASCrypto.AES_CBC_PKCS7_Encrypt(data: vaultKey, key: transportKey, ivData: MiniPASCrypto.ZERO_IV)
-		return encryptedVaultKey.base64EncodedString()
-	}
+    
+    /// Get encrypted vault key from activation entry
+    /// - Parameter activationEntry: Activation entry
+    /// - Throws: In case of failure
+    /// - Returns: Encrypted vault key in Base64 format
+    func getEncryptedVaultKey(activationEntry: ActivationEntry) throws -> String {
+        guard activationEntry.state == .active else {
+            throw PASErrors.invalidActivationState
+        }
+        let transportKey = activationEntry.keys.transportKey
+        let vaultKey = activationEntry.keys.vaultKey
+        let encryptedVaultKey = try MiniPASCrypto.AES_CBC_PKCS7_Encrypt(data: vaultKey, key: transportKey, ivData: MiniPASCrypto.ZERO_IV)
+        return encryptedVaultKey.base64EncodedString()
+    }
 }

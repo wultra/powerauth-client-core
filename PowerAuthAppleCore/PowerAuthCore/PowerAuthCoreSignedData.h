@@ -20,15 +20,15 @@
  The `SigningDataKey` enumeration defines key type used for signature calculation.
  */
 typedef NS_ENUM(NSInteger, PowerAuthCoreSigningDataKey) {
-	/**
-	 `KEY_SERVER_MASTER_PRIVATE` key was used for signature calculation
-	 */
-	PowerAuthCoreSigningDataKey_ECDSA_MasterServerKey = 0,
-	/**
-	 `KEY_SERVER_PRIVATE` key was used for signature calculation
-	 */
-	PowerAuthCoreSigningDataKey_ECDSA_PersonalizedKey = 1
-	
+    /**
+     `KEY_SERVER_MASTER_PRIVATE` key was used for signature calculation
+     */
+    PowerAuthCoreSigningDataKey_ECDSA_MasterServerKey = 0,
+    /**
+     `KEY_SERVER_PRIVATE` key was used for signature calculation
+     */
+    PowerAuthCoreSigningDataKey_ECDSA_PersonalizedKey = 1
+    
 } NS_SWIFT_NAME(SigningDataKey);
 
 

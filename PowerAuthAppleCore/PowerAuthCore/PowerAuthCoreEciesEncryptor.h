@@ -41,8 +41,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  The initialized instance can be used for both encryption and decryption tasks.
  */
 - (nullable instancetype) initWithPublicKey:(nonnull NSData*)publicKey
-								sharedInfo1:(nullable NSData*)sharedInfo1
-								sharedInfo2:(nullable NSData*)sharedInfo2;
+                                sharedInfo1:(nullable NSData*)sharedInfo1
+                                sharedInfo2:(nullable NSData*)sharedInfo2;
 
 /**
  Returns a new instance of PowerAuthCoreEciesEncryptor, suitable only for data decryption or nil if current encryptor is not
@@ -97,8 +97,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  The DEBUG version of the SDK prints detailed error about the failure reason into the log.
  */
 - (nullable PowerAuthCoreEciesCryptogram *) encryptRequest:(nullable NSData *)data
-													 error:(NSError * _Nullable * _Nullable)error
-									  NS_SWIFT_NAME(encrypt(requestData:));
+                                                     error:(NSError * _Nullable * _Nullable)error
+                                      NS_SWIFT_NAME(encrypt(requestData:));
 
 /**
  Decrypts a |cryptogram| received from the server and returns decrypted data or nil in case of failure.
@@ -106,8 +106,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  The DEBUG version of the SDK prints detailed error about the failure reason into the log.
  */
 - (nullable NSData *) decryptResponse:(nonnull PowerAuthCoreEciesCryptogram *)cryptogram
-								error:(NSError * _Nullable * _Nullable)error
-						 NS_SWIFT_NAME(decrypt(responseData:));
+                                error:(NSError * _Nullable * _Nullable)error
+                         NS_SWIFT_NAME(decrypt(responseData:));
 
 /**
  This is a special, thread-safe version of request encryption. The method encrypts provided data
@@ -121,8 +121,8 @@ NS_SWIFT_NAME(EciesEncryptor)
  Returns YES if encryption succeeded or NO in case of error.
  */
 - (BOOL) encryptRequest:(nullable NSData *)data
-			 completion:(void (NS_NOESCAPE ^_Nonnull)(PowerAuthCoreEciesCryptogram * _Nullable cryptogram, PowerAuthCoreEciesEncryptor * _Nullable decryptor, NSError * _Nullable error))completion
-		   NS_SWIFT_NAME(encrypt(requestData:completion:));
+             completion:(void (NS_NOESCAPE ^_Nonnull)(PowerAuthCoreEciesCryptogram * _Nullable cryptogram, PowerAuthCoreEciesEncryptor * _Nullable decryptor, NSError * _Nullable error))completion
+           NS_SWIFT_NAME(encrypt(requestData:completion:));
 
 
 #pragma mark Associated metadata
@@ -205,7 +205,7 @@ NS_SWIFT_NAME(EciesMetaData)
  Initializes object with required `applicationKey` and with optional `activationIdentifier`
  */
 - (nonnull instancetype) initWithApplicationKey:(nonnull NSString*)applicationKey
-						   activationIdentifier:(nullable NSString*)activationIdentifier;
+                           activationIdentifier:(nullable NSString*)activationIdentifier;
 
 /**
  Contains required application key required for the HTTP header construction.

@@ -32,75 +32,75 @@ POWERAUTH_EXTERN_C NSString * __nonnull const PowerAuthCoreErrorDomain;
  then it's usualy your fault and you're using the session in wrong way.
  */
 typedef NS_ENUM(NSInteger, PowerAuthCoreErrorCode) {
-	/**
-	 PowerAuthErrorCode is not available in NSError object. This
-	 constant is returned when you call `NSError.powerAuthCoreErrorCode`
-	 on objed that has different than `PowerAuthCoreErrorDomain`
-	 */
-	PowerAuthCoreErrorCode_NA				= 0,
-	/**
-	 You have called Session method while session has invalid setup.
-	 */
-	PowerAuthCoreErrorCode_WrongSetup		= 1,
-	/**
-	 You have called method in wrong session's state. Usually that
-	 means that you're using session in a  wrong way. This kind
-	 of error should not be propagated to the UI. It's your
-	 responsibility to handle session states correctly.
-	 */
-	PowerAuthCoreErrorCode_WrongState		= 2,
-	/**
-	 You have called method with wrong or missing parameters.
-	 Usually this error code means that you're using method
-	 in wrong way and you did not provide all required data.
-	 This kind of error should not be propagated to UI. It's
-	 your responsibility to handle all user's inputs
-	 and validate all responses from server before you
-	 ask core for processing.
-	 */
-	PowerAuthCoreErrorCode_WrongParam		= 3,
-	/**
-	 You have provided a wrong activation or recovery code.
-	 You should use ActivationCodeUtil class to vlaidate user
-	 inputs, before you call other PowerAuth functions.
-	 */
-	PowerAuthCoreErrorCode_WrongCode		= 4,
-	/**
-	 The provided digital signature is not valid. This error is also
-	 returned when the digital signature is missing, but it's required.
-	 */
-	PowerAuthCoreErrorCode_WrongSignature	= 5,
-	/**
-	 The provided data is in wrong format. This error code is typically
-	 returned when decoding of important parameter failed. For example,
-	 if BASE64 encoded value is in wrong format.
-	 */
-	PowerAuthCoreErrorCode_WrongData		= 6,
-	/**
-	 The encryption or decryption failed. Whatever that means it's usually
-	 very wrong and the UI response depends on what method did you call.
-	 Typically, you have to perform retry or restart for the whole process.
-	 */
-	PowerAuthCoreErrorCode_Encryption		= 7,
-	/**
-	 The operation requires a signature key that is not available in
-	 session's persistent data. For example, if you request a signature
-	 calculation with biometric factor but the biometry is not configured
-	 in the session.
-	 */
-	PowerAuthCoreErrorCode_MissingRequestedFactor	= 8,
-	/**
-	 The operation has a mandatory set of signature factor keys but you
-	 don't provide some.
-	 */
-	PowerAuthCoreErrorCode_MissingRequiredFactor	= 9,
-	/**
-	 The operation fails on general failure. This type of error is typically
-	 returned when underlying implementation fails. For example, if PRNG
-	 generator could not produce a sequence of bytes.
-	 */
-	PowerAuthCoreErrorCode_GeneralFailure	= 10
-	
+    /**
+     PowerAuthErrorCode is not available in NSError object. This
+     constant is returned when you call `NSError.powerAuthCoreErrorCode`
+     on objed that has different than `PowerAuthCoreErrorDomain`
+     */
+    PowerAuthCoreErrorCode_NA               = 0,
+    /**
+     You have called Session method while session has invalid setup.
+     */
+    PowerAuthCoreErrorCode_WrongSetup       = 1,
+    /**
+     You have called method in wrong session's state. Usually that
+     means that you're using session in a  wrong way. This kind
+     of error should not be propagated to the UI. It's your
+     responsibility to handle session states correctly.
+     */
+    PowerAuthCoreErrorCode_WrongState       = 2,
+    /**
+     You have called method with wrong or missing parameters.
+     Usually this error code means that you're using method
+     in wrong way and you did not provide all required data.
+     This kind of error should not be propagated to UI. It's
+     your responsibility to handle all user's inputs
+     and validate all responses from server before you
+     ask core for processing.
+     */
+    PowerAuthCoreErrorCode_WrongParam       = 3,
+    /**
+     You have provided a wrong activation or recovery code.
+     You should use ActivationCodeUtil class to vlaidate user
+     inputs, before you call other PowerAuth functions.
+     */
+    PowerAuthCoreErrorCode_WrongCode        = 4,
+    /**
+     The provided digital signature is not valid. This error is also
+     returned when the digital signature is missing, but it's required.
+     */
+    PowerAuthCoreErrorCode_WrongSignature   = 5,
+    /**
+     The provided data is in wrong format. This error code is typically
+     returned when decoding of important parameter failed. For example,
+     if BASE64 encoded value is in wrong format.
+     */
+    PowerAuthCoreErrorCode_WrongData        = 6,
+    /**
+     The encryption or decryption failed. Whatever that means it's usually
+     very wrong and the UI response depends on what method did you call.
+     Typically, you have to perform retry or restart for the whole process.
+     */
+    PowerAuthCoreErrorCode_Encryption       = 7,
+    /**
+     The operation requires a signature key that is not available in
+     session's persistent data. For example, if you request a signature
+     calculation with biometric factor but the biometry is not configured
+     in the session.
+     */
+    PowerAuthCoreErrorCode_MissingRequestedFactor   = 8,
+    /**
+     The operation has a mandatory set of signature factor keys but you
+     don't provide some.
+     */
+    PowerAuthCoreErrorCode_MissingRequiredFactor    = 9,
+    /**
+     The operation fails on general failure. This type of error is typically
+     returned when underlying implementation fails. For example, if PRNG
+     generator could not produce a sequence of bytes.
+     */
+    PowerAuthCoreErrorCode_GeneralFailure   = 10
+    
 } NS_SWIFT_NAME(ErrorCode);
 
 @interface NSError (PowerAuthCore)

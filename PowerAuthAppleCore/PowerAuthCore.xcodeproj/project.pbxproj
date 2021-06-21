@@ -841,6 +841,7 @@
 				BFB47D502075347E008A6A52 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		BF3ACC862073DBA500B8107E /* Products */ = {
 			isa = PBXGroup;

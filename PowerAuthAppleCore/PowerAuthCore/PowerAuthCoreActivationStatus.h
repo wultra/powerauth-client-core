@@ -22,32 +22,32 @@
  of the PowerAuthCoreActivationStatus object.
  */
 typedef NS_ENUM(NSInteger, PowerAuthCoreActivationState) {
-	/**
-	 The activation is just created.
-	 */
-	PowerAuthCoreActivationState_Created  = 1,
-	/**
-	 The activation is not completed yet on the server.
-	 */
-	PowerAuthCoreActivationState_PendingCommit = 2,
-	/**
-	 The shared secure context is valid and active.
-	 */
-	PowerAuthCoreActivationState_Active   = 3,
-	/**
-	 The activation is blocked.
-	 */
-	PowerAuthCoreActivationState_Blocked  = 4,
-	/**
-	 The activation doesn't exist anymore.
-	 */
-	PowerAuthCoreActivationState_Removed  = 5,
-	/**
-	 The activation is technically blocked. You cannot use it anymore
-	 for the signature calculations.
-	 */
-	PowerAuthCoreActivationState_Deadlock	= 128,
-	
+    /**
+     The activation is just created.
+     */
+    PowerAuthCoreActivationState_Created  = 1,
+    /**
+     The activation is not completed yet on the server.
+     */
+    PowerAuthCoreActivationState_PendingCommit = 2,
+    /**
+     The shared secure context is valid and active.
+     */
+    PowerAuthCoreActivationState_Active   = 3,
+    /**
+     The activation is blocked.
+     */
+    PowerAuthCoreActivationState_Blocked  = 4,
+    /**
+     The activation doesn't exist anymore.
+     */
+    PowerAuthCoreActivationState_Removed  = 5,
+    /**
+     The activation is technically blocked. You cannot use it anymore
+     for the signature calculations.
+     */
+    PowerAuthCoreActivationState_Deadlock   = 128,
+    
 } NS_SWIFT_NAME(ActivationState);
 
 
@@ -127,8 +127,8 @@ NS_SWIFT_NAME(EncryptedActivationStatus)
 /// @param statusBlob encrypted status data. The Base64 encoded string is expected.
 /// @param nonce nonce returned from the server. 16 bytes encoded to Base64 is expected.
 - (nonnull instancetype) initWithChallenge:(nullable NSString *)challenge
-								statusBlob:(nullable NSString *)statusBlob
-									 nonce:(nullable NSString *)nonce;
+                                statusBlob:(nullable NSString *)statusBlob
+                                     nonce:(nullable NSString *)nonce;
 
 /**
  The challenge value sent to the server. 16 bytes encoded to Base64 is expected.

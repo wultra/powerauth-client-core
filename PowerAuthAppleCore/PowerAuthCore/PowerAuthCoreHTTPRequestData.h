@@ -33,7 +33,7 @@ NS_SWIFT_NAME(HTTPRequestData)
 /// @param method HTTP method ("POST", "GET", "HEAD", "PUT", "DELETE" value is expected).
 /// @param uri URI identifier of the request. This is pre-agreed constant, typically equal to a relative URI.
 - (nonnull instancetype) initWithMethod:(nonnull NSString*)method
-									uri:(nonnull NSString*)uri;
+                                    uri:(nonnull NSString*)uri;
 /**
  HTTP method ("POST", "GET", "HEAD", "PUT", "DELETE" value is expected)
  */

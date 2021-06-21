@@ -18,10 +18,10 @@
 #include <cc7/jni/JniHelper.h>
 
 // Package: com.wultra.android.powerauth.core
-#define CC7_JNI_CLASS_PATH	    	"com/wultra/android/powerauth/core"
-#define CC7_JNI_CLASS_PACKAGE	    com_wultra_android_powerauth_core
-#define CC7_JNI_JAVA_CLASS  		ActivationCodeUtil
-#define CC7_JNI_CPP_CLASS		    OtpUtil
+#define CC7_JNI_CLASS_PATH          "com/wultra/android/powerauth/core"
+#define CC7_JNI_CLASS_PACKAGE       com_wultra_android_powerauth_core
+#define CC7_JNI_JAVA_CLASS          ActivationCodeUtil
+#define CC7_JNI_CPP_CLASS           OtpUtil
 #include <cc7/jni/JniModule.inl>
 
 using namespace com::wultra::powerAuth;
@@ -40,17 +40,17 @@ extern "C" {
 //
 CC7_JNI_METHOD_PARAMS(jobject, parseFromActivationCode, jstring activationCode)
 {
-	std::string cppActivationCode = cc7::jni::CopyFromJavaString(env, activationCode);
-	ActivationCode cppCode;
-	if (false == ActivationCodeUtil::parseActivationCode(cppActivationCode, cppCode)) {
-		return NULL;
-	}
-	// Copy cppResult into java result object
-	jclass  resultClazz  = CC7_JNI_MODULE_FIND_CLASS("ActivationCode");
-	jobject resultObject = cc7::jni::CreateJavaObject(env, CC7_JNI_MODULE_CLASS_PATH("ActivationCode"), "()V");
-	CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "activationCode",	cc7::jni::CopyToJavaString(env, cppCode.activationCode));
-	CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "activationSignature",	cc7::jni::CopyToNullableJavaString(env, cppCode.activationSignature));
-	return resultObject;
+    std::string cppActivationCode = cc7::jni::CopyFromJavaString(env, activationCode);
+    ActivationCode cppCode;
+    if (false == ActivationCodeUtil::parseActivationCode(cppActivationCode, cppCode)) {
+        return NULL;
+    }
+    // Copy cppResult into java result object
+    jclass  resultClazz  = CC7_JNI_MODULE_FIND_CLASS("ActivationCode");
+    jobject resultObject = cc7::jni::CreateJavaObject(env, CC7_JNI_MODULE_CLASS_PATH("ActivationCode"), "()V");
+    CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "activationCode",   cc7::jni::CopyToJavaString(env, cppCode.activationCode));
+    CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "activationSignature",  cc7::jni::CopyToNullableJavaString(env, cppCode.activationSignature));
+    return resultObject;
 }
 
 //
@@ -58,16 +58,16 @@ CC7_JNI_METHOD_PARAMS(jobject, parseFromActivationCode, jstring activationCode)
 //
 CC7_JNI_METHOD_PARAMS(jobject, parseFromRecoveryCode, jstring activationCode)
 {
-	std::string cppActivationCode = cc7::jni::CopyFromJavaString(env, activationCode);
-	ActivationCode cppCode;
-	if (false == ActivationCodeUtil::parseRecoveryCode(cppActivationCode, cppCode)) {
-		return NULL;
-	}
-	// Copy cppResult into java result object
-	jclass  resultClazz  = CC7_JNI_MODULE_FIND_CLASS("ActivationCode");
-	jobject resultObject = cc7::jni::CreateJavaObject(env, CC7_JNI_MODULE_CLASS_PATH("ActivationCode"), "()V");
-	CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "activationCode",	cc7::jni::CopyToJavaString(env, cppCode.activationCode));
-	return resultObject;
+    std::string cppActivationCode = cc7::jni::CopyFromJavaString(env, activationCode);
+    ActivationCode cppCode;
+    if (false == ActivationCodeUtil::parseRecoveryCode(cppActivationCode, cppCode)) {
+        return NULL;
+    }
+    // Copy cppResult into java result object
+    jclass  resultClazz  = CC7_JNI_MODULE_FIND_CLASS("ActivationCode");
+    jobject resultObject = cc7::jni::CreateJavaObject(env, CC7_JNI_MODULE_CLASS_PATH("ActivationCode"), "()V");
+    CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "activationCode",   cc7::jni::CopyToJavaString(env, cppCode.activationCode));
+    return resultObject;
 }
 
 // ----------------------------------------------------------------------------
@@ -79,7 +79,7 @@ CC7_JNI_METHOD_PARAMS(jobject, parseFromRecoveryCode, jstring activationCode)
 //
 CC7_JNI_METHOD_PARAMS(jboolean, validateTypedCharacter, jint utfCodepoint)
 {
-	return (jboolean) ActivationCodeUtil::validateTypedCharacter((cc7::U32) utfCodepoint);
+    return (jboolean) ActivationCodeUtil::validateTypedCharacter((cc7::U32) utfCodepoint);
 }
 
 //
@@ -87,7 +87,7 @@ CC7_JNI_METHOD_PARAMS(jboolean, validateTypedCharacter, jint utfCodepoint)
 //
 CC7_JNI_METHOD_PARAMS(jint, validateAndCorrectTypedCharacter, jint utfCodepoint)
 {
-	return (jint) ActivationCodeUtil::validateAndCorrectTypedCharacter((cc7::U32) utfCodepoint);
+    return (jint) ActivationCodeUtil::validateAndCorrectTypedCharacter((cc7::U32) utfCodepoint);
 }
 
 //
@@ -95,8 +95,8 @@ CC7_JNI_METHOD_PARAMS(jint, validateAndCorrectTypedCharacter, jint utfCodepoint)
 //
 CC7_JNI_METHOD_PARAMS(jboolean, validateActivationCode, jstring activationCode)
 {
-	std::string cppActivationCode = cc7::jni::CopyFromJavaString(env, activationCode);
-	return (jboolean) ActivationCodeUtil::validateActivationCode(cppActivationCode);
+    std::string cppActivationCode = cc7::jni::CopyFromJavaString(env, activationCode);
+    return (jboolean) ActivationCodeUtil::validateActivationCode(cppActivationCode);
 }
 
 //
@@ -104,8 +104,8 @@ CC7_JNI_METHOD_PARAMS(jboolean, validateActivationCode, jstring activationCode)
 //
 CC7_JNI_METHOD_PARAMS(jboolean, validateRecoveryCode, jstring recoveryCode)
 {
-	std::string cppRecoveryCode = cc7::jni::CopyFromJavaString(env, recoveryCode);
-	return (jboolean) ActivationCodeUtil::validateRecoveryCode(cppRecoveryCode);
+    std::string cppRecoveryCode = cc7::jni::CopyFromJavaString(env, recoveryCode);
+    return (jboolean) ActivationCodeUtil::validateRecoveryCode(cppRecoveryCode);
 }
 
 //
@@ -113,8 +113,8 @@ CC7_JNI_METHOD_PARAMS(jboolean, validateRecoveryCode, jstring recoveryCode)
 //
 CC7_JNI_METHOD_PARAMS(jboolean, validateRecoveryPuk, jstring recoveryPuk)
 {
-	std::string cppRecoveryPuk = cc7::jni::CopyFromJavaString(env, recoveryPuk);
-	return (jboolean) ActivationCodeUtil::validateRecoveryPuk(cppRecoveryPuk);
+    std::string cppRecoveryPuk = cc7::jni::CopyFromJavaString(env, recoveryPuk);
+    return (jboolean) ActivationCodeUtil::validateRecoveryPuk(cppRecoveryPuk);
 }
 
 } // extern "C"

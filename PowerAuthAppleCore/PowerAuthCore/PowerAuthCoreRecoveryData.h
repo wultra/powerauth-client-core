@@ -32,7 +32,7 @@ NS_SWIFT_NAME(RecoveryData)
  Initialize object with given recovery code and PUK.
  */
 - (nonnull instancetype)initWithRecoveryCode:(nonnull NSString*)recoveryCode
-										 puk:(nonnull NSString*)puk;
+                                         puk:(nonnull NSString*)puk;
 
 /**
  Contains recovery code.

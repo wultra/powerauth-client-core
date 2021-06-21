@@ -22,51 +22,51 @@ NSString * const PowerAuthCoreErrorDomain = @"PowerAuthCoreErrorDomain";
 
 - (PowerAuthCoreErrorCode) powerAuthCoreErrorCode
 {
-	if ([self.domain isEqualToString:PowerAuthCoreErrorDomain]) {
-		return (PowerAuthCoreErrorCode)self.code;
-	}
-	return PowerAuthCoreErrorCode_NA;
+    if ([self.domain isEqualToString:PowerAuthCoreErrorDomain]) {
+        return (PowerAuthCoreErrorCode)self.code;
+    }
+    return PowerAuthCoreErrorCode_NA;
 }
 
 @end
 
 static NSString * _GetDefaultErrorDescription(PowerAuthCoreErrorCode ec, NSString * message)
 {
-	// Keep original message, if it's already provided.
-	if (message) {
-		return message;
-	}
-	switch (ec) {
-		case PowerAuthCoreErrorCode_WrongSetup:
-			return @"Session has invalid setup";
-		case PowerAuthCoreErrorCode_WrongState:
-			return @"Function called in wrong object state";
-		case PowerAuthCoreErrorCode_WrongCode:
-			return @"Wrong Activation or Recovery code";
-		case PowerAuthCoreErrorCode_WrongData:
-			return @"Invalid input data";
-		case PowerAuthCoreErrorCode_WrongParam:
-			return @"Invalid or empty parameter provided to the function";
-		case PowerAuthCoreErrorCode_Encryption:
-			return @"Data encryption or decryption failed";
-		case PowerAuthCoreErrorCode_WrongSignature:
-			return @"Invalid digital signature";
-		case PowerAuthCoreErrorCode_MissingRequestedFactor:
-			return @"Requested factor is missing in session's data";
-		case PowerAuthCoreErrorCode_MissingRequiredFactor:
-			return @"Mandatory signature factor key is missing.";
-		case PowerAuthCoreErrorCode_GeneralFailure:
-			return @"General failure";
-		default:
-			return nil;
-	}
+    // Keep original message, if it's already provided.
+    if (message) {
+        return message;
+    }
+    switch (ec) {
+        case PowerAuthCoreErrorCode_WrongSetup:
+            return @"Session has invalid setup";
+        case PowerAuthCoreErrorCode_WrongState:
+            return @"Function called in wrong object state";
+        case PowerAuthCoreErrorCode_WrongCode:
+            return @"Wrong Activation or Recovery code";
+        case PowerAuthCoreErrorCode_WrongData:
+            return @"Invalid input data";
+        case PowerAuthCoreErrorCode_WrongParam:
+            return @"Invalid or empty parameter provided to the function";
+        case PowerAuthCoreErrorCode_Encryption:
+            return @"Data encryption or decryption failed";
+        case PowerAuthCoreErrorCode_WrongSignature:
+            return @"Invalid digital signature";
+        case PowerAuthCoreErrorCode_MissingRequestedFactor:
+            return @"Requested factor is missing in session's data";
+        case PowerAuthCoreErrorCode_MissingRequiredFactor:
+            return @"Mandatory signature factor key is missing.";
+        case PowerAuthCoreErrorCode_GeneralFailure:
+            return @"General failure";
+        default:
+            return nil;
+    }
 }
 
 NSError * PowerAuthCoreMakeError(PowerAuthCoreErrorCode ec, NSString * message)
 {
-	if (ec == PowerAuthCoreErrorCode_NA) {
-		return nil;
-	}
-	NSDictionary * info = @{ NSLocalizedDescriptionKey: _GetDefaultErrorDescription(ec, message)};
-	return [NSError errorWithDomain:PowerAuthCoreErrorDomain code:ec userInfo:info];
+    if (ec == PowerAuthCoreErrorCode_NA) {
+        return nil;
+    }
+    NSDictionary * info = @{ NSLocalizedDescriptionKey: _GetDefaultErrorDescription(ec, message)};
+    return [NSError errorWithDomain:PowerAuthCoreErrorDomain code:ec userInfo:info];
 }

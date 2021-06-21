@@ -21,19 +21,19 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreSignedData
 {
-	SignedData _signedData;
+    SignedData _signedData;
 }
 
 // Signing key
 
 - (PowerAuthCoreSigningDataKey) signingDataKey
 {
-	return static_cast<PowerAuthCoreSigningDataKey>(_signedData.signingKey);
+    return static_cast<PowerAuthCoreSigningDataKey>(_signedData.signingKey);
 }
 
 - (void) setSigningDataKey:(PowerAuthCoreSigningDataKey)signingDataKey
 {
-	_signedData.signingKey = static_cast<SignedData::SigningKey>(signingDataKey);
+    _signedData.signingKey = static_cast<SignedData::SigningKey>(signingDataKey);
 }
 
 
@@ -41,44 +41,44 @@ using namespace com::wultra::powerAuth;
 
 - (NSData*) data
 {
-	return cc7::objc::CopyToNSData(_signedData.data);
+    return cc7::objc::CopyToNSData(_signedData.data);
 }
 
 - (void) setData:(NSData *)data
 {
-	_signedData.data = cc7::objc::CopyFromNSData(data);
+    _signedData.data = cc7::objc::CopyFromNSData(data);
 }
 
 - (NSData*) signature
 {
-	return cc7::objc::CopyToNSData(_signedData.signature);
+    return cc7::objc::CopyToNSData(_signedData.signature);
 }
 
 - (void) setSignature:(NSData *)signature
 {
-	_signedData.signature = cc7::objc::CopyFromNSData(signature);
+    _signedData.signature = cc7::objc::CopyFromNSData(signature);
 }
 
 // Base64 setters and getters
 
 - (NSString*) dataBase64
 {
-	return cc7::objc::CopyToNSString(_signedData.data.base64String());
+    return cc7::objc::CopyToNSString(_signedData.data.base64String());
 }
 
 - (void) setDataBase64:(NSString *)dataBase64
 {
-	_signedData.data.readFromBase64String(cc7::objc::CopyFromNSString(dataBase64));
+    _signedData.data.readFromBase64String(cc7::objc::CopyFromNSString(dataBase64));
 }
 
 - (NSString*) signatureBase64
 {
-	return cc7::objc::CopyToNSString(_signedData.signature.base64String());
+    return cc7::objc::CopyToNSString(_signedData.signature.base64String());
 }
 
 - (void) setSignatureBase64:(NSString *)signatureBase64
 {
-	_signedData.signature.readFromBase64String(cc7::objc::CopyFromNSString(signatureBase64));
+    _signedData.signature.readFromBase64String(cc7::objc::CopyFromNSString(signatureBase64));
 }
 
 @end
@@ -87,16 +87,16 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithStruct:(const com::wultra::powerAuth::SignedData &)structRef
 {
-	self = [super init];
-	if (self) {
-		_signedData = structRef;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _signedData = structRef;
+    }
+    return self;
 }
 
 - (const SignedData&) structRef
 {
-	return _signedData;
+    return _signedData;
 }
 
 @end

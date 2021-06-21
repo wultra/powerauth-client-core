@@ -23,19 +23,19 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithActivationCode:(PowerAuthCoreActivationCode *)activationCode
 {
-	self = [super init];
-	if (self) {
-		_activationCode = activationCode;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _activationCode = activationCode;
+    }
+    return self;
 }
 
 - (ActivationStep1Param) activationData
 {
-	ActivationStep1Param data;
-	data.activationCode 		= cc7::objc::CopyFromNSString(_activationCode.activationCode);
-	data.activationSignature	= cc7::objc::CopyFromNSString(_activationCode.activationSignature);
-	return data;
+    ActivationStep1Param data;
+    data.activationCode         = cc7::objc::CopyFromNSString(_activationCode.activationCode);
+    data.activationSignature    = cc7::objc::CopyFromNSString(_activationCode.activationSignature);
+    return data;
 }
 
 @end
@@ -45,11 +45,11 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithStruct:(const ActivationStep1Result &)structRef
 {
-	self = [super init];
-	if (self) {
-		_devicePublicKey = cc7::objc::CopyToNSString(structRef.devicePublicKey);
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _devicePublicKey = cc7::objc::CopyToNSString(structRef.devicePublicKey);
+    }
+    return self;
 }
 
 @end

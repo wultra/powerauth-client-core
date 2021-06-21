@@ -21,49 +21,49 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreSessionSetup
 {
-	SessionSetup _sessionSetup;
+    SessionSetup _sessionSetup;
 }
 
 - (nonnull instancetype) initWithApplicationKey:(nonnull NSString*)applicationKey
-							  applicationSecret:(nonnull NSString*)applicationSecret
-						  masterServerPublicKey:(nonnull NSString*)masterServerPublicKey
-							  sessionIdentifier:(UInt32)sessionIdentifier
-						  externalEncryptionKey:(nullable NSData*)externalEncryptionKey
+                              applicationSecret:(nonnull NSString*)applicationSecret
+                          masterServerPublicKey:(nonnull NSString*)masterServerPublicKey
+                              sessionIdentifier:(UInt32)sessionIdentifier
+                          externalEncryptionKey:(nullable NSData*)externalEncryptionKey
 {
-	self = [super init];
-	if (self) {
-		_sessionSetup.applicationKey		= cc7::objc::CopyFromNSString(applicationKey);
-		_sessionSetup.applicationSecret		= cc7::objc::CopyFromNSString(applicationSecret);
-		_sessionSetup.masterServerPublicKey	= cc7::objc::CopyFromNSString(masterServerPublicKey);
-		_sessionSetup.sessionIdentifier		= sessionIdentifier;
-		_sessionSetup.externalEncryptionKey	= cc7::objc::CopyFromNSData(externalEncryptionKey);
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _sessionSetup.applicationKey        = cc7::objc::CopyFromNSString(applicationKey);
+        _sessionSetup.applicationSecret     = cc7::objc::CopyFromNSString(applicationSecret);
+        _sessionSetup.masterServerPublicKey = cc7::objc::CopyFromNSString(masterServerPublicKey);
+        _sessionSetup.sessionIdentifier     = sessionIdentifier;
+        _sessionSetup.externalEncryptionKey = cc7::objc::CopyFromNSData(externalEncryptionKey);
+    }
+    return self;
 }
 
 - (NSString*) applicationKey
 {
-	return cc7::objc::CopyToNSString(_sessionSetup.applicationKey);
+    return cc7::objc::CopyToNSString(_sessionSetup.applicationKey);
 }
 
 - (NSString*) applicationSecret
 {
-	return cc7::objc::CopyToNSString(_sessionSetup.applicationSecret);
+    return cc7::objc::CopyToNSString(_sessionSetup.applicationSecret);
 }
 
 - (NSString*) masterServerPublicKey
 {
-	return cc7::objc::CopyToNSString(_sessionSetup.masterServerPublicKey);
+    return cc7::objc::CopyToNSString(_sessionSetup.masterServerPublicKey);
 }
 
 - (UInt32) sessionIdentifier
 {
-	return _sessionSetup.sessionIdentifier;
+    return _sessionSetup.sessionIdentifier;
 }
 
 - (NSData*) externalEncryptionKey
 {
-	return cc7::objc::CopyToNullableNSData(_sessionSetup.externalEncryptionKey);
+    return cc7::objc::CopyToNullableNSData(_sessionSetup.externalEncryptionKey);
 }
 
 @end
@@ -73,16 +73,16 @@ using namespace com::wultra::powerAuth;
 
 - (nonnull instancetype) initWithStruct:(const SessionSetup &)structRef
 {
-	self = [super init];
-	if (self) {
-		_sessionSetup = structRef;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _sessionSetup = structRef;
+    }
+    return self;
 }
 
 - (const SessionSetup &) structRef
 {
-	return _sessionSetup;
+    return _sessionSetup;
 }
 
 @end

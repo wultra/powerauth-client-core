@@ -19,9 +19,9 @@
 
 BOOL PowerAuthCoreHasDebugFeatures()
 {
-	BOOL debug_features = com::wultra::powerAuth::HasDebugFeaturesTurnedOn();
+    BOOL debug_features = com::wultra::powerAuth::HasDebugFeaturesTurnedOn();
 #if defined(ENABLE_POWERAUTH_CORE_LOG) || defined(DEBUG)
-	debug_features |= YES;
+    debug_features |= YES;
 #endif
-	return debug_features;
+    return debug_features;
 }
