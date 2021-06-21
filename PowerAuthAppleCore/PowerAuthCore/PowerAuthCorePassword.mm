@@ -24,68 +24,68 @@ using namespace com::wultra::powerAuth;
 @implementation PowerAuthCorePassword
 {
 @protected
-	Password _password;
+    Password _password;
 }
 
 - (instancetype) init
 {
-	return [self initEmptyAsMutable:NO];
+    return [self initEmptyAsMutable:NO];
 }
 
 - (instancetype) initEmptyAsMutable:(BOOL)asMutable
 {
-	self = [super init];
-	if (self) {
-		if (asMutable) {
-			_password.initAsMutable();
-		} else {
-			_password.initAsImmutable(cc7::ByteRange());
-		}
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        if (asMutable) {
+            _password.initAsMutable();
+        } else {
+            _password.initAsImmutable(cc7::ByteRange());
+        }
+    }
+    return self;
 }
 
 + (instancetype) passwordWithString:(NSString *)string
 {
-	PowerAuthCorePassword * pass = [[PowerAuthCorePassword alloc] init];
-	if (pass) {
-		pass->_password.initAsImmutable(cc7::MakeRange(string.UTF8String));
-	}
-	return pass;
+    PowerAuthCorePassword * pass = [[PowerAuthCorePassword alloc] init];
+    if (pass) {
+        pass->_password.initAsImmutable(cc7::MakeRange(string.UTF8String));
+    }
+    return pass;
 }
 
 + (instancetype) passwordWithData:(NSData *)data
 {
-	PowerAuthCorePassword * pass = [[PowerAuthCorePassword alloc] init];
-	if (pass) {
-		pass->_password.initAsImmutable(cc7::ByteRange(data.bytes, data.length));
-	}
-	return pass;
+    PowerAuthCorePassword * pass = [[PowerAuthCorePassword alloc] init];
+    if (pass) {
+        pass->_password.initAsImmutable(cc7::ByteRange(data.bytes, data.length));
+    }
+    return pass;
 }
 
 - (NSUInteger) length
 {
-	return _password.length();
+    return _password.length();
 }
 
 - (BOOL) isEqualToPassword:(PowerAuthCorePassword *)password
 {
-	if (self == password) {
-		return YES;
-	} else if (!password) {
-		return NO;
-	}
-	return _password.isEqualToPassword(password->_password);
+    if (self == password) {
+        return YES;
+    } else if (!password) {
+        return NO;
+    }
+    return _password.isEqualToPassword(password->_password);
 }
 
 - (BOOL) validatePasswordComplexity:(BOOL (NS_NOESCAPE ^)(const UInt8* passphrase, NSUInteger length))validationBlock
 {
-	BOOL result = NO;
-	const cc7::byte * plaintext_bytes = _password.passwordData().data();
-	if (validationBlock && plaintext_bytes) {
-		result = validationBlock(plaintext_bytes, _password.passwordData().size());
-	}
-	return result;
+    BOOL result = NO;
+    const cc7::byte * plaintext_bytes = _password.passwordData().data();
+    if (validationBlock && plaintext_bytes) {
+        result = validationBlock(plaintext_bytes, _password.passwordData().size());
+    }
+    return result;
 }
 
 @end
@@ -97,16 +97,16 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithStruct:(const cc7::ByteRange &)structRef
 {
-	self = [super init];
-	if (self) {
-		_password.initAsImmutable(structRef);
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _password.initAsImmutable(structRef);
+    }
+    return self;
 }
 
 - (const Password &) structRef
 {
-	return _password;
+    return _password;
 }
 
 @end
@@ -118,37 +118,37 @@ using namespace com::wultra::powerAuth;
 
 - (id) init
 {
-	return [super initEmptyAsMutable:YES];
+    return [super initEmptyAsMutable:YES];
 }
 
 + (instancetype) mutablePassword
 {
-	return [[self alloc] initEmptyAsMutable:YES];
+    return [[self alloc] initEmptyAsMutable:YES];
 }
 
 - (void) clear
 {
-	_password.clear();
+    _password.clear();
 }
 
 - (BOOL) addCharacter:(UInt32)character
 {
-	return _password.addCharacter(character);
+    return _password.addCharacter(character);
 }
 
 - (BOOL) insertCharacter:(UInt32)character atIndex:(NSUInteger)index
 {
-	return _password.insertCharacter(character, index);
+    return _password.insertCharacter(character, index);
 }
 
 - (BOOL) removeLastCharacter
 {
-	return _password.removeLastCharacter();
+    return _password.removeLastCharacter();
 }
 
 - (BOOL) removeCharacterAtIndex:(NSUInteger)index
 {
-	return _password.removeCharacter(index);
+    return _password.removeCharacter(index);
 }
 
 @end

@@ -34,44 +34,44 @@ NS_SWIFT_NAME(CryptoUtils)
  Validates ECDSA signature for given data and EC public key.
  */
 + (BOOL) ecdsaValidateSignature:(nonnull NSData*)signature
-						forData:(nonnull NSData*)data
-				   forPublicKey:(nonnull PowerAuthCoreECPublicKey*)publicKey
-						  error:(NSError * _Nullable * _Nullable)error
-				   NS_SWIFT_NAME(ecdsaValidateSignature(signature:for:publicKey:));
+                        forData:(nonnull NSData*)data
+                   forPublicKey:(nonnull PowerAuthCoreECPublicKey*)publicKey
+                          error:(NSError * _Nullable * _Nullable)error
+                   NS_SWIFT_NAME(ecdsaValidateSignature(signature:for:publicKey:));
 
 /**
  Computes SHA-256 from given data.
  */
 + (nullable NSData*) hashSha256:(nonnull NSData*)data
-						  error:(NSError * _Nullable * _Nullable)error
-				   NS_SWIFT_NAME(hashSha256(data:));
+                          error:(NSError * _Nullable * _Nullable)error
+                   NS_SWIFT_NAME(hashSha256(data:));
 
 /**
  Computes HMAC-SHA-256 for given data and key. Returns nil in case that underlying
  implementation fail.
  */
 + (nullable NSData*) hmacSha256:(nonnull NSData*)data
-						   key:(nonnull NSData*)key
-						 error:(NSError * _Nullable * _Nullable)error
-				  NS_SWIFT_NAME(hmacSha256(data:key:));
+                           key:(nonnull NSData*)key
+                         error:(NSError * _Nullable * _Nullable)error
+                  NS_SWIFT_NAME(hmacSha256(data:key:));
 
 /**
  Computes HMAC-SHA-256 with requested length for given data and key. Returns nil in
  case that underlying implementation fail.
  */
 + (nullable NSData*) hmacSha256:(nonnull NSData*)data
-							key:(nonnull NSData*)key
-						 length:(NSUInteger)length
-						  error:(NSError * _Nullable * _Nullable)error
-				   NS_SWIFT_NAME(hmacSha256(data:key:length:));
+                            key:(nonnull NSData*)key
+                         length:(NSUInteger)length
+                          error:(NSError * _Nullable * _Nullable)error
+                   NS_SWIFT_NAME(hmacSha256(data:key:length:));
 
 /**
  Generates a required amount of random bytes. Returns nil in case that 
  underlying random generator is broken.
  */
 + (nullable NSData*) randomBytes:(NSUInteger)count
-						   error:(NSError * _Nullable * _Nullable)error
-					NS_SWIFT_NAME(randomBytes(count:));
+                           error:(NSError * _Nullable * _Nullable)error
+                    NS_SWIFT_NAME(randomBytes(count:));
 
 @end
 

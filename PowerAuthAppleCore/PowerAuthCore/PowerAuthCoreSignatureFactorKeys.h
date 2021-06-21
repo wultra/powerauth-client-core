@@ -38,8 +38,8 @@ NS_SWIFT_NAME(SignatureFactorkKeys)
 /// @param biometryKey Key-encryption-key that protects biometry factor.
 /// @param password User's password that protects knowledge factor.
 - (nonnull instancetype) initWithPossessionKey:(nonnull NSData*)possessionKey
-								   biometryKey:(nullable NSData*)biometryKey
-									  password:(nullable PowerAuthCorePassword*)password;
+                                   biometryKey:(nullable NSData*)biometryKey
+                                      password:(nullable PowerAuthCorePassword*)password;
 
 /**
  The key-encryption-key required for signatures with "possession" factor.

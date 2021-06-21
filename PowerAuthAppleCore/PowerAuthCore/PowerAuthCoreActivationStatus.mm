@@ -23,77 +23,77 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreActivationStatus
 {
-	ActivationStatus _status;
+    ActivationStatus _status;
 }
 
 - (PowerAuthCoreActivationState) state
 {
-	return static_cast<PowerAuthCoreActivationState>(_status.state);
+    return static_cast<PowerAuthCoreActivationState>(_status.state);
 }
 
 - (UInt32) failCount
 {
-	return _status.failCount;
+    return _status.failCount;
 }
 
 - (UInt32) maxFailCount
 {
-	return _status.maxFailCount;
+    return _status.maxFailCount;
 }
 
 - (UInt32) remainingAttempts
 {
-	if (_status.state == ActivationStatus::Active) {
-		if (_status.maxFailCount >= _status.failCount) {
-			return _status.maxFailCount - _status.failCount;
-		}
-	}
-	return 0;
+    if (_status.state == ActivationStatus::Active) {
+        if (_status.maxFailCount >= _status.failCount) {
+            return _status.maxFailCount - _status.failCount;
+        }
+    }
+    return 0;
 }
 
 - (NSString*) description
 {
-	NSString * status_str;
-	switch (_status.state) {
-		case ActivationStatus::Created:			status_str = @"CREATED"; break;
-		case ActivationStatus::PendingCommit:	status_str = @"PENDING_COMMIT"; break;
-		case ActivationStatus::Active:			status_str = @"ACTIVE"; break;
-		case ActivationStatus::Blocked:			status_str = @"BLOCKED"; break;
-		case ActivationStatus::Removed:			status_str = @"REMOVED"; break;
-		case ActivationStatus::Deadlock:		status_str = @"DEADLOCK"; break;
-		default:
-			status_str = @"<<unknown>>"; break;
-			
-	}
-	bool upgrade = _status.isProtocolUpgradeAvailable();
-	return [NSString stringWithFormat:@"<PowerAuthCoreActivationStatus %@, fails %@/%@%@>", status_str, @(_status.failCount), @(_status.maxFailCount), upgrade ? @", upgrade" : @""];
+    NSString * status_str;
+    switch (_status.state) {
+        case ActivationStatus::Created:         status_str = @"CREATED"; break;
+        case ActivationStatus::PendingCommit:   status_str = @"PENDING_COMMIT"; break;
+        case ActivationStatus::Active:          status_str = @"ACTIVE"; break;
+        case ActivationStatus::Blocked:         status_str = @"BLOCKED"; break;
+        case ActivationStatus::Removed:         status_str = @"REMOVED"; break;
+        case ActivationStatus::Deadlock:        status_str = @"DEADLOCK"; break;
+        default:
+            status_str = @"<<unknown>>"; break;
+            
+    }
+    bool upgrade = _status.isProtocolUpgradeAvailable();
+    return [NSString stringWithFormat:@"<PowerAuthCoreActivationStatus %@, fails %@/%@%@>", status_str, @(_status.failCount), @(_status.maxFailCount), upgrade ? @", upgrade" : @""];
 }
 
 // Private
 
 - (UInt8) currentActivationVersion
 {
-	return _status.currentVersion;
+    return _status.currentVersion;
 }
 
 - (UInt8) upgradeActivationVersion
 {
-	return _status.upgradeVersion;
+    return _status.upgradeVersion;
 }
 
 - (BOOL) isProtocolUpgradeAvailable
 {
-	return _status.isProtocolUpgradeAvailable();
+    return _status.isProtocolUpgradeAvailable();
 }
 
 - (BOOL) isSignatureCalculationRecommended
 {
-	return _status.isSignatureCalculationRecommended();
+    return _status.isSignatureCalculationRecommended();
 }
 
 - (BOOL) needsSerializeSessionState
 {
-	return _status.needsSerializeSessionState();
+    return _status.needsSerializeSessionState();
 }
 
 @end
@@ -102,11 +102,11 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithStruct:(const com::wultra::powerAuth::ActivationStatus&)structRef
 {
-	self = [super init];
-	if (self) {
-		_status = structRef;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _status = structRef;
+    }
+    return self;
 }
 
 @end
@@ -116,16 +116,16 @@ using namespace com::wultra::powerAuth;
 @implementation PowerAuthCoreEncryptedActivationStatus
 
 - (instancetype) initWithChallenge:(NSString *)challenge
-						statusBlob:(NSString *)statusBlob
-							 nonce:(NSString *)nonce
+                        statusBlob:(NSString *)statusBlob
+                             nonce:(NSString *)nonce
 {
-	self = [super init];
-	if (self) {
-		_challenge = challenge;
-		_encryptedStatusBlob = statusBlob;
-		_nonce = nonce;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _challenge = challenge;
+        _encryptedStatusBlob = statusBlob;
+        _nonce = nonce;
+    }
+    return self;
 }
 
 @end
@@ -134,11 +134,11 @@ using namespace com::wultra::powerAuth;
 
 - (EncryptedActivationStatus) statusData
 {
-	EncryptedActivationStatus sd;
-	sd.challenge 			= cc7::objc::CopyFromNSString(_challenge);
-	sd.encryptedStatusBlob 	= cc7::objc::CopyFromNSString(_encryptedStatusBlob);
-	sd.nonce 				= cc7::objc::CopyFromNSString(_nonce);
-	return sd;
+    EncryptedActivationStatus sd;
+    sd.challenge            = cc7::objc::CopyFromNSString(_challenge);
+    sd.encryptedStatusBlob  = cc7::objc::CopyFromNSString(_encryptedStatusBlob);
+    sd.nonce                = cc7::objc::CopyFromNSString(_nonce);
+    return sd;
 }
 
 @end

@@ -22,14 +22,14 @@ using namespace com::wultra::powerAuth;
 @implementation PowerAuthCoreHTTPRequestData
 
 - (nonnull instancetype) initWithMethod:(nonnull NSString*)method
-									uri:(nonnull NSString*)uri
+                                    uri:(nonnull NSString*)uri
 {
-	self = [super init];
-	if (self) {
-		_method = method;
-		_uri = uri;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _method = method;
+        _uri = uri;
+    }
+    return self;
 }
 
 @end
@@ -38,12 +38,12 @@ using namespace com::wultra::powerAuth;
 
 - (HTTPRequestData) requestData
 {
-	HTTPRequestData rd;
-	rd.method		= cc7::objc::CopyFromNSString(_method);
-	rd.uri			= cc7::objc::CopyFromNSString(_uri);
-	rd.body			= cc7::objc::CopyFromNSData(_body);
-	rd.offlineNonce	= cc7::objc::CopyFromNSString(_offlineNonce);
-	return rd;
+    HTTPRequestData rd;
+    rd.method       = cc7::objc::CopyFromNSString(_method);
+    rd.uri          = cc7::objc::CopyFromNSString(_uri);
+    rd.body         = cc7::objc::CopyFromNSData(_body);
+    rd.offlineNonce = cc7::objc::CopyFromNSString(_offlineNonce);
+    return rd;
 }
 
 @end

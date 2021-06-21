@@ -26,19 +26,19 @@
  to V2 servers with V3 SDK.
  */
 typedef NS_ENUM(NSInteger, PowerAuthCoreProtocolVersion) {
-	/**
-	 Protocol version is not specified, or cannot be determined.
-	 */
-	PowerAuthCoreProtocolVersion_NA = 0,
-	/**
-	 Protocol version 2
-	 */
-	PowerAuthCoreProtocolVersion_V2 = 2,
-	/**
-	 Protocol version 3
-	 */
-	PowerAuthCoreProtocolVersion_V3 = 3
-	
+    /**
+     Protocol version is not specified, or cannot be determined.
+     */
+    PowerAuthCoreProtocolVersion_NA = 0,
+    /**
+     Protocol version 2
+     */
+    PowerAuthCoreProtocolVersion_V2 = 2,
+    /**
+     Protocol version 3
+     */
+    PowerAuthCoreProtocolVersion_V3 = 3
+    
 } NS_SWIFT_NAME(ProtocolVersion);
 
 /**
@@ -46,15 +46,15 @@ typedef NS_ENUM(NSInteger, PowerAuthCoreProtocolVersion) {
  in `PowerAuthCoreSession.getEciesEncryptor()` method.
  */
 typedef NS_ENUM(NSInteger, PowerAuthCoreEciesEncryptorScope) {
-	/**
-	 An application scope means that encryptor can be constructed also when
-	 the session has no valid activation.
-	 */
-	PowerAuthCoreEciesEncryptorScope_Application  = 0,
-	/**
-	 An activation scope means that the encryptor can be constructed only when
-	 the session has a valid activation.
-	 */
-	PowerAuthCoreEciesEncryptorScope_Activation  = 1
-	
+    /**
+     An application scope means that encryptor can be constructed also when
+     the session has no valid activation.
+     */
+    PowerAuthCoreEciesEncryptorScope_Application  = 0,
+    /**
+     An activation scope means that the encryptor can be constructed only when
+     the session has a valid activation.
+     */
+    PowerAuthCoreEciesEncryptorScope_Activation  = 1
+    
 } NS_SWIFT_NAME(EciesEncryptorScope);

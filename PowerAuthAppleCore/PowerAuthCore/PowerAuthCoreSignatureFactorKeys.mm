@@ -21,41 +21,41 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreSignatureFactorKeys
 {
-	SignatureUnlockKeys _keys;
+    SignatureUnlockKeys _keys;
 }
 
 - (instancetype) initWithPossessionKey:(NSData*)possessionKey
-						   biometryKey:(NSData*)biometryKey
-							  password:(PowerAuthCorePassword*)password
+                           biometryKey:(NSData*)biometryKey
+                              password:(PowerAuthCorePassword*)password
 {
-	self = [super init];
-	if (self) {
-		_keys.possessionUnlockKey	= cc7::objc::CopyFromNSData(possessionKey);
-		_keys.biometryUnlockKey		= cc7::objc::CopyFromNSData(biometryKey);
-		if (password) {
-			_keys.userPassword		= password.structRef.passwordData();
-		}
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _keys.possessionUnlockKey   = cc7::objc::CopyFromNSData(possessionKey);
+        _keys.biometryUnlockKey     = cc7::objc::CopyFromNSData(biometryKey);
+        if (password) {
+            _keys.userPassword      = password.structRef.passwordData();
+        }
+    }
+    return self;
 }
 
 - (NSData*) possessionKey
 {
-	return cc7::objc::CopyToNSData(_keys.possessionUnlockKey);
+    return cc7::objc::CopyToNSData(_keys.possessionUnlockKey);
 }
 
 - (NSData*) biometryKey
 {
-	return cc7::objc::CopyToNullableNSData(_keys.biometryUnlockKey);
+    return cc7::objc::CopyToNullableNSData(_keys.biometryUnlockKey);
 }
 
 - (PowerAuthCorePassword*) password
 {
-	if (!_keys.userPassword.empty()) {
-		return [[PowerAuthCorePassword alloc] initWithStruct:_keys.userPassword];
-	} else {
-		return nil;
-	}
+    if (!_keys.userPassword.empty()) {
+        return [[PowerAuthCorePassword alloc] initWithStruct:_keys.userPassword];
+    } else {
+        return nil;
+    }
 }
 
 @end
@@ -64,22 +64,22 @@ using namespace com::wultra::powerAuth;
 
 - (const SignatureUnlockKeys &) structRef
 {
-	return _keys;
+    return _keys;
 }
 
 - (SignatureFactor) signatureFactor
 {
-	SignatureFactor factor = 0;
-	if (!_keys.possessionUnlockKey.empty()) {
-		factor |= SF_Possession;
-	}
-	if (!_keys.biometryUnlockKey.empty()) {
-		factor |= SF_Biometry;
-	}
-	if (!_keys.userPassword.empty()) {
-		factor |= SF_Knowledge;
-	}
-	return factor;
+    SignatureFactor factor = 0;
+    if (!_keys.possessionUnlockKey.empty()) {
+        factor |= SF_Possession;
+    }
+    if (!_keys.biometryUnlockKey.empty()) {
+        factor |= SF_Biometry;
+    }
+    if (!_keys.userPassword.empty()) {
+        factor |= SF_Knowledge;
+    }
+    return factor;
 }
 
 @end

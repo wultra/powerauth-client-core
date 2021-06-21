@@ -29,7 +29,7 @@
 
 - (void) setupStructure:(com::wultra::powerAuth::ProtocolUpgradeData &)ref
 {
-	ref.toV3.ctrData = cc7::objc::CopyFromNSString(_ctrData);
+    ref.toV3.ctrData = cc7::objc::CopyFromNSString(_ctrData);
 }
 
 @end

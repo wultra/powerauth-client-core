@@ -23,47 +23,47 @@ using namespace com::wultra::powerAuth;
 
 + (BOOL) validateTypedCharacter:(UInt32)character
 {
-	return ActivationCodeUtil::validateTypedCharacter(character);
+    return ActivationCodeUtil::validateTypedCharacter(character);
 }
 
 + (UInt32) validateAndCorrectTypedCharacter:(UInt32)character
 {
-	return ActivationCodeUtil::validateAndCorrectTypedCharacter(character);
+    return ActivationCodeUtil::validateAndCorrectTypedCharacter(character);
 }
 
 + (BOOL) validateActivationCode:(NSString*)activationCode
 {
-	return ActivationCodeUtil::validateActivationCode(cc7::objc::CopyFromNSString(activationCode));
+    return ActivationCodeUtil::validateActivationCode(cc7::objc::CopyFromNSString(activationCode));
 }
 
 + (BOOL) validateRecoveryCode:(nonnull NSString*)recoveryCode
 {
-	return ActivationCodeUtil::validateRecoveryCode(cc7::objc::CopyFromNSString(recoveryCode));
+    return ActivationCodeUtil::validateRecoveryCode(cc7::objc::CopyFromNSString(recoveryCode));
 }
 
 + (BOOL) validateRecoveryPuk:(nonnull NSString*)recoveryPuk
 {
-	return ActivationCodeUtil::validateRecoveryPuk(cc7::objc::CopyFromNSString(recoveryPuk));
+    return ActivationCodeUtil::validateRecoveryPuk(cc7::objc::CopyFromNSString(recoveryPuk));
 }
 
 + (PowerAuthCoreActivationCode*) parseFromActivationCode:(NSString*)activationCode
 {
-	auto cppActivationCode = cc7::objc::CopyFromNSString(activationCode);
-	ActivationCode cppCode;
-	if (ActivationCodeUtil::parseActivationCode(cppActivationCode, cppCode)) {
-		return [[PowerAuthCoreActivationCode alloc] initWithStruct:cppCode];
-	}
-	return nil;
+    auto cppActivationCode = cc7::objc::CopyFromNSString(activationCode);
+    ActivationCode cppCode;
+    if (ActivationCodeUtil::parseActivationCode(cppActivationCode, cppCode)) {
+        return [[PowerAuthCoreActivationCode alloc] initWithStruct:cppCode];
+    }
+    return nil;
 }
 
 + (PowerAuthCoreActivationCode*) parseFromRecoveryCode:(NSString *)recoveryCode
 {
-	auto cppRecoveryCode = cc7::objc::CopyFromNSString(recoveryCode);
-	ActivationCode cppCode;
-	if (ActivationCodeUtil::parseRecoveryCode(cppRecoveryCode, cppCode)) {
-		return [[PowerAuthCoreActivationCode alloc] initWithStruct:cppCode];
-	}
-	return nil;
+    auto cppRecoveryCode = cc7::objc::CopyFromNSString(recoveryCode);
+    ActivationCode cppCode;
+    if (ActivationCodeUtil::parseRecoveryCode(cppRecoveryCode, cppCode)) {
+        return [[PowerAuthCoreActivationCode alloc] initWithStruct:cppCode];
+    }
+    return nil;
 }
 
 @end

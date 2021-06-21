@@ -24,14 +24,14 @@
 POWERAUTH_EXTERN_C NSError * _Nullable PowerAuthCoreMakeError(PowerAuthCoreErrorCode errorCode, NSString * _Nullable message);
 
 #ifdef __cplusplus
-	#include <PowerAuth/PublicTypes.h>
-	/**
-	 Function creates a new `NSError` instance with `PowerAuthCoreErrorDomain` and provided error code. If message parameter
-	 is nil, then the default message is provided to error's localized description. If errorCode is EC_Ok then function
-	 returns nil.
-	 */
-	inline NSError * _Nullable PowerAuthCoreMakeError(com::wultra::powerAuth::ErrorCode errorCode, NSString * _Nullable message)
-	{
-		return PowerAuthCoreMakeError(static_cast<PowerAuthCoreErrorCode>(errorCode), message);
-	}
+    #include <PowerAuth/PublicTypes.h>
+    /**
+     Function creates a new `NSError` instance with `PowerAuthCoreErrorDomain` and provided error code. If message parameter
+     is nil, then the default message is provided to error's localized description. If errorCode is EC_Ok then function
+     returns nil.
+     */
+    inline NSError * _Nullable PowerAuthCoreMakeError(com::wultra::powerAuth::ErrorCode errorCode, NSString * _Nullable message)
+    {
+        return PowerAuthCoreMakeError(static_cast<PowerAuthCoreErrorCode>(errorCode), message);
+    }
 #endif

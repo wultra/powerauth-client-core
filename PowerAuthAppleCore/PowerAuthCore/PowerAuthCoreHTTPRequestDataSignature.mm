@@ -23,17 +23,17 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithStruct:(const HTTPRequestDataSignature &)structRef
 {
-	self = [super init];
-	if (self) {
-		_version			= cc7::objc::CopyToNSString(structRef.version);
-		_activationId		= cc7::objc::CopyToNSString(structRef.activationId);
-		_applicationKey		= cc7::objc::CopyToNSString(structRef.applicationKey);
-		_nonce				= cc7::objc::CopyToNSString(structRef.nonce);
-		_factor				= cc7::objc::CopyToNSString(structRef.factor);
-		_signature			= cc7::objc::CopyToNSString(structRef.signature);
-		_authHeaderValue	= cc7::objc::CopyToNSString(structRef.buildAuthHeaderValue());
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _version            = cc7::objc::CopyToNSString(structRef.version);
+        _activationId       = cc7::objc::CopyToNSString(structRef.activationId);
+        _applicationKey     = cc7::objc::CopyToNSString(structRef.applicationKey);
+        _nonce              = cc7::objc::CopyToNSString(structRef.nonce);
+        _factor             = cc7::objc::CopyToNSString(structRef.factor);
+        _signature          = cc7::objc::CopyToNSString(structRef.signature);
+        _authHeaderValue    = cc7::objc::CopyToNSString(structRef.buildAuthHeaderValue());
+    }
+    return self;
 }
 
 @end

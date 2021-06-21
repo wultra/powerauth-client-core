@@ -34,9 +34,9 @@ NS_SWIFT_NAME(ValidateActivationResponseParam)
 /// @param ctrData Initial value for hash-based counter. Should not be null.
 /// @param activationRecovery Optional activation recovery data.
 - (nonnull instancetype)initWithActivationId:(nullable NSString*)activationId
-							 serverPublicKey:(nullable NSString*)serverPublicKey
-									 ctrData:(nullable NSString*)ctrData
-						  activationRecovery:(nullable PowerAuthCoreRecoveryData*)activationRecovery;
+                             serverPublicKey:(nullable NSString*)serverPublicKey
+                                     ctrData:(nullable NSString*)ctrData
+                          activationRecovery:(nullable PowerAuthCoreRecoveryData*)activationRecovery;
 
 /**
  Real Activation ID received from server.

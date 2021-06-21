@@ -21,42 +21,42 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreRecoveryData
 {
-	RecoveryData _recoveryData;
+    RecoveryData _recoveryData;
 }
 
 - (instancetype) initWithStruct:(const RecoveryData &)structRef
 {
-	self = [super init];
-	if (self) {
-		_recoveryData = structRef;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _recoveryData = structRef;
+    }
+    return self;
 }
 
 - (const RecoveryData &) structRef
 {
-	return _recoveryData;
+    return _recoveryData;
 }
 
 - (nonnull instancetype)initWithRecoveryCode:(nonnull NSString*)recoveryCode
-										 puk:(nonnull NSString*)puk
+                                         puk:(nonnull NSString*)puk
 {
-	self = [super init];
-	if (self) {
-		_recoveryData.recoveryCode = cc7::objc::CopyFromNSString(recoveryCode);
-		_recoveryData.puk = cc7::objc::CopyFromNSString(puk);
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _recoveryData.recoveryCode = cc7::objc::CopyFromNSString(recoveryCode);
+        _recoveryData.puk = cc7::objc::CopyFromNSString(puk);
+    }
+    return self;
 }
 
 - (NSString*) recoveryCode
 {
-	return cc7::objc::CopyToNSString(_recoveryData.recoveryCode);
+    return cc7::objc::CopyToNSString(_recoveryData.recoveryCode);
 }
 
 - (NSString*) puk
 {
-	return cc7::objc::CopyToNSString(_recoveryData.puk);
+    return cc7::objc::CopyToNSString(_recoveryData.puk);
 }
 
 @end

@@ -37,10 +37,10 @@ NS_SWIFT_NAME(SessionSetup)
 /// @param sessionIdentifier Optional session identifier.
 /// @param externalEncryptionKey Optional external encryption key.
 - (nonnull instancetype) initWithApplicationKey:(nonnull NSString*)applicationKey
-							  applicationSecret:(nonnull NSString*)applicationSecret
-						  masterServerPublicKey:(nonnull NSString*)masterServerPublicKey
-							  sessionIdentifier:(UInt32)sessionIdentifier
-						  externalEncryptionKey:(nullable NSData*)externalEncryptionKey;
+                              applicationSecret:(nonnull NSString*)applicationSecret
+                          masterServerPublicKey:(nonnull NSString*)masterServerPublicKey
+                              sessionIdentifier:(UInt32)sessionIdentifier
+                          externalEncryptionKey:(nullable NSData*)externalEncryptionKey;
 /**
  Defines APPLICATION_KEY for the session.
  */

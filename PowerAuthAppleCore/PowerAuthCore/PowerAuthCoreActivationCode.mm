@@ -21,17 +21,17 @@ using namespace com::wultra::powerAuth;
 
 @implementation PowerAuthCoreActivationCode
 {
-	ActivationCode _code;
+    ActivationCode _code;
 }
 
 - (NSString*) activationCode
 {
-	return cc7::objc::CopyToNSString(_code.activationCode);
+    return cc7::objc::CopyToNSString(_code.activationCode);
 }
 
 - (NSString*) activationSignature
 {
-	return cc7::objc::CopyToNullableNSString(_code.activationSignature);
+    return cc7::objc::CopyToNullableNSString(_code.activationSignature);
 }
 
 @end
@@ -40,16 +40,16 @@ using namespace com::wultra::powerAuth;
 
 - (instancetype) initWithStruct:(const ActivationCode &)structRef
 {
-	self = [super init];
-	if (self) {
-		_code = structRef;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _code = structRef;
+    }
+    return self;
 }
 
 - (const ActivationCode &) structRef
 {
-	return _code;
+    return _code;
 }
 
 @end
