@@ -79,7 +79,6 @@ namespace powerAuthTests
             _setup.applicationKey           = "MDEyMzQ1Njc4OUFCQ0RFRg==";
             _setup.applicationSecret        = "QUJDREVGMDEyMzQ1Njc4OQ==";
             _setup.masterServerPublicKey    = _masterServerPublicKeyStr;
-            _setup.sessionIdentifier        = 99;
 
             // prepare some other constants
             _activation_code    = "VVVVV-VVVVV-VVVVV-VTFVA";

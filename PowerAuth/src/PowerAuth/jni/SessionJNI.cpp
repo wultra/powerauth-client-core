@@ -76,7 +76,6 @@ CC7_JNI_METHOD_PARAMS(jlong, init, jobject setup)
     cppSetup.applicationKey         = cc7::jni::CopyFromJavaString(env, CC7_JNI_GET_FIELD_STRING(setup, setupClazz, "applicationKey"));
     cppSetup.applicationSecret      = cc7::jni::CopyFromJavaString(env, CC7_JNI_GET_FIELD_STRING(setup, setupClazz, "applicationSecret"));
     cppSetup.masterServerPublicKey  = cc7::jni::CopyFromJavaString(env, CC7_JNI_GET_FIELD_STRING(setup, setupClazz, "masterServerPublicKey"));
-    cppSetup.sessionIdentifier      = CC7_JNI_GET_FIELD_INT(setup, setupClazz, "sessionIdentifier");
     cppSetup.externalEncryptionKey  = cc7::jni::CopyFromJavaByteArray(env, CC7_JNI_GET_FIELD_BYTEARRAY(setup, setupClazz, "externalEncryptionKey"));
 
     auto session = new Session(cppSetup);
@@ -116,7 +115,6 @@ CC7_JNI_METHOD(jobject, getSessionSetup)
     CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "applicationKey",           cc7::jni::CopyToJavaString(env, cppSetup->applicationKey));
     CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "applicationSecret",        cc7::jni::CopyToJavaString(env, cppSetup->applicationSecret));
     CC7_JNI_SET_FIELD_STRING(resultObject, resultClazz, "masterServerPublicKey",    cc7::jni::CopyToJavaString(env, cppSetup->masterServerPublicKey));
-    CC7_JNI_SET_FIELD_INT   (resultObject, resultClazz, "sessionIdentifier",        cppSetup->sessionIdentifier);
     if (session->hasExternalEncryptionKey()) {
         CC7_JNI_SET_FIELD_BYTEARRAY(resultObject, resultClazz, "externalEncryptionKey", cc7::jni::CopyToJavaByteArray(env, cppSetup->externalEncryptionKey));
     }

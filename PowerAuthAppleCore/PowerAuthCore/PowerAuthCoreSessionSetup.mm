@@ -27,7 +27,6 @@ using namespace com::wultra::powerAuth;
 - (nonnull instancetype) initWithApplicationKey:(nonnull NSString*)applicationKey
                               applicationSecret:(nonnull NSString*)applicationSecret
                           masterServerPublicKey:(nonnull NSString*)masterServerPublicKey
-                              sessionIdentifier:(UInt32)sessionIdentifier
                           externalEncryptionKey:(nullable NSData*)externalEncryptionKey
 {
     self = [super init];
@@ -35,7 +34,6 @@ using namespace com::wultra::powerAuth;
         _sessionSetup.applicationKey        = cc7::objc::CopyFromNSString(applicationKey);
         _sessionSetup.applicationSecret     = cc7::objc::CopyFromNSString(applicationSecret);
         _sessionSetup.masterServerPublicKey = cc7::objc::CopyFromNSString(masterServerPublicKey);
-        _sessionSetup.sessionIdentifier     = sessionIdentifier;
         _sessionSetup.externalEncryptionKey = cc7::objc::CopyFromNSData(externalEncryptionKey);
     }
     return self;
@@ -54,11 +52,6 @@ using namespace com::wultra::powerAuth;
 - (NSString*) masterServerPublicKey
 {
     return cc7::objc::CopyToNSString(_sessionSetup.masterServerPublicKey);
-}
-
-- (UInt32) sessionIdentifier
-{
-    return _sessionSetup.sessionIdentifier;
 }
 
 - (NSData*) externalEncryptionKey
