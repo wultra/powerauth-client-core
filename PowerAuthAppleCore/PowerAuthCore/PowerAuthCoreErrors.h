@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, PowerAuthCoreErrorCode) {
     PowerAuthCoreErrorCode_WrongParam       = 3,
     /**
      You have provided a wrong activation or recovery code.
-     You should use ActivationCodeUtil class to vlaidate user
+     You should use ActivationCodeUtil class to validate user
      inputs, before you call other PowerAuth functions.
      */
     PowerAuthCoreErrorCode_WrongCode        = 4,
