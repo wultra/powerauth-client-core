@@ -218,13 +218,11 @@ namespace powerAuth
         
         if (result && (flags != 'M')) {
             if (flags & HAS_PERSISTENT_DATA) {
-                result = result && protocol::DeserializePersistentData(*new_data, reader);
+                result = protocol::DeserializePersistentData(*new_data, reader);
                 has_data = result;
             }
         } else {
-            // DATA_MIGRATION_TAG
-            result = protocol::TryDeserializeOldPersistentData(*new_data, reader);
-            has_data = result && !new_data->activationId.empty();
+            result = false;
         }
         
         State new_state = has_data ? SS_Activated : SS_Empty;
