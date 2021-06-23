@@ -34,12 +34,10 @@ NS_SWIFT_NAME(SessionSetup)
 /// @param applicationKey Required APPLICATION_KEY constant.
 /// @param applicationSecret Required APPLICATION_SECRET constant.
 /// @param masterServerPublicKey Required master server public key constant.
-/// @param sessionIdentifier Optional session identifier.
 /// @param externalEncryptionKey Optional external encryption key.
 - (nonnull instancetype) initWithApplicationKey:(nonnull NSString*)applicationKey
                               applicationSecret:(nonnull NSString*)applicationSecret
                           masterServerPublicKey:(nonnull NSString*)masterServerPublicKey
-                              sessionIdentifier:(UInt32)sessionIdentifier
                           externalEncryptionKey:(nullable NSData*)externalEncryptionKey;
 /**
  Defines APPLICATION_KEY for the session.
@@ -54,13 +52,6 @@ NS_SWIFT_NAME(SessionSetup)
  different keys for the testing and production servers.
  */
 @property (nonatomic, strong, readonly, nonnull) NSString * masterServerPublicKey;
-/**
- Optional session identifier helps with session identification
- in multi-session environments. You can assign any value
- which helps you identify multiple sessions in your system.
- The session itself doesn't use this value.
- */
-@property (nonatomic, readonly) UInt32 sessionIdentifier;
 /**
  Optional external encryption key. If the data object size is equal to 16 bytes,
  then the key is considered as valid and will be used during the cryptographic operations.

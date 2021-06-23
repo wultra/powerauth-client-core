@@ -52,11 +52,6 @@ using namespace com::wultra::powerAuth;
     return cpp_setup != nullptr ? [[PowerAuthCoreSessionSetup alloc] initWithStruct:*cpp_setup] : nil;
 }
 
-- (UInt32) sessionIdentifier
-{
-    return _session.sessionIdentifier();
-}
-
 - (BOOL) hasValidSetup
 {
     return _session.hasValidSetup();

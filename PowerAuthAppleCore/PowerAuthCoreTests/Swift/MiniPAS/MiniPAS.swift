@@ -90,7 +90,6 @@ class MiniPAS {
             applicationKey: applicationKey,
             applicationSecret: applicationSecret,
             masterServerPublicKey: masterServerPublicKey,
-            sessionIdentifier: 0,
             externalEncryptionKey: eek)
     }
 }
