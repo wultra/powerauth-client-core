@@ -90,12 +90,18 @@ using namespace com::wultra::powerAuth;
 
 + (NSData*) hmacSha256:(NSData *)data
                    key:(NSData *)key
-                length:(NSUInteger)length
+                length:(NSInteger)length
                  error:(NSError **)error
 {
     if (!data || !key) {
         if (error) {
             *error = PowerAuthCoreMakeError(PowerAuthCoreErrorCode_WrongParam, nil);
+        }
+        return nil;
+    }
+    if (length <= 0) {
+        if (error) {
+            *error = PowerAuthCoreMakeError(PowerAuthCoreErrorCode_WrongParam, @"length must be greater than 0");
         }
         return nil;
     }
@@ -110,10 +116,10 @@ using namespace com::wultra::powerAuth;
 }
 
 
-+ (NSData*) randomBytes:(NSUInteger)count
++ (NSData*) randomBytes:(NSInteger)count
                   error:(NSError **)error
 {
-    if (count == 0) {
+    if (count <= 0) {
         if (error) {
             *error = PowerAuthCoreMakeError(PowerAuthCoreErrorCode_WrongParam, @"count must be greater than 0");
         }
