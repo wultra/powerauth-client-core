@@ -61,7 +61,7 @@ NS_SWIFT_NAME(CryptoUtils)
  */
 + (nullable NSData*) hmacSha256:(nonnull NSData*)data
                             key:(nonnull NSData*)key
-                         length:(NSUInteger)length
+                         length:(NSInteger)length
                           error:(NSError * _Nullable * _Nullable)error
                    NS_SWIFT_NAME(hmacSha256(data:key:length:));
 
@@ -69,7 +69,7 @@ NS_SWIFT_NAME(CryptoUtils)
  Generates a required amount of random bytes. Returns nil in case that 
  underlying random generator is broken.
  */
-+ (nullable NSData*) randomBytes:(NSUInteger)count
++ (nullable NSData*) randomBytes:(NSInteger)count
                            error:(NSError * _Nullable * _Nullable)error
                     NS_SWIFT_NAME(randomBytes(count:));
 

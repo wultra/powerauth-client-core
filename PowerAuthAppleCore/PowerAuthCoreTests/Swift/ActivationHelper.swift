@@ -229,8 +229,8 @@ extension CryptoUtils {
     /// - Parameter minimumLength: Minimum random data length.
     /// - Throws: In case of failure
     /// - Returns: Returns random data with variable length
-    static func variableLengthRandomData(from minimumLength: UInt = 13) throws -> Data {
-        let count = UInt(try randomBytes(count: 1)[0]) + minimumLength
+    static func variableLengthRandomData(from minimumLength: Int = 13) throws -> Data {
+        let count = Int(try randomBytes(count: 1)[0]) + minimumLength
         return try randomBytes(count: count)
     }
 }
