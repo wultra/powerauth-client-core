@@ -14,7 +14,7 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "PowerAuthCore",
-            url: "https://github.com/wultra/powerauth-client-core/releases/download/1.9.9-b1/PowerAuthCore-b2.zip",
-            checksum: "d8d053f6b13a773f8843ac7d6b859085c0c7f04a96238158368906f619fca3cd")
+            url: "https://github.com/wultra/powerauth-client-core/releases/download/1.9.9-b1/PowerAuthCore-b3.zip",
+            checksum: "fd61e42cb40270cc12ea7825bee42b7745a4d5839fb34775a7e973a5f2dc5396")
     ]
 )
