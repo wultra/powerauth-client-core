@@ -17,8 +17,8 @@
 #import <PowerAuthCore/PowerAuthCoreMacros.h>
 
 /**
- The `PowerAuthCoreActivationCode` object contains parsed components from user-provided activation, or recovery
- code. You can use methods from `PowerAuthCoreActivationCodeUtil` class to fill this object with valid data.
+ The `ActivationCode` object contains parsed components from user-provided activation, or recovery
+ code. You can use methods from `ActivationCodeUtil` class to fill this object with valid data.
  */
 NS_SWIFT_NAME(ActivationCode)
 @interface PowerAuthCoreActivationCode : NSObject
@@ -27,6 +27,13 @@ NS_SWIFT_NAME(ActivationCode)
  Not available.
  */
 - (nonnull instancetype)init NS_UNAVAILABLE;
+
+/**
+ Construct object with provided activation code and optional activation signature. Be aware, that valus
+ provided to the constructor should be already validated by `ActivationCodeUtil` class.
+ */
+- (nonnull instancetype) initWithActivationCode:(nonnull NSString*)activationCode
+                            activationSignature:(nullable NSString*)activationSignature;
 
 /**
  If object is constructed from an activation code, then property contains just a code, without a signature part.

@@ -17,7 +17,7 @@
 #import <PowerAuthCore/PowerAuthCoreActivationCode.h>
 
 /**
- The `PowerAuthCoreActivationCodeUtil` class provides various set of methods for parsing and validating
+ The `ActivationCodeUtil` class provides various set of methods for parsing and validating
  activation or recovery codes.
  
  Current format:
@@ -37,7 +37,7 @@
  - Where the 'D' is digit (0 - 9)
  
  As you can see, both activation and recovery codes, shares the same basic principle (like CRC16
- checksum). That's why parser returns the same `PowerAuthCoreActivationCode` object for both scenarios.
+ checksum). That's why parser returns the same `ActivationCode` object for both scenarios.
  */
 NS_SWIFT_NAME(ActivationCodeUtil)
 @interface PowerAuthCoreActivationCodeUtil : NSObject
@@ -90,19 +90,18 @@ NS_SWIFT_NAME(ActivationCodeUtil)
 #pragma mark - Parser
 
 /**
- Parses an input |activationCode| (which may or may not contain an optional signature) and returns PowerAuthCoreActivationCode
+ Parses an input |activationCode| (which may or may not contain an optional signature) and returns `ActivationCode`
  object filled with valid data. The method doesn't perform an auto-correction, so the provided code must be valid.
  
- Returns PowerAuthCoreActivationCode object if code is valid, or nil.
+ Returns `ActivationCode` object if code is valid, or nil.
  */
 + (nullable PowerAuthCoreActivationCode*) parseFromActivationCode:(nonnull NSString*)activationCode;
 
 /**
- Parses an input |recoveryCode| (which may or may not contain an optional "R:" prefix) and returns PowerAuthCoreActivationCode
+ Parses an input |recoveryCode| (which may or may not contain an optional "R:" prefix) and returns `ActivationCode`
  object filled with valid data. The method doesn't perform an auto-correction, so the provided code must be valid.
  
- Returns PowerAuthCoreActivationCode
- bject if code is valid, or nil.
+ Returns `ActivationCode` object if code is valid, or nil.
  */
 + (nullable PowerAuthCoreActivationCode*) parseFromRecoveryCode:(nonnull NSString*)recoveryCode;
 
