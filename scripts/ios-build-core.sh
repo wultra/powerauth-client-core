@@ -234,7 +234,17 @@ function BUILD_CORE_LIB
     done
     DEBUG_LOG "  - target fw: ${XCFW_PATH}"
     
-    xcodebuild -create-xcframework $XCFW_ARGS -output "${XCFW_PATH}"    
+    xcodebuild -create-xcframework $XCFW_ARGS -output "${XCFW_PATH}"
+    
+    LOG "Compressing final framework..."
+    
+    PUSH_DIR "${OUT_DIR}"
+    local ZIP_FILE=${OUT_FW}.xcframework.zip
+    zip -9yrq ${ZIP_FILE} ${OUT_FW}.xcframework 
+    local ZIP_HASH=$(SHA256 ${ZIP_FILE})
+    POP_DIR
+    
+    LOG " - File ${ZIP_FILE} has hash ${ZIP_HASH}"
 }
 
 # -----------------------------------------------------------------------------
@@ -326,6 +336,7 @@ fi
 REQUIRE_COMMAND xcodebuild
 REQUIRE_COMMAND lipo
 REQUIRE_COMMAND otool
+REQUIRE_COMMAND zip
 
 # -----------------------------------------------------------------------------
 # Real job starts here :) 
