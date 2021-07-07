@@ -24,6 +24,16 @@ using namespace com::wultra::powerAuth;
     ActivationCode _code;
 }
 
+- (instancetype) initWithActivationCode:(NSString *)activationCode activationSignature:(NSString *)activationSignature
+{
+    self = [super init];
+    if (self) {
+        _code.activationCode = cc7::objc::CopyFromNSString(activationCode);
+        _code.activationSignature = cc7::objc::CopyFromNSString(activationSignature);
+    }
+    return self;
+}
+
 - (NSString*) activationCode
 {
     return cc7::objc::CopyToNSString(_code.activationCode);
